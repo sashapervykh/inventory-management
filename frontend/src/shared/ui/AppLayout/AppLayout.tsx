@@ -1,14 +1,15 @@
 import Layout from "antd/es/layout/layout";
 import { Outlet } from "react-router-dom";
+import { AppFooter } from "./Footer/AppFooter";
 
 export function AppLayout() {
   return (
-    <Layout>
+    <Layout className="flex">
       <header>HEADER</header>
-      <main>
+      <main className="flex-1">
         <Outlet />
       </main>
-      <footer>FOOTER</footer>
+      <AppFooter />
     </Layout>
   );
 }
