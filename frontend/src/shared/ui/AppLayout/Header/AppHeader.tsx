@@ -11,7 +11,7 @@ export function AppHeader() {
     <Header className="flex justify-center mt-4">
       <Text>INVENTO</Text>
       <Menu
-        className="flex w-[75%] ml-auto mr-0"
+        className="min-w-[30%] justify-end"
         theme="light"
         mode="horizontal"
         defaultSelectedKeys={[ROUTES.HOME]}
