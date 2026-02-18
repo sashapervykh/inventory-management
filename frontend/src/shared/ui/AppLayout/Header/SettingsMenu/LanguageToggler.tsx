@@ -1,5 +1,5 @@
 import { Switch } from "antd";
-import { SwitchConfig } from "./SettingsMenu/SwitchConfig";
+import { SwitchConfig } from "./SwitchConfig";
 
 export function LanguageToggler() {
   return (

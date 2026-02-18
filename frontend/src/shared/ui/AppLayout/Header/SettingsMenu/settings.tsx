@@ -1,6 +1,6 @@
 import type { MenuProps } from "antd";
 import { ThemeToggler } from "./ThemeToggler";
-import { LanguageToggler } from "../LanguageToggler";
+import { LanguageToggler } from "./LanguageToggler";
 
 type MenuItem = Required<MenuProps>["items"][number];
 

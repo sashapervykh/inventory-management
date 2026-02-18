@@ -1,14 +1,14 @@
-import { Typography } from "antd";
 import { Header } from "antd/es/layout/layout";
-import { NavMenu } from "./NavMenu";
 import { SettingsMenu } from "./SettingsMenu/SettingsMenu";
-
-const { Text } = Typography;
+import { NavMenu } from "./NavMenu/NavMenu";
+import { Logo } from "./Logo/Logo";
+import { AppSearch } from "./AppSearch/AppSearch";
 
 export function AppHeader() {
   return (
-    <Header className="flex justify-center mt-4">
-      <Text>INVENTO</Text>
+    <Header className="flex mt-4">
+      <Logo />
+      <AppSearch />
       <NavMenu />
       <SettingsMenu />
     </Header>
