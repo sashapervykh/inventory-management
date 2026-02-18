@@ -22,7 +22,7 @@ export function SettingsMenu() {
       onOpenChange={handleOpenChange}
       placement="topLeft"
     >
-      <div className="bg-white ml-2.5 pr-2 pl-2 cursor-pointer">
+      <div className="ml-2.5 pr-2 pl-2 cursor-pointer">
         <SettingOutlined />
       </div>
     </Dropdown>

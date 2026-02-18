@@ -1,9 +1,12 @@
+import { Providers } from "./providers/providers";
 import { AppRouter } from "./routes/routes";
 
 export function App() {
   return (
     <>
-      <AppRouter />
+      <Providers>
+        <AppRouter />
+      </Providers>
     </>
   );
 }

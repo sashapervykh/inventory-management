@@ -3,14 +3,23 @@ import { Outlet } from "react-router-dom";
 import { AppFooter } from "./Footer/AppFooter";
 import { AppHeader } from "./Header/AppHeader";
 import { ConfigProvider, theme } from "antd";
+import { useTheme } from "../../hooks/useTheme/useTheme";
+import { THEMES } from "../../constants/themes";
 
 export function AppLayout() {
+  const { theme: appTheme } = useTheme();
   return (
     <ConfigProvider
       theme={{
-        algorithm: theme.defaultAlgorithm,
+        algorithm:
+          appTheme === THEMES.DARK
+            ? theme.darkAlgorithm
+            : theme.defaultAlgorithm,
         components: {
-          Layout: { headerBg: "#FFFFFF", colorBgLayout: "#FFFFFF" },
+          Layout: {
+            headerBg: appTheme === THEMES.DARK ? "rgb(20, 20, 20)" : "#FFFFFF",
+            colorBgLayout: appTheme === THEMES.DARK ? "#000000" : "#FFFFFF",
+          },
         },
       }}
     >
