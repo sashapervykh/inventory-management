@@ -10,7 +10,7 @@ export function AppLayout() {
       theme={{
         algorithm: theme.defaultAlgorithm,
         components: {
-          Layout: { headerBg: "#FFFFFF" },
+          Layout: { headerBg: "#FFFFFF", colorBgLayout: "#FFFFFF" },
         },
       }}
     >

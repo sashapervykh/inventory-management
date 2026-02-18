@@ -9,7 +9,7 @@ const { Header } = Layout;
 
 export function AppHeader() {
   return (
-    <Header className="flex mt-4">
+    <Header className="grid mt-4 grid-cols-[auto_minmax(100px,35%)_minmax(100px,35%)_auto_auto]">
       <Logo />
       <AppSearch />
       <NavMenu />
