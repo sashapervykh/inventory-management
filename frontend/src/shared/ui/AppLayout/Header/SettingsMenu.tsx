@@ -1,19 +1,13 @@
-import { SettingOutlined } from "@ant-design/icons";
+import { DownOutlined, SettingOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Menu } from "antd";
+import { Button, Dropdown, Menu, Space } from "antd";
+import { ThemeToggler } from "./ThemeToggler";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
 const items: MenuItem[] = [
-  {
-    key: "settings",
-    label: <SettingOutlined />,
-    popupOffset: [-76, 50],
-    children: [
-      { key: "language", label: "language" },
-      { key: "theme", label: "theme" },
-    ],
-  },
+  { key: "language", label: <ThemeToggler /> },
+  { key: "theme", label: "theme" },
 ];
 
 const onClick: MenuProps["onClick"] = (e) => {
@@ -22,14 +16,10 @@ const onClick: MenuProps["onClick"] = (e) => {
 
 export function SettingsMenu() {
   return (
-    <div className="flex flex-col h-full justify-center ml-[30px]">
-      <Menu
-        className="h-fit"
-        onClick={onClick}
-        expandIcon={null}
-        mode="vertical"
-        items={items}
-      />
-    </div>
+    <Dropdown menu={{ items }} placement="topLeft">
+      <div className="bg-white ml-2.5 pr-2 pl-2 cursor-pointer">
+        <SettingOutlined />
+      </div>
+    </Dropdown>
   );
 }
