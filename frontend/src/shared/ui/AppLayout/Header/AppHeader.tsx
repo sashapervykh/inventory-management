@@ -3,6 +3,7 @@ import { SettingsMenu } from "./SettingsMenu/SettingsMenu";
 import { NavMenu } from "./NavMenu/NavMenu";
 import { Logo } from "./Logo/Logo";
 import { AppSearch } from "./AppSearch/AppSearch";
+import { AuthButton } from "./AuthButton/AuthButton";
 
 export function AppHeader() {
   return (
@@ -11,6 +12,7 @@ export function AppHeader() {
       <AppSearch />
       <NavMenu />
       <SettingsMenu />
+      <AuthButton />
     </Header>
   );
 }
