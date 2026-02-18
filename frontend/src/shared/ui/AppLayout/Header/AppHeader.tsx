@@ -1,7 +1,7 @@
 import { Typography } from "antd";
 import { Header } from "antd/es/layout/layout";
 import { NavMenu } from "./NavMenu";
-import { SettingsMenu } from "./SettingsMenu";
+import { SettingsMenu } from "./SettingsMenu/SettingsMenu";
 
 const { Text } = Typography;
 
