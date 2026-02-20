@@ -1,4 +1,3 @@
-import { Router } from "express";
 import passport from "passport";
 import {
   Strategy as GoogleStrategy,
@@ -6,8 +5,6 @@ import {
   type VerifyCallback,
 } from "passport-google-oauth20";
 import { prisma } from "../lib/prisma.js";
-
-const authRouter = Router();
 
 passport.use(
   new GoogleStrategy(
@@ -53,25 +50,3 @@ passport.use(
     },
   ),
 );
-
-authRouter.get(
-  "/google",
-  passport.authenticate("google", {
-    scope: ["profile", "email"],
-    session: false,
-  }),
-  (req, res) => {
-    console.log("First step");
-  },
-);
-
-authRouter.get(
-  "/google/callback",
-  passport.authenticate("google", { session: false }),
-  (req, res) => {
-    console.log(req.user);
-    res.redirect(`${process.env["FRONTEND_URL"]}/home`);
-  },
-);
-
-export default authRouter;
