@@ -15,6 +15,12 @@ datasource db {
 model User {
   id            String     @id @default(uuid())
   email         String     @unique
-  name          String
+  first_name    String
+  last_name     String
+  provider      String
+  provider_id   String
   createdAt     DateTime   @default(now())
+  last_login_at DateTime?
+
+  @@index([provider, provider_id])
  }
