@@ -4,4 +4,5 @@ export const ROUTES = {
   ADMIN: "admin",
   INVENTORY: "inventory",
   ITEM: "item",
+  LOGIN: "login",
 };

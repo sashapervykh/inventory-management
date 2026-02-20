@@ -4,6 +4,7 @@ import { ROUTES } from "../../shared/constants/routes";
 import { HomePage } from "../../pages/Home/HomePage";
 import { UserPage } from "../../pages/User/UserPage";
 import { AdminPage } from "../../pages/Admin/AdminPage";
+import { LoginPage } from "../../pages/Auth/RegisterPage";
 
 export function AppRouter() {
   return (
@@ -16,6 +17,7 @@ export function AppRouter() {
           <Route path={ROUTES.ADMIN} element={<AdminPage />} />
           <Route path={ROUTES.INVENTORY} element={<UserPage />} />
           <Route path={ROUTES.ITEM} element={<AdminPage />} />
+          <Route path={ROUTES.LOGIN} element={<LoginPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

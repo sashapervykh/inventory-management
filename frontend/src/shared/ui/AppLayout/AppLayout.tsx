@@ -25,7 +25,7 @@ export function AppLayout() {
     >
       <Layout className="flex">
         <AppHeader />
-        <main className="flex-1">
+        <main className="flex flex-1 justify-center pt-10">
           <Outlet />
         </main>
         <AppFooter />
