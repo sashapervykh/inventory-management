@@ -5,14 +5,18 @@ import {
   type VerifyCallback,
 } from "passport-google-oauth20";
 import { prisma } from "../prisma.js";
+import { ENV } from "../../constants/env.js";
+import { AUTH_ROUTES } from "../../constants/routes/authRoutes.js";
+import { ENDPOINTS } from "../../constants/routes/endpoints.js";
+import { AUTH_PROVIDERS } from "../../constants/authProviders.js";
 
 export function useGoogleStrategy() {
   passport.use(
     new GoogleStrategy(
       {
-        clientID: process.env["GOOGLE_CLIENT_ID"],
-        clientSecret: process.env["GOOGLE_CLIENT_SECRET"],
-        callbackURL: "/auth/google/callback",
+        clientID: ENV.GOOGLE_CLIENT_ID,
+        clientSecret: ENV.GOOGLE_CLIENT_SECRET,
+        callbackURL: `${ENDPOINTS.AUTH}/${AUTH_ROUTES.GOOGLE.CALLBACK}`,
         scope: ["profile", "email"],
       },
       async (
@@ -26,7 +30,7 @@ export function useGoogleStrategy() {
           if (!email) {
             return done(null, false);
           }
-          const provider = profile.provider;
+          const provider = AUTH_PROVIDERS.GOOGLE;
           const providerId = profile.id;
           const firstName = profile.name?.givenName;
           const lastName = profile.name?.familyName;
