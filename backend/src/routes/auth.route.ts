@@ -1,75 +1,21 @@
 import { Router } from "express";
 import passport from "passport";
-import {
-  Strategy as GoogleStrategy,
-  type Profile,
-  type VerifyCallback,
-} from "passport-google-oauth20";
-import { prisma } from "../lib/prisma.js";
+import { useGoogleStrategy } from "../lib/passport/useGoogleStrategy.js";
 
 const authRouter = Router();
-
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: process.env["GOOGLE_CLIENT_ID"],
-      clientSecret: process.env["GOOGLE_CLIENT_SECRET"],
-      callbackURL: "/auth/google/callback",
-      scope: ["profile", "email"],
-    },
-    async (
-      _accessToken: string,
-      _refreshToken: string,
-      profile: Profile,
-      done: VerifyCallback,
-    ) => {
-      try {
-        const email = profile.emails?.[0]?.value;
-        if (!email) {
-          return done(null, false);
-        }
-        const provider = profile.provider;
-        const providerId = profile.id;
-        const firstName = profile.name?.givenName;
-        const lastName = profile.name?.familyName;
-        const user = await prisma.user.upsert({
-          where: {
-            provider_provider_id: { provider, provider_id: providerId },
-          },
-          update: { last_login_at: new Date() },
-          create: {
-            first_name: firstName ?? "",
-            last_name: lastName ?? "",
-            provider,
-            provider_id: providerId,
-            email,
-            last_login_at: new Date(),
-          },
-        });
-        done(null, user);
-      } catch (err) {
-        done(err);
-      }
-    },
-  ),
-);
-
+useGoogleStrategy();
 authRouter.get(
   "/google",
   passport.authenticate("google", {
     scope: ["profile", "email"],
     session: false,
   }),
-  (req, res) => {
-    console.log("First step");
-  },
 );
 
 authRouter.get(
   "/google/callback",
   passport.authenticate("google", { session: false }),
   (req, res) => {
-    console.log(req.user);
     res.redirect(`${process.env["FRONTEND_URL"]}/home`);
   },
 );
