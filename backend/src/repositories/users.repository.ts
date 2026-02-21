@@ -5,6 +5,11 @@ class UsersRepository {
     const user = await prisma.user.create({ data: { name, email } });
     return user;
   }
+
+  async getUser(id: string) {
+    const user = await prisma.user.findFirst({ where: { id: id } });
+    return user;
+  }
 }
 
 export const usersRepository = new UsersRepository();

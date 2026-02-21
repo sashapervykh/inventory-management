@@ -5,6 +5,11 @@ class UsersService {
     const user = await usersRepository.createUser(name, email);
     return user;
   }
+
+  async getUser(id: string) {
+    const user = await usersRepository.getUser(id);
+    return user;
+  }
 }
 
 export const usersService = new UsersService();
