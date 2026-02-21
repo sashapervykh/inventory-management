@@ -32,16 +32,14 @@ export function useGoogleStrategy() {
           }
           const provider = AUTH_PROVIDERS.GOOGLE;
           const providerId = profile.id;
-          const firstName = profile.name?.givenName;
-          const lastName = profile.name?.familyName;
           const user = await prisma.user.upsert({
             where: {
               provider_provider_id: { provider, provider_id: providerId },
             },
             update: { last_login_at: new Date() },
             create: {
-              first_name: firstName ?? "",
-              last_name: lastName ?? "",
+              first_name: profile.name?.givenName,
+              last_name: profile.name?.familyName,
               provider,
               provider_id: providerId,
               email,
