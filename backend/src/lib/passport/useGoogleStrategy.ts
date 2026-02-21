@@ -44,6 +44,7 @@ export function useGoogleStrategy() {
               last_login_at: new Date(),
             },
           });
+
           done(null, user);
         } catch (err) {
           done(err);
