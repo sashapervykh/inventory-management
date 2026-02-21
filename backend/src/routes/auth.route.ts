@@ -3,11 +3,12 @@ import passport from "passport";
 import { useGoogleStrategy } from "../lib/passport/useGoogleStrategy.js";
 import jwt from "jsonwebtoken";
 import { ENV } from "../constants/env.js";
+import { AUTH_ROUTES } from "../constants/routes/authRoutes.js";
 
 const authRouter = Router();
 useGoogleStrategy();
 authRouter.get(
-  "/google",
+  AUTH_ROUTES.GOOGLE.MAIN,
   passport.authenticate("google", {
     scope: ["profile", "email"],
     session: false,
@@ -15,7 +16,7 @@ authRouter.get(
 );
 
 authRouter.get(
-  "/google/callback",
+  AUTH_ROUTES.GOOGLE.CALLBACK,
   passport.authenticate("google", { session: false }),
   (req, res) => {
     const token = jwt.sign({ user: req.user?.id }, ENV.JWT_SECRET, {
