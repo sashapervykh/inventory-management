@@ -11,7 +11,7 @@ class UsersController {
 
   async getUser(req: Request, res: Response) {
     const token = req.cookies.auth;
-    const userInfo = jwt.decode(token, process.env["JWT_SECRET"]);
+    const userInfo = jwt.decode(token);
     const user = await usersService.getUser(userInfo.user);
     res.status(200).send(user);
   }
