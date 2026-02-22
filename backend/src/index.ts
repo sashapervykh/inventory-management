@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import { ENV } from "./constants/env.js";
 import { ENDPOINTS } from "./constants/routes/endpoints.js";
 import { useGoogleStrategy } from "./lib/passport/useGoogleStrategy.js";
+import { handleErrors } from "./middlewares/handleErrors.js";
 
 dotenv.config();
 const app = express();
@@ -17,6 +18,7 @@ useGoogleStrategy();
 app.use(express.json());
 app.use(ENDPOINTS.USERS, usersRouter);
 app.use(ENDPOINTS.AUTH, authRouter);
+app.use(handleErrors);
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);

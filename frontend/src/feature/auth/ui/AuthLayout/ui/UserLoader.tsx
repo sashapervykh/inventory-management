@@ -14,6 +14,7 @@ export function UserLoader({ children }: { children: ReactNode }) {
           `${import.meta.env.VITE_API_URL}users/me`,
           { method: "GET", credentials: "include" },
         );
+        if (!response.ok) throw new Error("Authentication failed");
         const user = await response.json();
         setUser(user);
       } catch (error) {

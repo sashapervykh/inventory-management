@@ -7,7 +7,7 @@ class UsersRepository {
   }
 
   async getUser(id: string) {
-    const user = await prisma.user.findFirst({ where: { id: id } });
+    const user = await prisma.user.findFirstOrThrow({ where: { id: id } });
     return user;
   }
 }

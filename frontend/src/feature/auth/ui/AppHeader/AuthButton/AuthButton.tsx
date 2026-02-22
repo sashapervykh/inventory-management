@@ -10,7 +10,7 @@ export function AuthButton() {
       <div className="w-fit whitespace-nowrap text-[16px]">{t("logout")}</div>
     </Link>
   ) : (
-    <Link className="flex h-fit m-[auto_0px]">
+    <Link className="flex h-fit m-[auto_0px]" href="/login">
       <div className="w-fit whitespace-nowrap text-[16px]">Log In</div>
     </Link>
   );

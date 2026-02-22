@@ -1,4 +1,6 @@
+import { AuthError } from "../errors/AuthError.js";
 import { usersRepository } from "../repositories/users.repository.js";
+import { getFrontendUser } from "../utils/getFrontendUser.js";
 
 class UsersService {
   async createUser(name: string, email: string) {
@@ -7,8 +9,13 @@ class UsersService {
   }
 
   async getUser(id: string) {
-    const user = await usersRepository.getUser(id);
-    return user;
+    try {
+      const user = await usersRepository.getUser(id);
+      const frontendUser = getFrontendUser(user);
+      return frontendUser;
+    } catch (error) {
+      throw new AuthError();
+    }
   }
 }
 
