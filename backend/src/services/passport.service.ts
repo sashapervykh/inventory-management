@@ -20,7 +20,20 @@ export class PassportService {
     });
   }
 
-  handleGoogleResponse(req: Request, res: Response) {
+  continueWithFacebook({
+    scope,
+    session,
+  }: {
+    scope?: string[];
+    session: boolean;
+  }) {
+    return passport.authenticate(AUTH_PROVIDERS.FACEBOOK, {
+      scope: scope,
+      session: session,
+    });
+  }
+
+  handleResponse(req: Request, res: Response) {
     const token = jwt.sign({ user: req.user?.id }, ENV.JWT_SECRET, {
       expiresIn: "7d",
     });
