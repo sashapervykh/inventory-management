@@ -5,11 +5,12 @@ import { LogoutButton } from "./LogoutButton";
 
 export function AuthButton() {
   const { user } = useUser();
+  const { t } = useTranslation();
   return user ? (
     <LogoutButton />
   ) : (
     <Link className="flex h-fit m-[auto_0px]" href="/login">
-      <div className="w-fit whitespace-nowrap text-[16px]">Log In</div>
+      <div className="w-fit whitespace-nowrap text-[16px]">{t("login")}</div>
     </Link>
   );
 }
