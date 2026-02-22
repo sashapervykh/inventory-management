@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Typography } from "antd";
+import { Button, Typography } from "antd";
 import { useTranslation } from "react-i18next";
 
 export function LoginLink() {
@@ -9,9 +9,9 @@ export function LoginLink() {
   if (pathname === "/login") return;
   return (
     <Link to="/login" className="flex h-fit m-[auto_0px]">
-      <Typography.Link>
+      <Button type="link">
         <div className="w-fit whitespace-nowrap text-[16px]">{t("login")}</div>
-      </Typography.Link>
+      </Button>
     </Link>
   );
 }

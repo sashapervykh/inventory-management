@@ -27,6 +27,6 @@ export function UserLoader({ children }: { children: ReactNode }) {
     getUser();
   }, []);
 
-  // if (loading) return <Spin />;
+  if (loading) return <Spin />;
   return <>{children}</>;
 }
