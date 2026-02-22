@@ -4,6 +4,7 @@ import { type Request, type Response } from "express";
 import { ENV } from "../constants/env.js";
 import { FRONTEND_ROUTES } from "../constants/frontendRoutes/frontendRoutes.js";
 import jwt from "jsonwebtoken";
+import { STATUS_CODES } from "../constants/statusCodes.js";
 
 export class PassportService {
   continueWithGoogle({
@@ -31,6 +32,16 @@ export class PassportService {
       path: "/",
     });
     res.redirect(FRONTEND_ROUTES.HOME);
+  }
+
+  logout(req: Request, res: Response) {
+    res.clearCookie("auth", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      path: "/",
+    });
+    res.status(STATUS_CODES.OK).send({ message: "Logout successfully" });
   }
 }
 

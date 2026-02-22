@@ -1,7 +1,7 @@
 import { AUTH_PROVIDERS } from "../authProviders.js";
-import { ENDPOINTS } from "./endpoints.js";
 
 export const AUTH_ROUTES = {
+  LOGOUT: "/logout",
   GOOGLE: {
     MAIN: `/${AUTH_PROVIDERS.GOOGLE}`,
     CALLBACK: `/${AUTH_PROVIDERS.GOOGLE}/callback`,

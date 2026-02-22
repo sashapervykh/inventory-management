@@ -10,11 +10,11 @@ authRouter.get(
     session: false,
   }),
 );
-
 authRouter.get(
   AUTH_ROUTES.GOOGLE.CALLBACK,
   passportService.continueWithGoogle({ session: false }),
   passportService.handleGoogleResponse,
 );
+authRouter.post(AUTH_ROUTES.LOGOUT, passportService.logout);
 
 export default authRouter;
