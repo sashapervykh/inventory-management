@@ -9,7 +9,7 @@ const { Header } = Layout;
 
 export function AuthHeader() {
   return (
-    <Header className="grid mt-4 grid-cols-[auto_minmax(100px,35%)_minmax(100px,35%)_auto_auto]">
+    <Header className="grid mt-4 grid-cols-[auto_minmax(100px,35%)_minmax(100px,35%)_auto_minmax(60px,auto)]">
       <Logo />
       <AppSearch />
       <NavMenu />
