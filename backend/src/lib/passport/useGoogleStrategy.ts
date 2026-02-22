@@ -16,7 +16,7 @@ export function useGoogleStrategy() {
       {
         clientID: ENV.GOOGLE_CLIENT_ID,
         clientSecret: ENV.GOOGLE_CLIENT_SECRET,
-        callbackURL: `${ENDPOINTS.AUTH}/${AUTH_ROUTES.GOOGLE.CALLBACK}`,
+        callbackURL: `${ENDPOINTS.AUTH}${AUTH_ROUTES.GOOGLE.CALLBACK}`,
         scope: ["profile", "email"],
       },
       async (
