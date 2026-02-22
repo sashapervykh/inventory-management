@@ -10,7 +10,6 @@ export function UserLoader({ children }: { children: ReactNode }) {
     if (user) return;
     async function getUser() {
       try {
-        console.log("start");
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}users/me`,
           { method: "GET", credentials: "include" },
