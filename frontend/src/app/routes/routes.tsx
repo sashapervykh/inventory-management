@@ -5,12 +5,13 @@ import { HomePage } from "../../pages/Home/HomePage";
 import { UserPage } from "../../pages/User/UserPage";
 import { AdminPage } from "../../pages/Admin/AdminPage";
 import { RegisterPage } from "../../pages/Auth/RegisterPage";
+import { AuthLayout } from "../../feature/auth/ui/AuthLayout/ui/AuthLayout";
 
 export function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<AppLayout />}>
+        <Route element={<AuthLayout />}>
           <Route path="/" element={<Navigate to={ROUTES.HOME} />} />
           <Route path={ROUTES.HOME} element={<HomePage />} />
           <Route path={ROUTES.USER} element={<UserPage />} />

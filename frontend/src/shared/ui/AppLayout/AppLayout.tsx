@@ -1,12 +1,12 @@
 import Layout from "antd/es/layout/layout";
 import { Outlet } from "react-router-dom";
 import { AppFooter } from "./Footer/AppFooter";
-import { AppHeader } from "./Header/AppHeader";
 import { ConfigProvider, theme } from "antd";
 import { useTheme } from "../../hooks/useTheme/useTheme";
 import { THEMES } from "../../constants/themes";
+import { type ReactNode } from "react";
 
-export function AppLayout() {
+export function AppLayout({ header }: { header: ReactNode }) {
   const { theme: appTheme } = useTheme();
   return (
     <ConfigProvider
@@ -24,7 +24,7 @@ export function AppLayout() {
       }}
     >
       <Layout className="flex">
-        <AppHeader />
+        {header}
         <main className="flex flex-1 justify-center pt-10">
           <Outlet />
         </main>

@@ -4,5 +4,6 @@ export interface User {
   lastName: string;
   lastLoginAt: string;
   createdAt: string;
+  type: "user" | "admin";
   email: string;
 }

@@ -1,8 +1,8 @@
 import { MoonOutlined, SunOutlined } from "@ant-design/icons";
 import { Switch } from "antd";
 import { SwitchConfig } from "./SwitchConfig";
-import { useTheme } from "../../../../hooks/useTheme/useTheme";
-import { THEMES } from "../../../../constants/themes";
+import { useTheme } from "../../../../../shared/hooks/useTheme/useTheme";
+import { THEMES } from "../../../../../shared/constants/themes";
 
 export function ThemeToggler() {
   const { setTheme } = useTheme();

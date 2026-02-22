@@ -1,5 +1,5 @@
 import Link from "antd/es/typography/Link";
-import { ROUTES } from "../../../../constants/routes";
+import { ROUTES } from "../../../../../shared/constants/routes";
 
 export function Logo() {
   return (
