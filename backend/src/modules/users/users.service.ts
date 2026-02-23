@@ -8,9 +8,9 @@ class UsersService {
     return user;
   }
 
-  async getUser(id: string) {
+  async findById(id: string) {
     try {
-      const user = await usersRepository.getUser(id);
+      const user = await usersRepository.findById(id);
       const frontendUser = getFrontendUser(user);
       return frontendUser;
     } catch (error) {

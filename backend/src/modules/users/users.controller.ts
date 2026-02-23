@@ -10,12 +10,12 @@ class UsersController {
     res.status(200).send(user);
   }
 
-  async getUser(req: Request, res: Response, next: NextFunction) {
+  async findById(req: Request, res: Response, next: NextFunction) {
     try {
       const token = req.cookies.auth;
       const userInfo = jwt.decode(token);
       if (!userInfo) throw new AuthError();
-      const user = await usersService.getUser(userInfo.user);
+      const user = await usersService.findById(userInfo.user);
       res.status(200).send(user);
     } catch (error) {
       next(error);
