@@ -1,0 +1,12 @@
+import { Router } from "express";
+import { inventoriesController } from "./inventories.controller.js";
+import { USERS_ROUTES } from "../../shared/constants/routes/usersRoutes.js";
+import { INVENTORY_ROUTES } from "./constants/inventoriesRoutes.js";
+
+const inventoriesRouter = Router();
+inventoriesRouter.post(
+  INVENTORY_ROUTES.MAIN,
+  inventoriesController.createInventory,
+);
+
+export default inventoriesRouter;

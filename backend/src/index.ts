@@ -9,6 +9,7 @@ import { ENDPOINTS } from "./shared/constants/routes/endpoints.js";
 import { useGoogleStrategy } from "./shared/lib/passport/useGoogleStrategy.js";
 import { useGitHubStrategy } from "./shared/lib/passport/useGithubStrategy.js";
 import { handleErrors } from "./shared/middlewares/handleErrors.js";
+import inventoriesRouter from "./modules/inventories/inventories.route.js";
 
 dotenv.config();
 const app = express();
@@ -19,6 +20,7 @@ useGoogleStrategy();
 useGitHubStrategy();
 app.use(express.json());
 app.use(ENDPOINTS.USERS, usersRouter);
+app.use(ENDPOINTS.INVENTORIES, inventoriesRouter);
 app.use(ENDPOINTS.AUTH, authRouter);
 app.use(handleErrors);
 
