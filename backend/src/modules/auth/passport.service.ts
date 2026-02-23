@@ -1,10 +1,10 @@
 import passport from "passport";
-import { AUTH_PROVIDERS } from "../constants/authProviders.js";
+import { AUTH_PROVIDERS } from "../../shared/constants/authProviders.js";
 import { type Request, type Response } from "express";
-import { ENV } from "../constants/env.js";
-import { FRONTEND_ROUTES } from "../constants/frontendRoutes/frontendRoutes.js";
+import { ENV } from "../../shared/constants/env.js";
 import jwt from "jsonwebtoken";
-import { STATUS_CODES } from "../constants/statusCodes.js";
+import { STATUS_CODES } from "../../shared/constants/statusCodes.js";
+import { FRONTEND_ROUTES } from "../../shared/constants/frontendRoutes/frontendRoutes.js";
 
 export class PassportService {
   continueWithGoogle({

@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { AUTH_ROUTES } from "../constants/routes/authRoutes.js";
-import { passportService } from "../services/passport.service.js";
+import { AUTH_ROUTES } from "../../shared/constants/routes/authRoutes.js";
+import { passportService } from "./passport.service.js";
 
 const authRouter = Router();
 authRouter.get(

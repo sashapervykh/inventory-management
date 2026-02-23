@@ -1,8 +1,10 @@
+import { RequiredFiles } from "./RequiredFields";
+
 export const TabsInfo = [
   {
     key: "REQUIRED",
     label: "REQUIRED FIELDS",
-    children: <div>REQUIRED FIELDS</div>,
+    children: <RequiredFiles />,
   },
   {
     key: "CUSTOM ID",

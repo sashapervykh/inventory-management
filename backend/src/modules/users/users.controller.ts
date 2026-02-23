@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
-import { usersService } from "../services/users.service.js";
+import { usersService } from "./users.service.js";
 import jwt from "jsonwebtoken";
-import { AuthError } from "../errors/AuthError.js";
+import { AuthError } from "../../shared/errors/AuthError.js";
 
 class UsersController {
   async createUser(req: Request, res: Response) {

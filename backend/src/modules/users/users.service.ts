@@ -1,6 +1,6 @@
-import { AuthError } from "../errors/AuthError.js";
-import { usersRepository } from "../repositories/users.repository.js";
-import { getFrontendUser } from "../utils/getFrontendUser.js";
+import { usersRepository } from "./users.repository.js";
+import { getFrontendUser } from "../../shared/utils/getFrontendUser.js";
+import { AuthError } from "../../shared/errors/AuthError.js";
 
 class UsersService {
   async createUser(name: string, email: string) {

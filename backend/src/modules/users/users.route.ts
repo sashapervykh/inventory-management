@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { userController } from "../controllers/users.controller.js";
-import { USERS_ROUTES } from "../constants/routes/usersRoutes.js";
+import { userController } from "./users.controller.js";
+import { USERS_ROUTES } from "../../shared/constants/routes/usersRoutes.js";
 
 const usersRouter = Router();
 usersRouter.post(USERS_ROUTES.MAIN, userController.createUser);

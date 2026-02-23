@@ -18,15 +18,25 @@ enum UserType {
 }
 
 model User {
-  id            String     @id @default(uuid())
-  email         String     @unique
+  id            String      @id @default(uuid())
+  email         String      @unique
   first_name    String?
   last_name     String?
   provider      String
   provider_id   String
-  type          UserType   @default(user)
-  createdAt     DateTime   @default(now())
+  type          UserType    @default(user)
+  createdAt     DateTime    @default(now())
   last_login_at DateTime?
+  inventory     Inventory[]
 
   @@unique([provider, provider_id])
- }
+}
+
+model Inventory {
+  id          String  @id @default(uuid())
+  title       String
+  description String
+  isPrivate   Boolean
+  owner       User    @relation(fields: [ownerId], references: [id])
+  ownerId     String
+}

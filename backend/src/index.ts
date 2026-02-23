@@ -1,14 +1,14 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import usersRouter from "./routes/users.route.js";
-import authRouter from "./routes/auth.route.js";
+import usersRouter from "./modules/users/users.route.js";
+import authRouter from "./modules/auth/auth.route.js";
 import cookieParser from "cookie-parser";
-import { ENV } from "./constants/env.js";
-import { ENDPOINTS } from "./constants/routes/endpoints.js";
-import { useGoogleStrategy } from "./lib/passport/useGoogleStrategy.js";
-import { handleErrors } from "./middlewares/handleErrors.js";
-import { useGitHubStrategy } from "./lib/passport/useGithubStrategy.js";
+import { ENV } from "./shared/constants/env.js";
+import { ENDPOINTS } from "./shared/constants/routes/endpoints.js";
+import { useGoogleStrategy } from "./shared/lib/passport/useGoogleStrategy.js";
+import { useGitHubStrategy } from "./shared/lib/passport/useGithubStrategy.js";
+import { handleErrors } from "./shared/middlewares/handleErrors.js";
 
 dotenv.config();
 const app = express();
