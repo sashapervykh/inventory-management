@@ -15,7 +15,6 @@ export async function requireAuth(
     const id = extractIdFromToken(token);
     const user = await usersRepository.findById(id);
     req.user = user;
-    console.log(req.body);
     next();
   } catch (error) {
     next(error);
