@@ -1,6 +1,5 @@
 import { type NextFunction, type Request, type Response } from "express";
 import jwt from "jsonwebtoken";
-import { ERROR_MESSAGES } from "../constants/errorMessages.js";
 import { AuthError } from "../errors/AuthError.js";
 import { ENV } from "../constants/env.js";
 import { userIdSchema } from "../schemas/userIdSchema.js";
@@ -16,6 +15,7 @@ export async function requireAuth(
     const id = extractIdFromToken(token);
     const user = await usersRepository.findById(id);
     req.user = user;
+    console.log(req.body);
     next();
   } catch (error) {
     next(error);
@@ -40,7 +40,7 @@ function extractIdFromToken(token: string) {
   }
 }
 
-function getTypedId(payload: unknown) {
+function getTypedId(payload: jwt.JwtPayload | string) {
   try {
     const typedPayload = userIdSchema.parse(payload);
     return typedPayload.userId;

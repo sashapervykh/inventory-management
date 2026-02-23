@@ -10,10 +10,14 @@ type FieldType = {
 export function InventoryForm() {
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
     try {
-      console.log(values);
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}inventories`,
-        { method: "POST", credentials: "include" },
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(values),
+        },
       );
       const inventory = await response.json();
       console.log(inventory);
