@@ -1,11 +1,13 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { AppLayout } from "../../shared/ui/AppLayout/AppLayout";
 import { ROUTES } from "../../shared/constants/routes";
 import { HomePage } from "../../pages/Home/HomePage";
 import { UserPage } from "../../pages/User/UserPage";
 import { AdminPage } from "../../pages/Admin/AdminPage";
 import { RegisterPage } from "../../pages/Auth/RegisterPage";
 import { AuthLayout } from "../../feature/auth/ui/AuthLayout/ui/AuthLayout";
+import { NotFoundPage } from "../../pages/NotFoundPage/NotFoundPage";
+import { ProtectedRoute } from "../../feature/auth/ui/ProtectedRoute/ProtectedRoute";
+import { PublicOnlyRoute } from "../../feature/auth/ui/PublicRoute/PublicRoute";
 
 export function AppRouter() {
   return (
@@ -13,12 +15,17 @@ export function AppRouter() {
       <Routes>
         <Route element={<AuthLayout />}>
           <Route path="/" element={<Navigate to={ROUTES.HOME} />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path={ROUTES.USER} element={<UserPage />} />
+            <Route path={ROUTES.ADMIN} element={<AdminPage />} />
+          </Route>
+          <Route element={<PublicOnlyRoute />}>
+            <Route path={ROUTES.LOGIN} element={<RegisterPage />} />
+          </Route>
           <Route path={ROUTES.HOME} element={<HomePage />} />
-          <Route path={ROUTES.USER} element={<UserPage />} />
-          <Route path={ROUTES.ADMIN} element={<AdminPage />} />
           <Route path={ROUTES.INVENTORY} element={<UserPage />} />
           <Route path={ROUTES.ITEM} element={<AdminPage />} />
-          <Route path={ROUTES.LOGIN} element={<RegisterPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
