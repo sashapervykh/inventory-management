@@ -8,7 +8,7 @@ export const ru = {
     logout: "ВЫЙТИ",
     loginTitle: "Войдите для редактирования",
     loginGoogle: "Продолжите с Google",
-    loginFacebook: "Продолжите с Facebook",
+    loginGithub: "Продолжите с Github",
     footerText: "Сделано",
     footerLink: "Сашей Первых",
   },

@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Button, Typography } from "antd";
+import { Button } from "antd";
 import { useTranslation } from "react-i18next";
 
 export function LoginLink() {

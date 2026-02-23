@@ -8,7 +8,7 @@ import { ENV } from "./constants/env.js";
 import { ENDPOINTS } from "./constants/routes/endpoints.js";
 import { useGoogleStrategy } from "./lib/passport/useGoogleStrategy.js";
 import { handleErrors } from "./middlewares/handleErrors.js";
-import { useFacebookStrategy } from "./lib/passport/useFacebookStrategy.js";
+import { useGitHubStrategy } from "./lib/passport/useGithubStrategy.js";
 
 dotenv.config();
 const app = express();
@@ -16,7 +16,7 @@ const port = ENV.PORT || 3000;
 app.use(cookieParser());
 app.use(cors({ origin: ENV.FRONTEND_URL, credentials: true }));
 useGoogleStrategy();
-useFacebookStrategy();
+useGitHubStrategy();
 app.use(express.json());
 app.use(ENDPOINTS.USERS, usersRouter);
 app.use(ENDPOINTS.AUTH, authRouter);

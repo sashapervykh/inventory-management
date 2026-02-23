@@ -1,19 +1,19 @@
 import passport from "passport";
-import { Strategy as FacebookStrategy, type Profile } from "passport-facebook";
+import { Strategy as GithubStrategy, type Profile } from "passport-github2";
 import { prisma } from "../prisma.js";
 import { ENV } from "../../constants/env.js";
 import { AUTH_ROUTES } from "../../constants/routes/authRoutes.js";
 import { ENDPOINTS } from "../../constants/routes/endpoints.js";
 import { AUTH_PROVIDERS } from "../../constants/authProviders.js";
 
-export function useFacebookStrategy() {
+export function useGitHubStrategy() {
   passport.use(
-    new FacebookStrategy(
+    new GithubStrategy(
       {
-        clientID: ENV.FACEBOOK_CLIENT_ID,
-        clientSecret: ENV.FACEBOOK_CLIENT_SECRET,
-        callbackURL: `${ENDPOINTS.AUTH}${AUTH_ROUTES.FACEBOOK.CALLBACK}`,
-        scope: ["profile", "email"],
+        clientID: ENV.GITHUB_CLIENT_ID,
+        clientSecret: ENV.GITHUB_CLIENT_SECRET,
+        callbackURL: `${ENDPOINTS.AUTH}${AUTH_ROUTES.GITHUB.CALLBACK}`,
+        scope: ["user:email"],
       },
       async (
         _accessToken: string,
@@ -22,11 +22,8 @@ export function useFacebookStrategy() {
         done: (error: any, user?: any, info?: any) => void,
       ) => {
         try {
-          const email = profile.emails?.[0]?.value;
-          if (!email) {
-            return done(null, false);
-          }
-          const provider = AUTH_PROVIDERS.GOOGLE;
+          const email = profile.emails?.[0]?.value ?? "no email";
+          const provider = AUTH_PROVIDERS.GITHUB;
           const providerId = profile.id;
           const user = await prisma.user.upsert({
             where: {
@@ -34,7 +31,10 @@ export function useFacebookStrategy() {
             },
             update: { last_login_at: new Date() },
             create: {
-              first_name: profile.name?.givenName,
+              first_name:
+                profile.name?.givenName ??
+                profile.displayName ??
+                profile.username,
               last_name: profile.name?.familyName,
               provider,
               provider_id: providerId,

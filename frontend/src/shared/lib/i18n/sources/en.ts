@@ -7,7 +7,7 @@ export const en = {
     login: "LOG IN",
     loginTitle: "Sign in to Make Changes",
     loginGoogle: "Continue with Google",
-    loginFacebook: "Continue with Facebook",
+    loginGithub: "Continue with Github",
     logout: "LOG OUT",
     footerText: "Made by",
     footerLink: "Sasha Pervykh",

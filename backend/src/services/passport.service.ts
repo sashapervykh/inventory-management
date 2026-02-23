@@ -20,14 +20,14 @@ export class PassportService {
     });
   }
 
-  continueWithFacebook({
+  continueWithGithub({
     scope,
     session,
   }: {
     scope?: string[];
     session: boolean;
   }) {
-    return passport.authenticate(AUTH_PROVIDERS.FACEBOOK, {
+    return passport.authenticate(AUTH_PROVIDERS.GITHUB, {
       scope: scope,
       session: session,
     });

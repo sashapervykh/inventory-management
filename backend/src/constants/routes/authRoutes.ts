@@ -6,8 +6,8 @@ export const AUTH_ROUTES = {
     MAIN: `/${AUTH_PROVIDERS.GOOGLE}`,
     CALLBACK: `/${AUTH_PROVIDERS.GOOGLE}/callback`,
   },
-  FACEBOOK: {
-    MAIN: `/${AUTH_PROVIDERS.FACEBOOK}`,
-    CALLBACK: `/${AUTH_PROVIDERS.FACEBOOK}/callback`,
+  GITHUB: {
+    MAIN: `/${AUTH_PROVIDERS.GITHUB}`,
+    CALLBACK: `/${AUTH_PROVIDERS.GITHUB}/callback`,
   },
 };

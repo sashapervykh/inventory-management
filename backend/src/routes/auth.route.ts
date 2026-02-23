@@ -16,15 +16,15 @@ authRouter.get(
   passportService.handleResponse,
 );
 authRouter.get(
-  AUTH_ROUTES.FACEBOOK.MAIN,
-  passportService.continueWithGoogle({
-    scope: ["profile", "email"],
+  AUTH_ROUTES.GITHUB.MAIN,
+  passportService.continueWithGithub({
+    scope: ["user:email"],
     session: false,
   }),
 );
 authRouter.get(
-  AUTH_ROUTES.FACEBOOK.CALLBACK,
-  passportService.continueWithFacebook({ session: false }),
+  AUTH_ROUTES.GITHUB.CALLBACK,
+  passportService.continueWithGithub({ session: false }),
   passportService.handleResponse,
 );
 authRouter.post(AUTH_ROUTES.LOGOUT, passportService.logout);
