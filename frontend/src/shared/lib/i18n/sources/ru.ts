@@ -4,6 +4,7 @@ export const ru = {
     user: "ПРОФИЛЬ",
     home: "ГЛАВНАЯ",
     admin: "АДМИН",
+    create: "СОЗДАТЬ",
     login: "ВОЙТИ",
     logout: "ВЫЙТИ",
     loginTitle: "Войдите для редактирования",

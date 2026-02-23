@@ -4,6 +4,7 @@ export const en = {
     home: "HOME",
     user: "USER",
     admin: "ADMIN",
+    create: "CREATE",
     login: "LOG IN",
     loginTitle: "Sign in to Make Changes",
     loginGoogle: "Continue with Google",
