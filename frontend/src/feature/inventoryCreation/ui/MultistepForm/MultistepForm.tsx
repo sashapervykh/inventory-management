@@ -1,37 +1,17 @@
-import { Card, Steps } from "antd";
-import {
-  AppstoreAddOutlined,
-  DatabaseOutlined,
-  InfoCircleOutlined,
-} from "@ant-design/icons";
+import { Card } from "antd";
 import { InventoryForm } from "../InventoryForm/InventoryForm";
+import { CreationSteps } from "../CreationSteps/CreationSteps";
+import { useState } from "react";
+import { ControlButtons } from "../ControlButtons/ControlButtons";
 
 export function MultistepForm() {
+  const [current, setCurrent] = useState(0);
   return (
     <>
-      {" "}
-      <Steps
-        items={[
-          {
-            title: "Basic Info",
-            status: "finish",
-            icon: <DatabaseOutlined />,
-          },
-          {
-            title: "Custom ID",
-            status: "wait",
-            icon: <InfoCircleOutlined />,
-          },
-
-          {
-            title: "Additional Fields",
-            status: "wait",
-            icon: <AppstoreAddOutlined />,
-          },
-        ]}
-      ></Steps>
+      <CreationSteps current={current} />
       <Card>
-        <InventoryForm />
+        <InventoryForm current={current} />
+        <ControlButtons currentStep={current} changeStep={setCurrent} />
       </Card>
     </>
   );
