@@ -1,4 +1,5 @@
 import { Button, Checkbox, Form, Input, type FormProps } from "antd";
+import { useCreateInventory } from "../../model/useCreateInventory";
 
 const { TextArea } = Input;
 type FieldType = {
@@ -8,25 +9,10 @@ type FieldType = {
 };
 
 export function InventoryForm() {
-  const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}inventories`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(values),
-        },
-      );
-      const inventory = await response.json();
-      console.log(inventory);
-    } catch {
-      console.error("Error when creating");
-    }
-  };
+  const { createInventory } = useCreateInventory();
+
   return (
-    <Form onFinish={onFinish}>
+    <Form onFinish={createInventory}>
       <Form.Item<FieldType>
         label="Title"
         name="title"
@@ -49,7 +35,7 @@ export function InventoryForm() {
         <Checkbox />
       </Form.Item>
       <Button type="primary" className="w-fit" htmlType="submit">
-        Create
+        Continue
       </Button>
     </Form>
   );

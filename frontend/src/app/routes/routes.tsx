@@ -8,7 +8,7 @@ import { AuthLayout } from "../../feature/auth/ui/AuthLayout/ui/AuthLayout";
 import { NotFoundPage } from "../../pages/NotFoundPage/NotFoundPage";
 import { ProtectedRoute } from "../../feature/auth/ui/ProtectedRoute/ProtectedRoute";
 import { PublicOnlyRoute } from "../../feature/auth/ui/PublicRoute/PublicRoute";
-import { CreatePage } from "../../pages/CreatePage/CreatePage";
+import { CreationPage } from "../../pages/CreationPage/CreationPage";
 
 export function AppRouter() {
   return (
@@ -24,7 +24,7 @@ export function AppRouter() {
             <Route path={ROUTES.LOGIN} element={<RegisterPage />} />
           </Route>
           <Route path={ROUTES.HOME} element={<HomePage />} />
-          <Route path={ROUTES.CREATE} element={<CreatePage />} />
+          <Route path={ROUTES.CREATE} element={<CreationPage />} />
           <Route path={ROUTES.ITEM} element={<AdminPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
