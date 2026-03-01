@@ -19,7 +19,7 @@ export function useGitHubStrategy() {
         _accessToken: string,
         _refreshToken: string,
         profile: Profile,
-        done: (error: any, user?: any, info?: any) => void,
+        done: (_error: any, _user?: any, _info?: any) => void,
       ) => {
         try {
           const email = profile.emails?.[0]?.value ?? "no email";

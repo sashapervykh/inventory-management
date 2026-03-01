@@ -13,7 +13,7 @@ class UsersService {
       const user = await usersRepository.findById(id);
       const frontendUser = getFrontendUser(user);
       return frontendUser;
-    } catch (error) {
+    } catch {
       throw new AuthError();
     }
   }
