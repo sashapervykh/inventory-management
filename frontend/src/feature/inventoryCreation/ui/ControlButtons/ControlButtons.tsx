@@ -17,10 +17,16 @@ export function ControlButtons({
   };
 
   return (
-    <div>
-      {currentStep > 0 && <Button onClick={moveBack}>Back</Button>}
+    <div className="flex gap-2.5 m-auto w-fit">
+      {currentStep > 0 && (
+        <Button type="primary" onClick={moveBack}>
+          Back
+        </Button>
+      )}
       {currentStep < stepsItems.length - 1 && (
-        <Button onClick={moveNext}>Continue</Button>
+        <Button type="primary" onClick={moveNext}>
+          Continue
+        </Button>
       )}
     </div>
   );
