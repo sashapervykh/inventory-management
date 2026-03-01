@@ -1,11 +1,7 @@
-type FieldType = {
-  title: string;
-  description: string;
-  isPublic?: boolean;
-};
+import type { FormDataType } from "../types/FormDataType";
 
 export function useCreateInventory() {
-  const createInventory = async (values: FieldType) => {
+  const createInventory = async (values: FormDataType) => {
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}inventories`,

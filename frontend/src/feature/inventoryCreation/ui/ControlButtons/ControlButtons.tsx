@@ -1,22 +1,30 @@
-import { Button } from "antd";
-import type { Dispatch, SetStateAction } from "react";
+import { Button, type FormInstance } from "antd";
+import { useState, type Dispatch, type SetStateAction } from "react";
 import { stepsItems } from "../CreationSteps/StepsItems";
+import { ControlOutlined } from "@ant-design/icons";
+import { useCreateInventory } from "../../model/hooks/useCreateInventory";
 
 export function ControlButtons({
   currentStep,
   changeStep,
+  form,
 }: {
   currentStep: number;
   changeStep: Dispatch<SetStateAction<number>>;
+  form: FormInstance;
 }) {
+  const [formData, setFormData] = useState({});
+  const { createInventory } = useCreateInventory();
   const moveBack = () => {
     changeStep((c) => c - 1);
   };
-  const moveNext = () => {
+  const moveNext = async () => {
+    const values = await form.validateFields();
+    setFormData({ ...formData, ...values });
     changeStep((c) => c + 1);
   };
   const onFinish = () => {
-    console.log("data");
+    createInventory(formData);
   };
 
   return (
