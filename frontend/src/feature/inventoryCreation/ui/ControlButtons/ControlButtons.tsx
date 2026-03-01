@@ -15,6 +15,9 @@ export function ControlButtons({
   const moveNext = () => {
     changeStep((c) => c + 1);
   };
+  const onFinish = () => {
+    console.log("data");
+  };
 
   return (
     <div className="flex gap-2.5 m-auto w-fit">
@@ -26,6 +29,11 @@ export function ControlButtons({
       {currentStep < stepsItems.length - 1 && (
         <Button type="primary" onClick={moveNext}>
           Continue
+        </Button>
+      )}
+      {currentStep === stepsItems.length - 1 && (
+        <Button type="primary" onClick={onFinish}>
+          Create
         </Button>
       )}
     </div>
