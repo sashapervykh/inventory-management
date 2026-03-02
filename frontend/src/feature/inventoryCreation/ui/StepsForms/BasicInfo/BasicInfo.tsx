@@ -1,8 +1,6 @@
 import { Checkbox, Form, Input } from "antd";
 import type { FormDataType } from "../../../model/types/FormDataType";
-import { InfoCircleOutlined } from "@ant-design/icons";
-
-const { TextArea } = Input;
+import { MDTextArea } from "./MdTextArea";
 
 export function BasicInfo() {
   return (
@@ -26,7 +24,7 @@ export function BasicInfo() {
         tooltip="Add a description of your inventory. Markdown supported"
         rules={[{ required: true, message: "Please input your description!" }]}
       >
-        <TextArea />
+        <MDTextArea />
       </Form.Item>
       <Form.Item<FormDataType>
         labelCol={{ span: 3 }}
