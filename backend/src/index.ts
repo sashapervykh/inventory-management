@@ -21,6 +21,7 @@ useGitHubStrategy();
 app.use(express.json());
 app.use(ENDPOINTS.USERS, usersRouter);
 app.use(ENDPOINTS.INVENTORIES, inventoriesRouter);
+app.use(ENDPOINTS.CATEGORIES, inventoriesRouter);
 app.use(ENDPOINTS.AUTH, authRouter);
 app.use(handleErrors);
 
