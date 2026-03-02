@@ -1,6 +1,7 @@
 import { Checkbox, Form, Input, Select } from "antd";
 import type { FormDataType } from "../../../model/types/FormDataType";
 import { MDTextArea } from "./MdTextArea";
+import { CategorySelect } from "../CategorySelect/CategorySelect";
 
 export function BasicInfo() {
   return (
@@ -32,9 +33,8 @@ export function BasicInfo() {
         label="Category"
         name="category"
         tooltip="Choose your inventory category"
-        valuePropName="checked"
       >
-        <Select />
+        <CategorySelect />
       </Form.Item>
       <Form.Item<FormDataType>
         labelCol={{ span: 3 }}

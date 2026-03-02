@@ -10,10 +10,10 @@ export class CategoriesService {
     this.repository = repository;
   }
 
-  async getAllCategories() {
+  getAllCategories = async () => {
     const categories = await this.repository.getAllCategories();
     return categories;
-  }
+  };
 }
 
 export const categoriesService = new CategoriesService(categoriesRepository);

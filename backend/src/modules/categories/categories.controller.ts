@@ -8,14 +8,18 @@ class CategoriesController {
     this.service = service;
   }
 
-  async getAllCategories(req: Request, res: Response, next: NextFunction) {
+  getAllCategories = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
     try {
       const categories = await this.service.getAllCategories();
       res.status(200).send(categories);
     } catch (err) {
       next(err);
     }
-  }
+  };
 }
 
 export const categoriesController = new CategoriesController(categoriesService);

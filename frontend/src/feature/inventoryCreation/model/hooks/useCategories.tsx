@@ -1,23 +1,32 @@
-import type { FormDataType } from "../types/FormDataType";
+import { useEffect, useState } from "react";
+import type { Category } from "../types/Category";
 
 export function useCategories() {
-  const createInventory = async (values: FormDataType) => {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/categories`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(values),
-        },
-      );
-      const inventory = await response.json();
-      console.log(inventory);
-    } catch {
-      console.error("Error when creating");
-    }
-  };
+  const [categories, setCategories] = useState<Category[] | undefined>(
+    undefined,
+  );
 
-  return { createInventory };
+  useEffect(() => {
+    async function getCategories() {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/categories`,
+          {
+            method: "GET",
+            credentials: "include",
+          },
+        );
+        console.log(response);
+        const categories = await response.json();
+        console.log(categories);
+        setCategories(categories);
+      } catch {
+        console.error("Error when creating");
+      }
+    }
+
+    getCategories();
+  }, []);
+
+  return { categories };
 }

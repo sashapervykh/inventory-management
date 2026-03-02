@@ -9,7 +9,7 @@ export function useLogout() {
     try {
       setLoading(true);
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}auth/logout`,
+        `${import.meta.env.VITE_API_URL}/auth/logout`,
         { method: "POST", credentials: "include" },
       );
       if (!response.ok) throw new Error("Logout failed");
