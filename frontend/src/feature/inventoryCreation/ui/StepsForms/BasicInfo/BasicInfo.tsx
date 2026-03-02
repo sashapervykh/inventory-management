@@ -1,4 +1,4 @@
-import { Checkbox, Form, Input } from "antd";
+import { Checkbox, Form, Input, Select } from "antd";
 import type { FormDataType } from "../../../model/types/FormDataType";
 import { MDTextArea } from "./MdTextArea";
 
@@ -25,6 +25,16 @@ export function BasicInfo() {
         rules={[{ required: true, message: "Please input your description!" }]}
       >
         <MDTextArea />
+      </Form.Item>
+      <Form.Item<FormDataType>
+        labelCol={{ span: 3 }}
+        wrapperCol={{ span: 20 }}
+        label="Category"
+        name="category"
+        tooltip="Choose your inventory category"
+        valuePropName="checked"
+      >
+        <Select />
       </Form.Item>
       <Form.Item<FormDataType>
         labelCol={{ span: 3 }}
