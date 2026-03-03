@@ -3,8 +3,9 @@ import type { FormDataType } from "../types/FormDataType";
 export function useCreateInventory() {
   const createInventory = async (values: FormDataType) => {
     try {
+      console.log(values);
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}inventories`,
+        `${import.meta.env.VITE_API_URL}/inventories`,
         {
           method: "POST",
           credentials: "include",
@@ -12,9 +13,11 @@ export function useCreateInventory() {
           body: JSON.stringify(values),
         },
       );
+      console.log(response);
       const inventory = await response.json();
       console.log(inventory);
-    } catch {
+    } catch (error) {
+      console.log(error);
       console.error("Error when creating");
     }
   };

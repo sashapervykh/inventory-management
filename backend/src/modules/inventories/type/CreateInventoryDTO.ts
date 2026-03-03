@@ -3,4 +3,6 @@ export interface CreateInventoryDTO {
   description: string;
   isPublic: boolean;
   ownerId: string;
+  category: string;
+  tags: string[];
 }
