@@ -7,8 +7,8 @@ export class TagsService {
     this.repository = repository;
   }
 
-  getAllTags = async () => {
-    const tags = await this.repository.getAllTags();
+  getAllTags = async (search: string) => {
+    const tags = await this.repository.getAllTags(search);
     return tags;
   };
 }

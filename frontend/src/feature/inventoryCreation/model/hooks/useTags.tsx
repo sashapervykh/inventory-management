@@ -1,19 +1,29 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { Tag } from "../types/Tag";
 
 export function useTags() {
-  const [tags, setTags] = useState<Tag[] | undefined>(undefined);
+  const [userQuery, setUserQuery] = useState("");
+  const [tags, setTags] = useState<Tag[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const timerId = useRef<number | undefined>(undefined);
 
   useEffect(() => {
-    async function getCategories() {
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    async function getTags() {
       try {
         setLoading(true);
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/tags`, {
-          method: "GET",
-          credentials: "include",
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/tags?search=${userQuery}`,
+          {
+            method: "GET",
+            credentials: "include",
+            signal,
+          },
+        );
         const tags = await response.json();
+        console.log(tags);
         setTags(tags);
       } catch {
         console.error("Error when getting tags");
@@ -22,8 +32,20 @@ export function useTags() {
       }
     }
 
-    getCategories();
+    console.log("new request");
+    getTags();
+    return () => {
+      if (timerId.current) clearTimeout(timerId.current);
+      controller.abort();
+    };
+  }, [userQuery]);
+
+  const handleInputChange = useCallback((value: string) => {
+    if (timerId.current) clearTimeout(timerId.current);
+    timerId.current = setTimeout(() => {
+      setUserQuery(value);
+    }, 300);
   }, []);
 
-  return { tags, loading };
+  return { tags, loading, handleInputChange };
 }

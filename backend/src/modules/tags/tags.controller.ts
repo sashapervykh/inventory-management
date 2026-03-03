@@ -8,9 +8,11 @@ class TagsController {
     this.service = service;
   }
 
-  getAllTags = async (req: Request, res: Response, next: NextFunction) => {
+  getTagsByInput = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const tags = await this.service.getAllTags();
+      const { search } = req.query;
+      if (typeof search !== "string") throw new Error("Query is not received");
+      const tags = await this.service.getAllTags(search);
       res.status(200).send(tags);
     } catch (err) {
       next(err);

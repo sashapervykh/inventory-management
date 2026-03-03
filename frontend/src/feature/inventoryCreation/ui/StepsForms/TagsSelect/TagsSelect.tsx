@@ -1,14 +1,13 @@
 import { Select, Spin } from "antd";
-import { useCategories } from "../../../model/hooks/useCategories";
 import { useTags } from "../../../model/hooks/useTags";
 
 interface Props {
-  value?: string | undefined;
-  onChange?: (value: string | undefined) => void;
+  value?: string[] | undefined;
+  onChange?: (value: string[] | undefined) => void;
 }
 
 export function TagsSelect({ value, onChange }: Props) {
-  const { tags, loading } = useTags();
+  const { tags, loading, handleInputChange } = useTags();
   return (
     <Select
       mode="tags"
@@ -18,6 +17,10 @@ export function TagsSelect({ value, onChange }: Props) {
         loading && <Spin size="small" className="flex justify-self-center" />
       }
       onChange={onChange}
+      onKeyUp={(e) => {
+        const input = e.target as HTMLInputElement;
+        handleInputChange(input.value);
+      }}
       options={tags}
       optionRender={(option) => <div>{option.data.name}</div>}
     />
