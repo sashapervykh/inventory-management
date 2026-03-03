@@ -1,5 +1,6 @@
 import { Select, Spin } from "antd";
 import { useCategories } from "../../../model/hooks/useCategories";
+import { useTags } from "../../../model/hooks/useTags";
 
 interface Props {
   value?: string | undefined;
@@ -7,19 +8,17 @@ interface Props {
 }
 
 export function TagsSelect({ value, onChange }: Props) {
-  const { categories } = useCategories();
+  const { tags, loading } = useTags();
   return (
     <Select
       mode="tags"
       value={value}
       fieldNames={{ value: "name", label: "name" }}
       notFoundContent={
-        !categories ? (
-          <Spin size="small" className="flex justify-self-center" />
-        ) : null
+        loading && <Spin size="small" className="flex justify-self-center" />
       }
       onChange={onChange}
-      options={categories}
+      options={tags}
       optionRender={(option) => <div>{option.data.name}</div>}
     />
   );
