@@ -1,8 +1,4 @@
-import {
-  AppstoreAddOutlined,
-  DatabaseOutlined,
-  InfoCircleOutlined,
-} from "@ant-design/icons";
+import { AppstoreAddOutlined, DatabaseOutlined } from "@ant-design/icons";
 
 export const stepsItems = [
   {
@@ -10,12 +6,7 @@ export const stepsItems = [
     icon: <DatabaseOutlined />,
   },
   {
-    title: "Custom ID",
-    icon: <InfoCircleOutlined />,
-  },
-
-  {
-    title: "Additional Fields",
+    title: "Additional Info",
     icon: <AppstoreAddOutlined />,
   },
 ];

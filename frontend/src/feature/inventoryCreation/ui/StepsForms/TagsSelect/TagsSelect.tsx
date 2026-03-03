@@ -6,9 +6,8 @@ interface Props {
   onChange?: (value: string | undefined) => void;
 }
 
-export function CategorySelect({ value, onChange }: Props) {
+export function TagsSelect({ value, onChange }: Props) {
   const { categories } = useCategories();
-
   return (
     <Select
       value={value}

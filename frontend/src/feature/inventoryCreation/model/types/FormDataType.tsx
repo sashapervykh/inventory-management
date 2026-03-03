@@ -3,4 +3,5 @@ export interface FormDataType {
   description?: string;
   isPublic?: boolean;
   category?: string;
+  tags?: string[] | undefined;
 }

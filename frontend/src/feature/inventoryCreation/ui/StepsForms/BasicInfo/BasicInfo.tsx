@@ -33,18 +33,9 @@ export function BasicInfo() {
         label="Category"
         name="category"
         tooltip="Choose your inventory category"
+        rules={[{ required: true, message: "Please choose category!" }]}
       >
         <CategorySelect />
-      </Form.Item>
-      <Form.Item<FormDataType>
-        labelCol={{ span: 3 }}
-        wrapperCol={{ span: 20 }}
-        label="Is public?"
-        name="isPublic"
-        tooltip="Grant write access to all users"
-        valuePropName="checked"
-      >
-        <Checkbox />
       </Form.Item>
     </>
   );
