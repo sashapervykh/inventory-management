@@ -21,11 +21,7 @@ export function CategorySelect({ value, onChange }: Props) {
           <Spin size="small" className="flex justify-self-center" />
         ) : null
       }
-      optionRender={(option) => (
-        <div style={{ display: "flex", alignItems: "center" }}>
-          {option.data.name}
-        </div>
-      )}
+      optionRender={(option) => <div>{option.data.name}</div>}
     />
   );
 }
