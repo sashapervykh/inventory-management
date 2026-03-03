@@ -1,7 +1,7 @@
 import { prisma } from "../../shared/lib/prisma.js";
 import type { CreateInventoryDTO } from "./type/CreateInventoryDTO.js";
 
-class InventoriesRepository {
+export class InventoriesRepository {
   async createInventory({
     title,
     description,
@@ -28,6 +28,17 @@ class InventoriesRepository {
             },
           })),
         },
+      },
+    });
+    return inventory;
+  }
+
+  async getInventoryById(inventoryId: string) {
+    const inventory = await prisma.inventory.findUnique({
+      where: { id: inventoryId },
+      include: {
+        category: true,
+        tags: true,
       },
     });
     return inventory;

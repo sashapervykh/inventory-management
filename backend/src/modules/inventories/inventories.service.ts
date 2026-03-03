@@ -1,12 +1,25 @@
-import { inventoriesRepository } from "./inventories.repository.js";
+import {
+  InventoriesRepository,
+  inventoriesRepository,
+} from "./inventories.repository.js";
 import type { CreateInventoryDTO } from "./type/CreateInventoryDTO.js";
 
-class InventoriesService {
-  async createInventory(createInventoryDto: CreateInventoryDTO) {
-    const inventory =
-      await inventoriesRepository.createInventory(createInventoryDto);
-    return inventory;
+export class InventoriesService {
+  private repository: InventoriesRepository;
+
+  constructor(repository: InventoriesRepository) {
+    this.repository = repository;
   }
+
+  createInventory = async (createInventoryDto: CreateInventoryDTO) => {
+    const inventory = await this.repository.createInventory(createInventoryDto);
+    return inventory;
+  };
+
+  getInventoryById = async (inventoryId: string) => {
+    const inventory = await this.repository.getInventoryById(inventoryId);
+    return inventory;
+  };
 }
 
-export const inventoriesService = new InventoriesService();
+export const inventoriesService = new InventoriesService(inventoriesRepository);

@@ -1,14 +1,23 @@
 import type { NextFunction, Request, Response } from "express";
-import { inventoriesService } from "./inventories.service.js";
+import {
+  InventoriesService,
+  inventoriesService,
+} from "./inventories.service.js";
 import { createInventorySchema } from "./schemas/createInventorySchema.js";
 import { validateUserId } from "../../shared/utils/validateUserId.js";
 
 class InventoriesController {
-  async createInventory(req: Request, res: Response, next: NextFunction) {
+  private service: InventoriesService;
+
+  constructor(service: InventoriesService) {
+    this.service = service;
+  }
+
+  createInventory = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const ownerId = validateUserId(req.user?.id);
       const inventoryInfo = createInventorySchema.parse(req.body);
-      const inventory = await inventoriesService.createInventory({
+      const inventory = await this.service.createInventory({
         ...inventoryInfo,
         ownerId,
       });
@@ -16,7 +25,26 @@ class InventoriesController {
     } catch (err) {
       next(err);
     }
-  }
+  };
+
+  getInventoryById = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      const { id } = req.params;
+      if (!id || typeof id !== "string") {
+        throw new Error("Inventory id was not received");
+      }
+      const inventory = await this.service.getInventoryById(id);
+      res.status(200).send(inventory);
+    } catch (err) {
+      next(err);
+    }
+  };
 }
 
-export const inventoriesController = new InventoriesController();
+export const inventoriesController = new InventoriesController(
+  inventoriesService,
+);
