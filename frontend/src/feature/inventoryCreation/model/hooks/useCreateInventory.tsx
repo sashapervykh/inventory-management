@@ -20,8 +20,7 @@ export function useCreateInventory() {
         throw new Error("Error when creating inventory");
       }
       const inventory = await response.json();
-      console.log(inventory);
-      navigate("/inventories");
+      navigate(`/inventories/${inventory.id}`);
     } catch (error) {
       console.log(error);
       console.error("Error when creating");
