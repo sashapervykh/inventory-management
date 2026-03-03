@@ -1,8 +1,7 @@
-import { Button, type FormInstance } from "antd";
 import { useState, type Dispatch, type SetStateAction } from "react";
+import { Button, type FormInstance } from "antd";
 import { stepsItems } from "../CreationSteps/StepsItems";
 import { useCreateInventory } from "../../model/hooks/useCreateInventory";
-import { useUser } from "../../../../entity/user/model/useUser";
 
 export function ControlButtons({
   currentStep,

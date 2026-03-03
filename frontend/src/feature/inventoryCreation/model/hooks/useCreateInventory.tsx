@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import type { FormDataType } from "../types/FormDataType";
 
 export function useCreateInventory() {
+  const navigate = useNavigate();
+
   const createInventory = async (values: FormDataType) => {
     try {
       console.log(values);
@@ -13,9 +16,12 @@ export function useCreateInventory() {
           body: JSON.stringify(values),
         },
       );
-      console.log(response);
+      if (!response.ok) {
+        throw new Error("Error when creating inventory");
+      }
       const inventory = await response.json();
       console.log(inventory);
+      navigate("/inventories");
     } catch (error) {
       console.log(error);
       console.error("Error when creating");
