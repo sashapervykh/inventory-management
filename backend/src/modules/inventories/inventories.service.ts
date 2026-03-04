@@ -3,6 +3,7 @@ import {
   inventoriesRepository,
 } from "./inventories.repository.js";
 import type { CreateInventoryDTO } from "./type/CreateInventoryDTO.js";
+import { getFrontendInventory } from "./utils/getFrontendInventory.js";
 
 export class InventoriesService {
   private repository: InventoriesRepository;
@@ -18,7 +19,8 @@ export class InventoriesService {
 
   getInventoryById = async (inventoryId: string) => {
     const inventory = await this.repository.getInventoryById(inventoryId);
-    return inventory;
+    const frontendInventory = getFrontendInventory(inventory);
+    return frontendInventory;
   };
 }
 

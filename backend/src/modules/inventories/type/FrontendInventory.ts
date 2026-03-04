@@ -1,4 +1,4 @@
-export interface Inventory {
+export interface FrontendInventory {
   title: string;
   description: string;
   isPublic: boolean;
