@@ -1,5 +1,6 @@
 import Text from "antd/es/typography";
 import { ToggleAccessButton } from "../../../../feature/toggle-access/ui/ToggleAccessButton";
+import { AutoComplete } from "antd";
 
 export function AccessTab({ isPublic }: { isPublic: boolean }) {
   if (isPublic) {
@@ -16,6 +17,11 @@ export function AccessTab({ isPublic }: { isPublic: boolean }) {
       <Text>
         You can choose who can change your repository or make it public
       </Text>
+      <AutoComplete
+        // showSearch={{ onSearch: handleSearch }}
+        placeholder="input here"
+        // options={options}
+      />
       <ToggleAccessButton isPublic={isPublic} />
     </>
   );
