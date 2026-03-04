@@ -5,6 +5,7 @@ import {
 } from "./inventories.service.js";
 import { createInventorySchema } from "./schemas/createInventorySchema.js";
 import { validateUserId } from "../../shared/utils/validateUserId.js";
+import { updateInventorySchema } from "./schemas/updateInventorySchema.js";
 
 class InventoriesController {
   private service: InventoriesService;
@@ -51,11 +52,14 @@ class InventoriesController {
   ) => {
     try {
       const { id } = req.params;
-      const data = req.body;
+      const updatedFields = updateInventorySchema.parse(req.body);
       if (!id || typeof id !== "string") {
         throw new Error("Inventory id was not received");
       }
-      const inventory = await this.service.updateInventoryById(id, data);
+      const inventory = await this.service.updateInventoryById(
+        id,
+        updatedFields,
+      );
       res.status(200).send(inventory);
     } catch (err) {
       next(err);

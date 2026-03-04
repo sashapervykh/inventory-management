@@ -1,5 +1,6 @@
 import { prisma } from "../../shared/lib/prisma.js";
 import type { CreateInventoryDTO } from "./type/CreateInventoryDTO.js";
+import type { UpdateInventoryDTO } from "./type/UpdateInventoryDTO.js";
 
 export class InventoriesRepository {
   async createInventory({
@@ -44,7 +45,7 @@ export class InventoriesRepository {
     return inventory;
   }
 
-  async updateInventoryById(inventoryId: string, data) {
+  async updateInventoryById(inventoryId: string, data: UpdateInventoryDTO) {
     const inventory = await prisma.inventory.update({
       where: { id: inventoryId },
       data: { ...data },
