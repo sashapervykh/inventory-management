@@ -38,7 +38,7 @@ export class InventoriesRepository {
       where: { id: inventoryId },
       include: {
         category: true,
-        tags: true,
+        tags: { include: { tag: true } },
       },
     });
     return inventory;
