@@ -22,7 +22,7 @@ export const getTabsList: (inventory: Inventory) => TabsProps["items"] = (
       <SettingsTab
         title={inventory.title}
         description={inventory.description}
-        category={inventory.category.name}
+        category={inventory.category}
         tags={inventory.tags}
       />
     ),

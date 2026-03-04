@@ -28,11 +28,13 @@ export function SettingsTab({ title, description, category, tags }: Props) {
       <span>
         <strong>Tags:</strong>
       </span>
-      <div>
+      <div className="flex flex-wrap gap-2">
         {tags ? (
           <>
             {tags.map((tag) => (
-              <Tag key={tag}>{tag}</Tag>
+              <Tag key={tag} variant="filled" color="blue">
+                {tag}
+              </Tag>
             ))}
           </>
         ) : (
