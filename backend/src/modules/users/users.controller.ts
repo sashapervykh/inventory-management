@@ -10,6 +10,11 @@ class UsersController {
     res.status(200).send(user);
   }
 
+  getUsers = async (req: Request, res: Response) => {
+    const users = await usersService.getUsers();
+    res.status(200).send(users);
+  };
+
   async findById(req: Request, res: Response, next: NextFunction) {
     try {
       const token = req.cookies.auth;
