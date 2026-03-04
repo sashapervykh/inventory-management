@@ -9,7 +9,7 @@ import { NotFoundPage } from "../../pages/NotFoundPage/NotFoundPage";
 import { ProtectedRoute } from "../../feature/auth/ui/ProtectedRoute/ProtectedRoute";
 import { PublicOnlyRoute } from "../../feature/auth/ui/PublicRoute/PublicRoute";
 import { CreationPage } from "../../pages/CreationPage/CreationPage";
-import { Inventory } from "../../entity/inventory/ui/Inventory";
+import { InventoryPage } from "../../pages/Inventory/InventoryPage";
 
 export function AppRouter() {
   return (
@@ -26,7 +26,7 @@ export function AppRouter() {
           </Route>
           <Route
             path={`${ROUTES.INVENTORIES}/:inventoryId`}
-            element={<Inventory />}
+            element={<InventoryPage />}
           />
           <Route path={ROUTES.HOME} element={<HomePage />} />
           <Route path={ROUTES.CREATE} element={<CreationPage />} />

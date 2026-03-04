@@ -17,6 +17,7 @@ export function useInventory(inventoryId: string) {
         if (!response.ok) {
           throw new Error("Error when getting inventory");
         }
+        console.log(response);
         const inventory = await response.json();
         setInventory(inventory);
       } catch (error) {
