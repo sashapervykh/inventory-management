@@ -14,5 +14,10 @@ inventoriesRouter.get(
   requireAuth,
   inventoriesController.getInventoryById,
 );
+inventoriesRouter.put(
+  INVENTORY_ROUTES.ONE,
+  requireAuth,
+  inventoriesController.updateInventoryById,
+);
 
 export default inventoriesRouter;

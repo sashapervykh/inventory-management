@@ -22,6 +22,14 @@ export class InventoriesService {
     const frontendInventory = getFrontendInventory(inventory);
     return frontendInventory;
   };
+
+  updateInventoryById = async (inventoryId: string, data) => {
+    const inventory = await this.repository.updateInventoryById(
+      inventoryId,
+      data,
+    );
+    return inventory;
+  };
 }
 
 export const inventoriesService = new InventoriesService(inventoriesRepository);

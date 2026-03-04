@@ -43,6 +43,14 @@ export class InventoriesRepository {
     });
     return inventory;
   }
+
+  async updateInventoryById(inventoryId: string, data) {
+    const inventory = await prisma.inventory.update({
+      where: { id: inventoryId },
+      data: { ...data },
+    });
+    return inventory;
+  }
 }
 
 export const inventoriesRepository = new InventoriesRepository();

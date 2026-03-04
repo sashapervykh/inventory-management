@@ -10,11 +10,13 @@ export function useToggleAccess() {
   const updateInventoryAccess = useCallback(async (isPublic: boolean) => {
     try {
       const body = { isPublic };
+      console.log(body);
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/inventories/${inventoryId}`,
         {
           method: "PUT",
           credentials: "include",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
         },
       );

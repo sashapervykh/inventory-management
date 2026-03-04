@@ -10,7 +10,7 @@ export function ToggleAccessButton({ isPublic }: { isPublic: boolean }) {
       }}
       type="primary"
     >
-      {isPublic ? "Limit access" : "Make Public"}
+      {isPublic ? "Limit access" : "Make public"}
     </Button>
   );
 }

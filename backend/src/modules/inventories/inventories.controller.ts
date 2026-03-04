@@ -43,6 +43,24 @@ class InventoriesController {
       next(err);
     }
   };
+
+  updateInventoryById = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      const { id } = req.params;
+      const data = req.body;
+      if (!id || typeof id !== "string") {
+        throw new Error("Inventory id was not received");
+      }
+      const inventory = await this.service.updateInventoryById(id, data);
+      res.status(200).send(inventory);
+    } catch (err) {
+      next(err);
+    }
+  };
 }
 
 export const inventoriesController = new InventoriesController(
