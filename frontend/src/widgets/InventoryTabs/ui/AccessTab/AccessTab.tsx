@@ -11,4 +11,12 @@ export function AccessTab({ isPublic }: { isPublic: boolean }) {
       </>
     );
   }
+  return (
+    <>
+      <Text>
+        You can choose who can change your repository or make it public
+      </Text>
+      <ToggleAccessButton isPublic={isPublic} />
+    </>
+  );
 }
