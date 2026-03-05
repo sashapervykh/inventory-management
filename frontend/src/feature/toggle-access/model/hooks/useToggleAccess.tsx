@@ -1,6 +1,6 @@
-import { useInventory } from "../../../entity/inventory/model/hooks/useInventory";
 import { useCallback } from "react";
 import { useParams } from "react-router-dom";
+import { useInventory } from "../../../../entity/inventory/model/hooks/useInventory";
 
 export function useToggleAccess() {
   const { getInventory } = useInventory();

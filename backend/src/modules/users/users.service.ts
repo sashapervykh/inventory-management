@@ -1,6 +1,7 @@
 import { UsersRepository, usersRepository } from "./users.repository.js";
 import { getFrontendUser } from "../../shared/utils/getFrontendUser.js";
 import { AuthError } from "../../shared/errors/AuthError.js";
+import { getFrontendUsers } from "./utils/getFrontendUsers.js";
 
 export class UsersService {
   repository: UsersRepository;
@@ -16,7 +17,8 @@ export class UsersService {
 
   getUsers = async () => {
     const users = await this.repository.getUsers();
-    return users;
+    const frontendUsers = getFrontendUsers(users);
+    return frontendUsers;
   };
 
   async findById(id: string) {

@@ -1,5 +1,5 @@
 import { Button } from "antd";
-import { useToggleAccess } from "../hooks/useToggleAccess";
+import { useToggleAccess } from "../model/hooks/useToggleAccess";
 
 export function ToggleAccessButton({ isPublic }: { isPublic: boolean }) {
   const { updateInventoryAccess } = useToggleAccess();
