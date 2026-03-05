@@ -1,12 +1,13 @@
+import { ANONYMOUS } from "../constants/ANONYM.js";
 import type { BackendUsers } from "../types/BackendUser.js";
 
 export function getFrontendUsers(users: BackendUsers) {
   return users.map((user) => {
-    const firstName = user.first_name ?? "Anonymous";
+    const firstName = user.first_name ?? ANONYMOUS;
     const lastName = user.last_name ?? "";
     const fullName =
-      firstName === "Anonymous"
-        ? "Anonymous"
+      firstName === ANONYMOUS
+        ? ANONYMOUS
         : lastName
           ? `${firstName} ${lastName}`
           : `${firstName}`;
