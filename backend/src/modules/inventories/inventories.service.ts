@@ -4,8 +4,8 @@ import {
 } from "./inventories.repository.js";
 import type { CreateInventoryDTO } from "./type/CreateInventoryDTO.js";
 import type { UpdateInventoryDTO } from "./type/UpdateInventoryDTO.js";
+import { getFrontendEditors } from "./utils/getFrontendEditors.js";
 import { getFrontendInventory } from "./utils/getFrontendInventory.js";
-import { getFrontendEditors } from "./utils/getFrotendEditors.js";
 
 export class InventoriesService {
   private repository: InventoriesRepository;
