@@ -47,7 +47,8 @@ export class InventoriesService {
       inventoryId,
       userIds,
     );
-    return updatedInventoryAccess;
+    const frontendEditors = getFrontendEditors(updatedInventoryAccess);
+    return frontendEditors;
   };
 }
 

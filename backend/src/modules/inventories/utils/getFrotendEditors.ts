@@ -9,8 +9,7 @@ export function getFrontendEditors(editors: BackendEditors) {
     );
     return {
       id: editor.user.id,
-      email: editor.user.id,
-
+      email: editor.user.email,
       fullName,
     };
   });
