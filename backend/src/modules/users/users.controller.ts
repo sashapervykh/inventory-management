@@ -1,9 +1,14 @@
 import type { NextFunction, Request, Response } from "express";
-import { usersService } from "./users.service.js";
+import { UsersService, usersService } from "./users.service.js";
 import jwt from "jsonwebtoken";
 import { AuthError } from "../../shared/errors/AuthError.js";
 
 class UsersController {
+  service: UsersService;
+  constructor(service: UsersService) {
+    this.service = service;
+  }
+
   async createUser(req: Request, res: Response) {
     const { name, email } = req.body;
     const user = await usersService.createUser(name, email);
@@ -18,9 +23,11 @@ class UsersController {
   async findById(req: Request, res: Response, next: NextFunction) {
     try {
       const token = req.cookies.auth;
+      console.log(token);
       const userInfo = jwt.decode(token);
       if (!userInfo) throw new AuthError();
-      const user = await usersService.findById(userInfo.user);
+      console.log(userInfo);
+      const user = await usersService.findById(userInfo.userId);
       res.status(200).send(user);
     } catch (error) {
       next(error);
@@ -28,4 +35,4 @@ class UsersController {
   }
 }
 
-export const userController = new UsersController();
+export const userController = new UsersController(usersService);

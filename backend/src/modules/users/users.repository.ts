@@ -12,7 +12,9 @@ export class UsersRepository {
   };
 
   async findById(id: string) {
+    console.log(id);
     const user = await prisma.user.findFirstOrThrow({ where: { id: id } });
+    console.log(user);
     return user;
   }
 }

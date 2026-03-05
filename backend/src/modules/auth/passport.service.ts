@@ -34,9 +34,12 @@ export class PassportService {
   }
 
   handleResponse(req: Request, res: Response) {
+    console.log(req.user?.id);
+    console.log(req.user?.id);
     const token = jwt.sign({ userId: req.user?.id }, ENV.JWT_SECRET, {
       expiresIn: "7d",
     });
+    console.log(token);
     res.cookie("auth", token, {
       httpOnly: true,
       secure: true,
