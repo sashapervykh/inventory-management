@@ -11,7 +11,6 @@ export class InventoriesRepository {
     category,
     tags,
   }: CreateInventoryDTO) {
-    console.log(tags);
     const normalizedTags = tags
       .map((tag) => tag.trim().toLowerCase())
       .filter((tag, i) => tags.indexOf(tag) === i);
@@ -52,6 +51,36 @@ export class InventoriesRepository {
     });
     return inventory;
   }
+
+  updateAccessInventory = async (inventoryId: string, userIds: string[]) => {
+    return prisma.$transaction(async (tx) => {
+      await tx.inventoryAccess.deleteMany({
+        where: {
+          inventoryId,
+        },
+      });
+
+      await tx.inventoryAccess.createMany({
+        data: userIds.map((userId) => ({
+          inventoryId,
+          userId,
+        })),
+        skipDuplicates: true,
+      });
+
+      return tx.inventoryAccess.findMany({
+        where: { inventoryId },
+        include: {
+          user: {
+            select: {
+              id: true,
+              email: true,
+            },
+          },
+        },
+      });
+    });
+  };
 }
 
 export const inventoriesRepository = new InventoriesRepository();

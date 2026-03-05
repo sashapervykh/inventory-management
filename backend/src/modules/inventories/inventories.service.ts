@@ -34,6 +34,14 @@ export class InventoriesService {
     );
     return inventory;
   };
+
+  updateAccessInventory = async (inventoryId: string, userIds: string[]) => {
+    const updatedInventoryAccess = await this.repository.updateAccessInventory(
+      inventoryId,
+      userIds,
+    );
+    return updatedInventoryAccess;
+  };
 }
 
 export const inventoriesService = new InventoriesService(inventoriesRepository);

@@ -7,6 +7,7 @@ import { createInventorySchema } from "./schemas/createInventorySchema.js";
 import { validateUserId } from "../../shared/utils/validateUserId.js";
 import { updateInventorySchema } from "./schemas/updateInventorySchema.js";
 import { inventoryIdSchema } from "./schemas/inventoryIdSchema.js";
+import { getUserIds } from "./utils/getUserIds.js";
 
 class InventoriesController {
   private service: InventoriesService;
@@ -54,6 +55,25 @@ class InventoriesController {
       const inventory = await this.service.updateInventoryById(
         id,
         updatedFields,
+      );
+      res.status(200).send(inventory);
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  updateInventoryAccess = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      console.log(req.body);
+      const inventoryId = inventoryIdSchema.parse(req.params.id);
+      const userIds = getUserIds(req.body);
+      const inventory = await this.service.updateAccessInventory(
+        inventoryId,
+        userIds,
       );
       res.status(200).send(inventory);
     } catch (err) {

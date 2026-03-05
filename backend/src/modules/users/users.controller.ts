@@ -21,7 +21,6 @@ class UsersController {
     const search = getTypedSearch(req);
     const limit = getTypedLimit(req);
     const users = await usersService.getUsers(search, limit);
-    console.log(users);
     res.status(200).send(users);
   };
 
