@@ -24,6 +24,12 @@ export class InventoriesService {
     return frontendInventory;
   };
 
+  getAccessInventory = async (inventoryId: string) => {
+    const updatedInventoryAccess =
+      await this.repository.getAccessInventory(inventoryId);
+    return updatedInventoryAccess;
+  };
+
   updateInventoryById = async (
     inventoryId: string,
     data: UpdateInventoryDTO,

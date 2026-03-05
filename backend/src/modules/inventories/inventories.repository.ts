@@ -52,7 +52,23 @@ export class InventoriesRepository {
     return inventory;
   }
 
-  updateAccessInventory = async (inventoryId: string, userIds: string[]) => {
+  async getAccessInventory(inventoryId: string) {
+    return prisma.inventoryAccess.findMany({
+      where: { inventoryId },
+      include: {
+        user: {
+          select: {
+            id: true,
+            first_name: true,
+            last_name: true,
+            email: true,
+          },
+        },
+      },
+    });
+  }
+
+  async updateAccessInventory(inventoryId: string, userIds: string[]) {
     return prisma.$transaction(async (tx) => {
       await tx.inventoryAccess.deleteMany({
         where: {
@@ -74,13 +90,15 @@ export class InventoriesRepository {
           user: {
             select: {
               id: true,
+              first_name: true,
+              last_name: true,
               email: true,
             },
           },
         },
       });
     });
-  };
+  }
 }
 
 export const inventoriesRepository = new InventoriesRepository();

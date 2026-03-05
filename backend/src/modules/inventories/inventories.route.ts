@@ -19,6 +19,11 @@ inventoriesRouter.put(
   requireAuth,
   inventoriesController.updateInventoryById,
 );
+inventoriesRouter.get(
+  INVENTORY_ROUTES.ACCESS,
+  requireAuth,
+  inventoriesController.getInventoryAccess,
+);
 inventoriesRouter.post(
   INVENTORY_ROUTES.ACCESS,
   requireAuth,

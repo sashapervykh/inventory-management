@@ -18,7 +18,6 @@ export function AccessControls() {
           getUsers(value);
         }}
         onSelect={(value) => {
-          console.log(value);
           updateUsersAccess(1, value);
         }}
         options={options}

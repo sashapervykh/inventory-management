@@ -1,5 +1,6 @@
 import Text from "antd/es/typography";
 import { AccessControls } from "./AccessControls";
+import { AccessTable } from "./AccessTable";
 
 export function LimitedAccess() {
   return (
@@ -8,6 +9,7 @@ export function LimitedAccess() {
         You can choose who can change your repository or make it public
       </Text>
       <AccessControls />
+      <AccessTable />
     </>
   );
 }
