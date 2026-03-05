@@ -7,7 +7,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export function UserProvider({ children }: Props) {
+export function InventoryProvider({ children }: Props) {
   const [inventory, setInventory] = useState<Inventory | null>(null);
 
   const value: InventoryContextType = {

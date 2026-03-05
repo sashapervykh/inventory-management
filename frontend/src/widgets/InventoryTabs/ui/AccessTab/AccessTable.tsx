@@ -2,5 +2,6 @@ import { useEditingUsers } from "../../../../feature/users/model/hooks/useEditin
 
 export function AccessTable() {
   const { editingUsers } = useEditingUsers();
-  return <div>{editingUsers.map((user) => user.name)}</div>;
+  console.log(editingUsers);
+  return <div>{editingUsers.map((user) => user.fullName)}</div>;
 }

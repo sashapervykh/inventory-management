@@ -25,7 +25,6 @@ export function InventoryProvider({ children }: Props) {
       if (!response.ok) {
         throw new Error("Error when getting inventory");
       }
-      console.log(response);
       const inventory = await response.json();
       setInventory(inventory);
     } catch (error) {

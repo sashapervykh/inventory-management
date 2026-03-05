@@ -18,7 +18,6 @@ export function useAllUsers() {
         throw new Error("Error when getting users");
       }
       const updatedUsers = await response.json();
-      console.log(updatedUsers);
       setUsers(updatedUsers);
     } catch (error) {
       console.log(error);
