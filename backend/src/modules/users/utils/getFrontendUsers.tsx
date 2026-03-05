@@ -1,16 +1,13 @@
-import { ANONYMOUS } from "../constants/ANONYM.js";
+import { ANONYMOUS } from "../../../shared/constants/ANONYM.js";
+import { getFrontendName } from "../../../shared/utils/getFrontendName.js";
 import type { BackendUsers } from "../types/BackendUser.js";
 
 export function getFrontendUsers(users: BackendUsers) {
   return users.map((user) => {
-    const firstName = user.first_name ?? ANONYMOUS;
-    const lastName = user.last_name ?? "";
-    const fullName =
-      firstName === ANONYMOUS
-        ? ANONYMOUS
-        : lastName
-          ? `${firstName} ${lastName}`
-          : `${firstName}`;
+    const { firstName, lastName, fullName } = getFrontendName(
+      user.first_name,
+      user.last_name,
+    );
     return {
       id: user.id,
       email: user.email,

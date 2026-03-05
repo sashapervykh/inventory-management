@@ -44,14 +44,10 @@ class InventoriesController {
     }
   };
 
-  getInventoryAccess = async (
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ) => {
+  getEditors = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const inventoryId = inventoryIdSchema.parse(req.params.id);
-      const inventory = await this.service.getAccessInventory(inventoryId);
+      const inventory = await this.service.getEditors(inventoryId);
       res.status(200).send(inventory);
     } catch (err) {
       next(err);

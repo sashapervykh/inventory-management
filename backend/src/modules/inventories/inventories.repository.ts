@@ -52,7 +52,7 @@ export class InventoriesRepository {
     return inventory;
   }
 
-  async getAccessInventory(inventoryId: string) {
+  async getEditors(inventoryId: string) {
     return prisma.inventoryAccess.findMany({
       where: { inventoryId },
       include: {

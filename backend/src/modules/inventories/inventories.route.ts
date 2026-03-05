@@ -22,7 +22,7 @@ inventoriesRouter.put(
 inventoriesRouter.get(
   INVENTORY_ROUTES.ACCESS,
   requireAuth,
-  inventoriesController.getInventoryAccess,
+  inventoriesController.getEditors,
 );
 inventoriesRouter.post(
   INVENTORY_ROUTES.ACCESS,

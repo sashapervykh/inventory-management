@@ -5,6 +5,7 @@ import {
 import type { CreateInventoryDTO } from "./type/CreateInventoryDTO.js";
 import type { UpdateInventoryDTO } from "./type/UpdateInventoryDTO.js";
 import { getFrontendInventory } from "./utils/getFrontendInventory.js";
+import { getFrontendEditors } from "./utils/getFrotendEditors.js";
 
 export class InventoriesService {
   private repository: InventoriesRepository;
@@ -24,10 +25,10 @@ export class InventoriesService {
     return frontendInventory;
   };
 
-  getAccessInventory = async (inventoryId: string) => {
-    const updatedInventoryAccess =
-      await this.repository.getAccessInventory(inventoryId);
-    return updatedInventoryAccess;
+  getEditors = async (inventoryId: string) => {
+    const editors = await this.repository.getEditors(inventoryId);
+    const frontendEditors = getFrontendEditors(editors);
+    return frontendEditors;
   };
 
   updateInventoryById = async (
