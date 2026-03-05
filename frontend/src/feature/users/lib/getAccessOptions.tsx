@@ -5,7 +5,7 @@ export function getAccessOptions(users: User[] | undefined) {
     return [{ label: "No users found", value: "No users found" }];
   }
   return users.map((user) => ({
-    value: `${user.firstName} ${user.lastName} ${user.email}`,
-    label: `Name: ${user.firstName} ${user.lastName}, email: ${user.email}`,
+    value: `${user.fullName}, email: ${user.email}`,
+    label: `${user.fullName}, email: ${user.email}`,
   }));
 }

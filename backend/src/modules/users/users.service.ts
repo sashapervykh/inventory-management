@@ -15,15 +15,14 @@ export class UsersService {
     return user;
   }
 
-  getUsers = async () => {
-    const users = await this.repository.getUsers();
+  getUsers = async (search: string | undefined, limit: number | undefined) => {
+    const users = await this.repository.getUsers(search, limit);
     const frontendUsers = getFrontendUsers(users);
     return frontendUsers;
   };
 
   async findById(id: string) {
     try {
-      console.log("service", id);
       const user = await usersRepository.findById(id);
       const frontendUser = getFrontendUser(user);
       return frontendUser;

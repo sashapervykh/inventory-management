@@ -6,15 +6,24 @@ export class UsersRepository {
     return user;
   }
 
-  getUsers = async () => {
-    const users = await prisma.user.findMany();
+  getUsers = async (search: string | undefined, limit: number | undefined) => {
+    const users = await prisma.user.findMany({
+      where: search
+        ? {
+            OR: [
+              { first_name: { contains: search, mode: "insensitive" } },
+              { last_name: { contains: search, mode: "insensitive" } },
+              { email: { contains: search, mode: "insensitive" } },
+            ],
+          }
+        : undefined,
+      take: limit ?? undefined,
+    });
     return users;
   };
 
   async findById(id: string) {
-    console.log(id);
     const user = await prisma.user.findFirstOrThrow({ where: { id: id } });
-    console.log(user);
     return user;
   }
 }

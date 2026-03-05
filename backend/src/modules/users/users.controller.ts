@@ -1,8 +1,9 @@
 import type { NextFunction, Request, Response } from "express";
 import { UsersService, usersService } from "./users.service.js";
 import jwt from "jsonwebtoken";
-import { AuthError } from "../../shared/errors/AuthError.js";
 import { decodedTokenSchema } from "./schema/decodedTokenSchema.js";
+import { getTypedSearch } from "./utils/getTypedSearch.js";
+import { getTypedLimit } from "./utils/getTypedLimit.js";
 
 class UsersController {
   service: UsersService;
@@ -17,7 +18,10 @@ class UsersController {
   }
 
   getUsers = async (req: Request, res: Response) => {
-    const users = await usersService.getUsers();
+    const search = getTypedSearch(req);
+    const limit = getTypedLimit(req);
+    const users = await usersService.getUsers(search, limit);
+    console.log(users);
     res.status(200).send(users);
   };
 
