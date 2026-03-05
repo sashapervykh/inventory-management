@@ -2,6 +2,7 @@ import type { NextFunction, Request, Response } from "express";
 import { UsersService, usersService } from "./users.service.js";
 import jwt from "jsonwebtoken";
 import { AuthError } from "../../shared/errors/AuthError.js";
+import { decodedTokenSchema } from "./schema/decodedTokenSchema.js";
 
 class UsersController {
   service: UsersService;
@@ -23,10 +24,7 @@ class UsersController {
   async findById(req: Request, res: Response, next: NextFunction) {
     try {
       const token = req.cookies.auth;
-      console.log(token);
-      const userInfo = jwt.decode(token);
-      if (!userInfo) throw new AuthError();
-      console.log(userInfo);
+      const userInfo = decodedTokenSchema.parse(jwt.decode(token));
       const user = await usersService.findById(userInfo.userId);
       res.status(200).send(user);
     } catch (error) {
