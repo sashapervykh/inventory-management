@@ -4,14 +4,20 @@ import { AccessTable } from "../../../../feature/define-editors/ui/AccessTable/A
 import { useState, type Key } from "react";
 
 export function LimitedAccess() {
-  const [usersToDelete, setUsersToDelete] = useState<Key[]>([]);
+  const [editorsToDelete, setEditorsToDelete] = useState<Key[]>([]);
   return (
     <>
       <Text>
         You can choose who can change your repository or make it public
       </Text>
-      <AccessControls usersToDelete={usersToDelete} />
-      <AccessTable setUsersToDelete={setUsersToDelete} />
+      <AccessControls
+        editorsToDelete={editorsToDelete}
+        setEditorsToDelete={setEditorsToDelete}
+      />
+      <AccessTable
+        editorsToDelete={editorsToDelete}
+        setEditorsToDelete={setEditorsToDelete}
+      />
     </>
   );
 }

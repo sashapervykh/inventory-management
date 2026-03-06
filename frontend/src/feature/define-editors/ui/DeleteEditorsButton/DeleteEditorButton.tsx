@@ -1,20 +1,20 @@
 import { DeleteOutlined } from "@ant-design/icons";
 import { Button } from "antd";
-import type { Key } from "react";
 import { useEditors } from "../../model/hooks/useEditors";
+import type { EditorsToDelete } from "../../../../widgets/InventoryTabs/models/types/editorsToDelete";
 
 export function DeleteEditorsButton({
-  usersToDelete,
-}: {
-  usersToDelete: Key[];
-}) {
+  editorsToDelete,
+  setEditorsToDelete,
+}: EditorsToDelete) {
   const { deleteEditors } = useEditors();
   return (
     <Button
       type="primary"
-      disabled={usersToDelete.length === 0}
+      disabled={editorsToDelete.length === 0}
       onClick={() => {
-        deleteEditors(usersToDelete);
+        deleteEditors(editorsToDelete);
+        setEditorsToDelete([]);
       }}
     >
       <DeleteOutlined />

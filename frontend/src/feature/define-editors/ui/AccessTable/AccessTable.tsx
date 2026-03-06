@@ -3,6 +3,7 @@ import Text from "antd/es/typography";
 import type { TableRowSelection } from "antd/es/table/interface";
 import { useState, type Dispatch, type Key, type SetStateAction } from "react";
 import { useEditors } from "../../model/hooks/useEditors";
+import type { EditorsToDelete } from "../../../../widgets/InventoryTabs/models/types/editorsToDelete";
 
 interface DataType {
   key: React.Key;
@@ -22,22 +23,20 @@ const columns: TableColumnsType<DataType> = [
 ];
 
 export function AccessTable({
-  setUsersToDelete,
-}: {
-  setUsersToDelete: Dispatch<SetStateAction<Key[]>>;
-}) {
+  editorsToDelete,
+  setEditorsToDelete,
+}: EditorsToDelete) {
   const { editors, isLoading } = useEditors();
-  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+
   if (isLoading) return <Spin />;
   const dataSource = editors.map((editor) => ({ ...editor, key: editor.id }));
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    setSelectedRowKeys(newSelectedRowKeys);
-    setUsersToDelete(newSelectedRowKeys);
+    setEditorsToDelete(newSelectedRowKeys);
   };
   const rowSelection: TableRowSelection<DataType> = {
     type: "checkbox",
-    selectedRowKeys,
+    selectedRowKeys: editorsToDelete,
     onChange: onSelectChange,
   };
 

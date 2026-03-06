@@ -2,12 +2,19 @@ import { ToggleAccessButton } from "../../../../feature/toggle-access/ui/ToggleA
 import { DeleteEditorsButton } from "../../../../feature/define-editors/ui/DeleteEditorsButton/DeleteEditorButton";
 import { AccessAutocomplete } from "../AccessAutocomplete/AccessAutocomplete";
 import type { Key } from "react";
+import type { EditorsToDelete } from "../../models/types/editorsToDelete";
 
-export function AccessControls({ usersToDelete }: { usersToDelete: Key[] }) {
+export function AccessControls({
+  editorsToDelete,
+  setEditorsToDelete,
+}: EditorsToDelete) {
   return (
     <div className="flex gap-2">
       <AccessAutocomplete />
-      <DeleteEditorsButton usersToDelete={usersToDelete} />
+      <DeleteEditorsButton
+        editorsToDelete={editorsToDelete}
+        setEditorsToDelete={setEditorsToDelete}
+      />
       <ToggleAccessButton isPublic={false} />
     </div>
   );
