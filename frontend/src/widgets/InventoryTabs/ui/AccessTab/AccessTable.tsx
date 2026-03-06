@@ -23,9 +23,7 @@ const columns: TableColumnsType<DataType> = [
 
 export function AccessTable() {
   const { editingUsers } = useEditingUsers();
-  console.log(editingUsers);
   const dataSource = editingUsers.map((user) => ({ ...user, key: user.id }));
-  console.log(dataSource);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     setSelectedRowKeys(newSelectedRowKeys);

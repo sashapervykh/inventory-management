@@ -11,7 +11,9 @@ export function useUsersAccess() {
     async (page?: number, newUserId?: string, limit: number = 10) => {
       try {
         const pageQuery = page ? `&page=${page}` : "";
+        console.log(editingUsers);
         const newUsers = [...editingUsers, { id: newUserId }];
+        console.log(newUsers);
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/inventories/${inventoryId}/access?limit=${limit}${pageQuery}`,
           {
