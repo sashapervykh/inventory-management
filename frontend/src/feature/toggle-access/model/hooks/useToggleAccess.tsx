@@ -1,11 +1,10 @@
 import { useCallback } from "react";
-import { useParams } from "react-router-dom";
 import { useInventory } from "../../../../entity/inventory/model/hooks/useInventory";
+import { useInventoryId } from "../../../../shared/hooks/useInventoryId/useInventoryId";
 
 export function useToggleAccess() {
   const { getInventory } = useInventory();
-  const { inventoryId } = useParams();
-  if (!inventoryId) throw new Error("Inventory id was not provided");
+  const { inventoryId } = useInventoryId();
 
   const updateInventoryAccess = useCallback(async (isPublic: boolean) => {
     try {

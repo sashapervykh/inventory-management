@@ -1,5 +1,5 @@
 import z, { ZodType } from "zod";
-import { API_URL } from "../constants/APU_URL";
+import { API_URL } from "../constants/API_URL";
 
 export async function requestApi<T extends ZodType>(
   endpoint: string,
