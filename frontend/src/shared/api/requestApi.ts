@@ -1,12 +1,22 @@
 import z, { ZodType } from "zod";
 import { API_URL } from "../constants/API_URL";
+import type { METHODS } from "../constants/METHODS";
 
-export async function requestApi<T extends ZodType>(
-  endpoint: string,
-  schema: T,
-  options?: RequestInit,
-): Promise<z.infer<T>> {
+interface Props<T> {
+  endpoint: string;
+  method: keyof typeof METHODS;
+  schema: T;
+  options?: RequestInit;
+}
+
+export async function requestApi<T extends ZodType>({
+  endpoint,
+  method,
+  schema,
+  options,
+}: Props<T>): Promise<z.infer<T> | string> {
   const response = await fetch(`${API_URL}${endpoint}`, {
+    method,
     credentials: "include",
     headers: { "Content-Type": "application/json" },
     ...options,

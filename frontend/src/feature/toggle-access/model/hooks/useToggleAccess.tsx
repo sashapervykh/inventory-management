@@ -1,33 +1,21 @@
 import { useCallback } from "react";
 import { useInventory } from "../../../../entity/inventory/model/hooks/useInventory";
 import { useInventoryId } from "../../../../shared/hooks/useInventoryId/useInventoryId";
+import { sendInventoryAccessRequest } from "../../api/sendInventoryAccessRequest";
 
 export function useToggleAccess() {
   const { getInventory } = useInventory();
   const { inventoryId } = useInventoryId();
 
-  const updateInventoryAccess = useCallback(async (isPublic: boolean) => {
+  const updateInventoryAccess = async (isPublic: boolean) => {
     try {
-      const body = { isPublic };
-      console.log(body);
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/inventories/${inventoryId}`,
-        {
-          method: "PUT",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body),
-        },
-      );
-      if (!response.ok) {
-        throw new Error("Error when updating inventory");
-      }
+      await sendInventoryAccessRequest({ isPublic, inventoryId });
       getInventory();
     } catch (error) {
       console.log(error);
       console.error("Error when updating inventory");
     }
-  }, []);
+  };
 
   return { updateInventoryAccess };
 }
