@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useInventoryId } from "../../../../shared/hooks/useInventoryId/useInventoryId";
 import { getEditors } from "../../api/getEditors";
 import { sendUpdatedEditors } from "../../api/sendUpdatedEditors";
-import type { Editors } from "../types/Editors";
+import type { EditorsUpdateDto } from "../types/EditorsUpdateDto";
 
 export function useEditors() {
   const { inventoryId } = useInventoryId();
@@ -16,7 +16,7 @@ export function useEditors() {
   });
 
   const { mutate: updateEditors } = useMutation({
-    mutationFn: (newEditors: Editors) => {
+    mutationFn: (newEditors: EditorsUpdateDto[]) => {
       const finalEditors = [...editors, ...newEditors];
       return sendUpdatedEditors(inventoryId, finalEditors);
     },

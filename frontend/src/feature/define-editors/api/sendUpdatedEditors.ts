@@ -3,11 +3,11 @@ import { API_ENDPOINTS } from "../../../shared/constants/API_ENDPOINTS";
 import { API_SUBROUTES } from "../../../shared/constants/API_SUBROUTES";
 import { METHODS } from "../../../shared/constants/METHODS";
 import { editorsSchema } from "../model/schemas/editors.schema";
-import { type Editors } from "../model/types/Editors";
+import type { EditorsUpdateDto } from "../model/types/EditorsUpdateDto";
 
 export async function sendUpdatedEditors(
   inventoryId: string,
-  newUsers: Editors,
+  newUsers: EditorsUpdateDto[],
 ) {
   const body = JSON.stringify([...newUsers]);
   const editors = await requestApi({
