@@ -1,6 +1,6 @@
 import Text from "antd/es/typography";
 import { AccessControls } from "./AccessControls";
-import { AccessTable } from "./AccessTable";
+import { AccessTable } from "../../../../feature/define-editors/ui/AccessTable/AccessTable";
 
 export function LimitedAccess() {
   return (

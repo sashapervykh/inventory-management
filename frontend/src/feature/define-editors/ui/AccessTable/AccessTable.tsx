@@ -1,9 +1,8 @@
 import { Spin, Table, type TableColumnsType } from "antd";
-import { useEditingUsers } from "../../../../feature/users/model/hooks/useEditingUsers";
 import Text from "antd/es/typography";
 import type { TableRowSelection } from "antd/es/table/interface";
 import { useState } from "react";
-import { useEditors } from "../../../../feature/define-editors/model/hooks/useEditors";
+import { useEditors } from "../../model/hooks/useEditors";
 
 interface DataType {
   key: React.Key;
