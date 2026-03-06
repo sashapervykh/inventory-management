@@ -29,5 +29,10 @@ inventoriesRouter.post(
   requireAuth,
   inventoriesController.updateInventoryAccess,
 );
+inventoriesRouter.delete(
+  INVENTORY_ROUTES.ACCESS,
+  requireAuth,
+  inventoriesController.deleteEditors,
+);
 
 export default inventoriesRouter;

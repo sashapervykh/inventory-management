@@ -33,6 +33,15 @@ export class InventoriesRepository {
     return inventory;
   }
 
+  async deleteEditors(inventoryId: string, userIds: string[]) {
+    await prisma.inventoryAccess.deleteMany({
+      where: {
+        inventoryId,
+        userId: { in: userIds },
+      },
+    });
+  }
+
   async getInventoryById(inventoryId: string) {
     const inventory = await prisma.inventory.findUnique({
       where: { id: inventoryId },

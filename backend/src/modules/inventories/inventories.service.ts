@@ -19,6 +19,10 @@ export class InventoriesService {
     return inventory;
   };
 
+  deleteEditors = async (inventoryId: string, userIds: string[]) => {
+    await this.repository.deleteEditors(inventoryId, userIds);
+  };
+
   getInventoryById = async (inventoryId: string) => {
     const inventory = await this.repository.getInventoryById(inventoryId);
     const frontendInventory = getFrontendInventory(inventory);

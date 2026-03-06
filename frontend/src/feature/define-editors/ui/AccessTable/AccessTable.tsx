@@ -1,7 +1,7 @@
 import { Spin, Table, type TableColumnsType } from "antd";
 import Text from "antd/es/typography";
 import type { TableRowSelection } from "antd/es/table/interface";
-import { useState } from "react";
+import { useState, type Dispatch, type Key, type SetStateAction } from "react";
 import { useEditors } from "../../model/hooks/useEditors";
 
 interface DataType {
@@ -21,7 +21,11 @@ const columns: TableColumnsType<DataType> = [
   },
 ];
 
-export function AccessTable() {
+export function AccessTable({
+  setUsersToDelete,
+}: {
+  setUsersToDelete: Dispatch<SetStateAction<Key[]>>;
+}) {
   const { editors, isLoading } = useEditors();
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   if (isLoading) return <Spin />;
@@ -29,6 +33,7 @@ export function AccessTable() {
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     setSelectedRowKeys(newSelectedRowKeys);
+    setUsersToDelete(newSelectedRowKeys);
   };
   const rowSelection: TableRowSelection<DataType> = {
     type: "checkbox",

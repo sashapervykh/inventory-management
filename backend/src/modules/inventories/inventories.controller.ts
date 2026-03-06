@@ -8,6 +8,7 @@ import { validateUserId } from "../../shared/utils/validateUserId.js";
 import { updateInventorySchema } from "./schemas/updateInventorySchema.js";
 import { inventoryIdSchema } from "./schemas/inventoryIdSchema.js";
 import { getUserIds } from "./utils/getUserIds.js";
+import { editorsDeletingSchema } from "./schemas/editorsDeletingSchema.js";
 
 class InventoriesController {
   private service: InventoriesService;
@@ -25,6 +26,17 @@ class InventoriesController {
         ownerId,
       });
       res.status(200).send(inventory);
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  deleteEditors = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const id = inventoryIdSchema.parse(req.params.id);
+      const data = editorsDeletingSchema.parse(req.body);
+      await this.service.deleteEditors(id, data.userIds);
+      res.status(204).send({ message: "Successfully deleted" });
     } catch (err) {
       next(err);
     }

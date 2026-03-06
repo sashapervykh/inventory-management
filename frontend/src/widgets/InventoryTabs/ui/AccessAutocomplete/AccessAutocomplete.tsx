@@ -24,6 +24,7 @@ export function AccessAutocomplete() {
         setValue("");
       }}
       options={options}
+      placeholder="Enter name or email"
     />
   );
 }

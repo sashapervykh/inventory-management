@@ -3,8 +3,8 @@ import { useInventoryId } from "../../../../shared/hooks/useInventoryId/useInven
 import { getEditors } from "../../api/getEditors";
 import { sendUpdatedEditors } from "../../api/sendUpdatedEditors";
 import type { EditorsUpdateDto } from "../types/EditorsUpdateDto";
-import type { Editors } from "../types/Editors";
 import { sendDeletedEditors } from "../../api/sendDeletedEditors";
+import type { Key } from "react";
 
 export function useEditors() {
   const { inventoryId } = useInventoryId();
@@ -26,7 +26,7 @@ export function useEditors() {
   });
 
   const { mutate: deleteEditors } = useMutation({
-    mutationFn: (deletedEditors: Editors) => {
+    mutationFn: (deletedEditors: Key[]) => {
       return sendDeletedEditors(inventoryId, deletedEditors);
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey }),
