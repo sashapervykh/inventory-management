@@ -1,3 +1,3 @@
-export const ENDPOINTS = {
+export const API_ENDPOINTS = {
   INVENTORIES: /inventories/,
 };

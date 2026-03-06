@@ -1,8 +1,9 @@
-import { Table, type TableColumnsType } from "antd";
+import { Spin, Table, type TableColumnsType } from "antd";
 import { useEditingUsers } from "../../../../feature/users/model/hooks/useEditingUsers";
 import Text from "antd/es/typography";
 import type { TableRowSelection } from "antd/es/table/interface";
 import { useState } from "react";
+import { useEditors } from "../../../../feature/define-editors/model/hooks/useEditors";
 
 interface DataType {
   key: React.Key;
@@ -22,9 +23,11 @@ const columns: TableColumnsType<DataType> = [
 ];
 
 export function AccessTable() {
-  const { editingUsers } = useEditingUsers();
-  const dataSource = editingUsers.map((user) => ({ ...user, key: user.id }));
+  const { editors, isLoading } = useEditors();
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  if (isLoading) return <Spin />;
+  const dataSource = editors.map((user) => ({ ...user, key: user.id }));
+
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     setSelectedRowKeys(newSelectedRowKeys);
   };
@@ -34,7 +37,7 @@ export function AccessTable() {
     onChange: onSelectChange,
   };
 
-  if (editingUsers.length === 0) {
+  if (editors.length === 0) {
     return (
       <Text>No users are granted write access, except you and admins.</Text>
     );

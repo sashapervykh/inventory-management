@@ -14,7 +14,7 @@ export async function requestApi<T extends ZodType>({
   method,
   schema,
   options,
-}: Props<T>): Promise<z.infer<T> | string> {
+}: Props<T>): Promise<z.infer<T>> {
   const response = await fetch(`${API_URL}${endpoint}`, {
     method,
     credentials: "include",
