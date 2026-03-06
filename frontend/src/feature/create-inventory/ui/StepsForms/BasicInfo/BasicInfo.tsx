@@ -1,4 +1,4 @@
-import { Checkbox, Form, Input, Select } from "antd";
+import { Form, Input } from "antd";
 import type { FormDataType } from "../../../model/types/FormDataType";
 import { MDTextArea } from "./MdTextArea";
 import { CategorySelect } from "../CategorySelect/CategorySelect";

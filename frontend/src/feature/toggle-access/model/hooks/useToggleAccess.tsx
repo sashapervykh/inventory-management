@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import { useInventory } from "../../../../entity/inventory/model/hooks/useInventory";
 import { useInventoryId } from "../../../../shared/hooks/useInventoryId/useInventoryId";
 import { sendInventoryAccessRequest } from "../../api/sendInventoryAccessRequest";

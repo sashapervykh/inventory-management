@@ -1,7 +1,6 @@
 import { Spin, Table, type TableColumnsType } from "antd";
 import Text from "antd/es/typography";
 import type { TableRowSelection } from "antd/es/table/interface";
-import { useState, type Dispatch, type Key, type SetStateAction } from "react";
 import { useEditors } from "../../model/hooks/useEditors";
 import type { EditorsToDelete } from "../../../../widgets/InventoryTabs/models/types/editorsToDelete";
 
