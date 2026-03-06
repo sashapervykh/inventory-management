@@ -1,6 +1,6 @@
 import z from "zod";
 
-export const editingUsersSchema = z.array(
+export const editorsSchema = z.array(
   z.object({
     id: z.string(),
     fullName: z.string(),

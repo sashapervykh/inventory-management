@@ -3,11 +3,11 @@ import { AutoComplete, Button } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import { useAllUsers } from "../../../../feature/users/model/hooks/useAllUsers";
 import { getAccessOptions } from "../../../../feature/users/lib/getAccessOptions";
-import { useUsersAccess } from "../../../../feature/users/model/hooks/useUsersAccess";
+import { useEditors } from "../../../../feature/define-editors/model/hooks/useEditors";
 
 export function AccessControls() {
   const { users, getUsers } = useAllUsers();
-  const { updateUsersAccess } = useUsersAccess();
+  const { updateEditors } = useEditors();
   const options = getAccessOptions(users);
 
   return (
@@ -18,7 +18,7 @@ export function AccessControls() {
           getUsers(value);
         }}
         onSelect={(value) => {
-          updateUsersAccess(1, value);
+          updateEditors([{ id: value }]);
         }}
         options={options}
       />

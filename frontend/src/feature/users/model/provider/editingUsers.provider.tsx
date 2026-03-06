@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { EditingUser } from "../types/EditingUser";
+import type { EditingUser } from "../../../define-editors/model/types/Editor";
 import type { EditingUsersContextType } from "../types/EditingUsersContextType";
 import { EditingUsersContext } from "../context/editingUsers.context";
 

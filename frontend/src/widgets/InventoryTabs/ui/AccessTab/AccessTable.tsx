@@ -26,7 +26,7 @@ export function AccessTable() {
   const { editors, isLoading } = useEditors();
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   if (isLoading) return <Spin />;
-  const dataSource = editors.map((user) => ({ ...user, key: user.id }));
+  const dataSource = editors.map((editor) => ({ ...editor, key: editor.id }));
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     setSelectedRowKeys(newSelectedRowKeys);
