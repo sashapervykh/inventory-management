@@ -46,7 +46,6 @@ export function AccessTable() {
       rowSelection={rowSelection}
       columns={columns}
       dataSource={dataSource}
-      // onChange={onChange}
     />
   );
 }
