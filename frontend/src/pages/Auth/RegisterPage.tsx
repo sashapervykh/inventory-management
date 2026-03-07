@@ -6,10 +6,10 @@ import { useTranslation } from "react-i18next";
 export function RegisterPage() {
   const { t } = useTranslation();
   const loginWithGoogle = () => {
-    window.location.href = `${import.meta.env.VITE_API_URL}auth/google`;
+    window.location.href = `${import.meta.env.VITE_API_URL}/auth/google`;
   };
   const loginWithGithub = () => {
-    window.location.href = `${import.meta.env.VITE_API_URL}auth/github`;
+    window.location.href = `${import.meta.env.VITE_API_URL}/auth/github`;
   };
   return (
     <Card className="min-w-25 max-w-125 w-[80vw] h-fit">

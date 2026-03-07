@@ -15,28 +15,74 @@ datasource db {
 enum UserType {
   user
   admin
+
+  @@map("user_type")
 }
 
 model User {
-  id            String      @id @default(uuid())
-  email         String      @unique
-  first_name    String?
-  last_name     String?
-  provider      String
-  provider_id   String
-  type          UserType    @default(user)
-  createdAt     DateTime    @default(now())
-  last_login_at DateTime?
-  inventory     Inventory[]
+  id                 String            @id @default(uuid())
+  email              String            @unique
+  first_name         String?
+  last_name          String?
+  provider           String
+  provider_id        String
+  type               UserType          @default(user)
+  createdAt          DateTime          @default(now())
+  last_login_at      DateTime?
+  inventory          Inventory[]
+  inventories_access InventoryAccess[]
 
   @@unique([provider, provider_id])
+  @@map("users")
 }
 
 model Inventory {
-  id          String  @id @default(uuid())
-  title       String
-  description String
-  isPublic    Boolean @map("is_public")
-  owner       User    @relation(fields: [ownerId], references: [id])
-  ownerId     String  @map("owner_id")
+  id                 String            @id @default(uuid())
+  title              String
+  description        String
+  isPublic           Boolean           @map("is_public")
+  owner              User              @relation(fields: [ownerId], references: [id])
+  ownerId            String            @map("owner_id")
+  category           Category          @relation(fields: [categoryId], references: [id])
+  categoryId         Int               @map("category_id")
+  tags               InventoryTag[]
+  inventories_access InventoryAccess[]
+
+  @@map("inventories")
+}
+
+model Category {
+  id          Int         @id @default(autoincrement())
+  name        String      @unique
+  inventories Inventory[]
+
+  @@map("categories")
+}
+
+model Tag {
+  id          Int            @id @default(autoincrement())
+  name        String         @unique
+  inventories InventoryTag[]
+
+  @@map("tags")
+}
+
+model InventoryTag {
+  tag         Tag       @relation(fields: [tagId], references: [id])
+  tagId       Int       @map("tag_id")
+  inventory   Inventory @relation(fields: [inventoryId], references: [id])
+  inventoryId String    @map("inventory_id")
+
+  @@id([tagId, inventoryId])
+  @@map("inventory_tags")
+}
+
+model InventoryAccess {
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String    @map("user_id")
+  inventory   Inventory @relation(fields: [inventoryId], references: [id])
+  inventoryId String    @map("inventory_id")
+
+  @@id([userId, inventoryId])
+  @@map("inventory_access")
 }

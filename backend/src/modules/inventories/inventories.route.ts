@@ -9,5 +9,30 @@ inventoriesRouter.post(
   requireAuth,
   inventoriesController.createInventory,
 );
+inventoriesRouter.get(
+  INVENTORY_ROUTES.ONE,
+  requireAuth,
+  inventoriesController.getInventoryById,
+);
+inventoriesRouter.put(
+  INVENTORY_ROUTES.ONE,
+  requireAuth,
+  inventoriesController.updateInventoryById,
+);
+inventoriesRouter.get(
+  INVENTORY_ROUTES.ACCESS,
+  requireAuth,
+  inventoriesController.getEditors,
+);
+inventoriesRouter.post(
+  INVENTORY_ROUTES.ACCESS,
+  requireAuth,
+  inventoriesController.updateInventoryAccess,
+);
+inventoriesRouter.delete(
+  INVENTORY_ROUTES.ACCESS,
+  requireAuth,
+  inventoriesController.deleteEditors,
+);
 
 export default inventoriesRouter;

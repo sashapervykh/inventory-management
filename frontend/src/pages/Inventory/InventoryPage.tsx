@@ -1,3 +1,10 @@
+import { InventoryProvider } from "../../entity/inventory/model/inventory.provider";
+import { InventoryView } from "../../widgets/InventoryTabs/ui/InventoryView/InventoryView";
+
 export function InventoryPage() {
-  return <div>INVENTORY</div>;
+  return (
+    <InventoryProvider>
+      <InventoryView />
+    </InventoryProvider>
+  );
 }

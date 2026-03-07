@@ -12,7 +12,7 @@ export function UserLoader({ children }: { children: ReactNode }) {
       console.log("request");
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}users/me`,
+          `${import.meta.env.VITE_API_URL}/users/me`,
           { method: "GET", credentials: "include" },
         );
         if (!response.ok) throw new Error("Authentication failed");
