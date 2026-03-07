@@ -1,5 +1,5 @@
 import Title from "antd/es/typography/Title";
-import { MultistepForm } from "../../feature/inventoryCreation/ui/MultistepForm/MultistepForm";
+import { MultistepForm } from "../../feature/create-inventory/ui/MultistepForm/MultistepForm";
 
 export function CreationPage() {
   return (

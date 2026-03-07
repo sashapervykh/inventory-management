@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { AutoComplete } from "antd";
 import { useAllUsers } from "../../../../feature/users/model/hooks/useAllUsers";
-import { useEditors } from "../../../../feature/define-editors/model/hooks/useEditors";
 import { getAccessOptions } from "../../lib/getAccessOptions";
 import type { EditorOption } from "../../models/types/EditorOption";
+import { useEditors } from "../../../../entity/editors/model/hooks/useEditors";
 
 export function AccessAutocomplete() {
   const [value, setValue] = useState("");

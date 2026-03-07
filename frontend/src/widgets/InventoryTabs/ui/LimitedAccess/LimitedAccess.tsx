@@ -1,7 +1,8 @@
 import Text from "antd/es/typography";
 import { AccessControls } from "./AccessControls";
-import { AccessTable } from "../../../../feature/define-editors/ui/AccessTable/AccessTable";
+
 import { useState, type Key } from "react";
+import { AccessTable } from "../../../../entity/editors/ui/AccessTable/AccessTable";
 
 export function LimitedAccess() {
   const [editorsToDelete, setEditorsToDelete] = useState<Key[]>([]);
