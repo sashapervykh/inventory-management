@@ -2,15 +2,7 @@ import { useState } from "react";
 import { move } from "@dnd-kit/helpers";
 import { DragDropProvider } from "@dnd-kit/react";
 import { SortableItem } from "./SortableItem";
-import { Button, Form, type FormListFieldData } from "antd";
-
-const fields = [
-  { id: 1, index: 1 },
-  { id: 2, index: 2 },
-  { id: 3, index: 3 },
-  { id: 4, index: 4 },
-  { id: 5, index: 5 },
-];
+import { Button, Form } from "antd";
 
 export function CustomIdForm() {
   const fields = Array.from({ length: 5 }, (_, i) => ({
@@ -25,7 +17,7 @@ export function CustomIdForm() {
       onFinish={(values: { "custom-id-elements": [] }) => {
         console.log(
           items.map((elem) =>
-            values["custom-id-elements"].find((value, id) => id === elem.id),
+            values["custom-id-elements"].find((_value, id) => id === elem.id),
           ),
         );
       }}
