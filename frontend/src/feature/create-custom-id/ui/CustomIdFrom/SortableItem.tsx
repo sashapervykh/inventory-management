@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { useSortable } from "@dnd-kit/react/sortable";
 import { HolderOutlined } from "@ant-design/icons";
 import { Form, Input, Select } from "antd";
+import { DragOverlay } from "@dnd-kit/react";
 
 const options = [
   { value: "Fixed", label: "Fixed" },
@@ -13,20 +14,36 @@ const options = [
   { value: "Date/time", label: "Date/time" },
 ];
 
-export function SortableItem({ id, index }: { id: number; index: number }) {
+export function SortableItem({ name, index }: { name: number; index: number }) {
   const [element, setElement] = useState<Element | null>(null);
   const handleRef = useRef<HTMLButtonElement | null>(null);
-  const { isDragging } = useSortable({ id, index, element, handle: handleRef });
+  const { isDragging } = useSortable({
+    id: name,
+    index,
+    element,
+    handle: handleRef,
+  });
 
   return (
     <div ref={setElement}>
-      <Form.Item data-shadow={isDragging || undefined}>
-        <div className="flex gap-3.5">
-          <HolderOutlined ref={handleRef} />
+      <div className="flex gap-3.5">
+        {index}
+        {" || "}
+        {name}
+        <HolderOutlined ref={handleRef} />
+        <Form.Item
+          name={[name, `${name}-1`]}
+          data-shadow={isDragging || undefined}
+        >
           <Select className="w-40" defaultValue="Fixed" options={options} />
+        </Form.Item>
+        <Form.Item
+          name={[name, `${name}-2`]}
+          data-shadow={isDragging || undefined}
+        >
           <Input className="w-40" />
-        </div>
-      </Form.Item>
+        </Form.Item>{" "}
+      </div>
     </div>
   );
 }
