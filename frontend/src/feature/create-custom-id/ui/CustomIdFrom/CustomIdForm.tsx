@@ -3,7 +3,7 @@ import { move } from "@dnd-kit/helpers";
 import { DragDropProvider } from "@dnd-kit/react";
 import { SortableItem } from "./SortableItem";
 import { Button, Form } from "antd";
-import { Droppable } from "./Droppable";
+import { TabHeaderArea } from "./TabHeaderArea";
 
 export function CustomIdForm() {
   const fields = Array.from({ length: 5 }, (_, i) => ({
@@ -41,6 +41,7 @@ export function CustomIdForm() {
                   }
                 }}
               >
+                <TabHeaderArea />
                 {items.map((field, index) => {
                   return (
                     <SortableItem
@@ -68,9 +69,8 @@ export function CustomIdForm() {
                   Add
                 </Button>
                 <Button type="primary" htmlType="submit">
-                  Submit
+                  Save
                 </Button>
-                <Droppable />
               </DragDropProvider>
             );
           }}
