@@ -5,5 +5,6 @@ export const ID_PARTS_TYPES = {
   DIGIT_6: "6-digit random",
   DIGIT_9: "9-digit random",
   GUID: "GUID",
+  SEQUENCE: "Sequence",
   DATE_TIME: "Date/time",
 } as const;

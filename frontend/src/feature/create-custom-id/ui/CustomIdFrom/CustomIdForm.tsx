@@ -6,23 +6,27 @@ import { DroppableTabHeader } from "../DroppableTabHeader/DroppableTabHeader";
 import { SortableItems } from "../SortableItems/SortableItems";
 import { INITIAL_ITEMS } from "../../constants/initialParts";
 import { ID_PARTS_TYPES } from "../../constants/idPartsTypes";
+import { useForm } from "antd/es/form/Form";
+import { CustomIdExample } from "../CustomIdExample/CustomIdExample";
 
 export function CustomIdForm() {
   const [items, setItems] = useState(INITIAL_ITEMS);
+  const [form] = useForm();
   const counter = useRef(items.length - 1);
 
   return (
     <>
       <Form
-        onFinish={(values: { "custom-id-elements": [] }) => {
+        form={form}
+        onFinish={(values: { "id-parts": [] }) => {
           console.log(
             items.map((elem) =>
-              values["custom-id-elements"].find((_value, id) => id === elem.id),
+              values["id-parts"].find((_value, id) => id === elem.id),
             ),
           );
         }}
       >
-        <Form.List name="custom-id-elements" initialValue={INITIAL_ITEMS}>
+        <Form.List name="id-parts" initialValue={INITIAL_ITEMS}>
           {() => {
             return (
               <DragDropProvider
@@ -39,6 +43,7 @@ export function CustomIdForm() {
                 }}
               >
                 <DroppableTabHeader />
+                <CustomIdExample />
                 <SortableItems items={items} />
                 <Button
                   type="primary"

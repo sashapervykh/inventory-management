@@ -12,7 +12,11 @@ export function PartsSelector({
   type: IdPartType;
 }) {
   return (
-    <Form.Item name={[name, `${name}-1`]} data-shadow={isDragging || undefined}>
+    <Form.Item
+      name={[name, `${name}-1`]}
+      data-shadow={isDragging || undefined}
+      initialValue={type}
+    >
       <Select defaultValue={type} options={partsOptions} />
     </Form.Item>
   );
