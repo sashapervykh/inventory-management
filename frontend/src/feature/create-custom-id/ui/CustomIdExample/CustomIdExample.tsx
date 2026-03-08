@@ -1,19 +1,19 @@
 import useFormInstance from "antd/es/form/hooks/useFormInstance";
-import Title from "antd/es/typography/Title";
+import Text from "antd/es/typography";
 import { getCustomIdExample } from "../../lib/getCustomExample";
 import { useWatch } from "antd/es/form/Form";
 
 export function CustomIdExample() {
   const form = useFormInstance();
   const idParts = useWatch("id-parts", form);
-
   if (!idParts) return;
-
-  console.log(idParts);
-  const idExample = getCustomIdExample(idParts);
+  const filledParts = idParts.filter(Boolean);
+  const idExample = getCustomIdExample(filledParts);
   return (
-    <div className="flex gap-2 align-bottom">
-      <Title level={5}>Custom Id Example:</Title>
+    <div className="flex gap-2 pb-2.5">
+      <Text>
+        <strong>Custom Id Example:</strong>
+      </Text>
       <span>{idExample}</span>
     </div>
   );
