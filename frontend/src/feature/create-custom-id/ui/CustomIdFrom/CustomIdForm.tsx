@@ -43,7 +43,7 @@ export function CustomIdForm() {
                 }}
               >
                 <DroppableTabHeader />
-                <CustomIdExample />
+                <CustomIdExample items={items} />
                 <SortableItems items={items} />
                 <Button
                   type="primary"
