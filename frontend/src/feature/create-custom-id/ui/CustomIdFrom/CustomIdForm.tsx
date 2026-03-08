@@ -23,22 +23,26 @@ export function CustomIdForm() {
       }}
     >
       <Form.List name="custom-id-elements" initialValue={fields}>
-        {(fields, { add }) => {
+        {(fields, { add, remove }) => {
           return (
             <DragDropProvider
               onDragEnd={(event) => {
                 setItems((items) => move(items, event));
               }}
             >
-              {fields.map((field, index) => {
-                return (
-                  <SortableItem
-                    key={field.key}
-                    name={field.name}
-                    index={index}
-                  />
-                );
-              })}
+              {fields
+                .filter((field) => items.find((item) => item.id === field.name))
+                .map((field, index) => {
+                  return (
+                    <SortableItem
+                      key={field.key}
+                      name={field.name}
+                      index={index}
+                      setItems={setItems}
+                      remove={remove}
+                    />
+                  );
+                })}
               <Button
                 type="primary"
                 onClick={() => {

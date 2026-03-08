@@ -1,8 +1,7 @@
-import { useRef, useState } from "react";
+import { useRef, useState, type Dispatch, type SetStateAction } from "react";
 import { useSortable } from "@dnd-kit/react/sortable";
 import { HolderOutlined } from "@ant-design/icons";
-import { Form, Input, Select } from "antd";
-import { DragOverlay } from "@dnd-kit/react";
+import { Button, Form, Input, Select } from "antd";
 
 const options = [
   { value: "Fixed", label: "Fixed" },
@@ -14,7 +13,25 @@ const options = [
   { value: "Date/time", label: "Date/time" },
 ];
 
-export function SortableItem({ name, index }: { name: number; index: number }) {
+export function SortableItem({
+  name,
+  index,
+  setItems,
+  remove,
+}: {
+  name: number;
+  index: number;
+  remove: (index: number | number[]) => void;
+  setItems: Dispatch<
+    SetStateAction<
+      {
+        name: string;
+        key: number;
+        id: number;
+      }[]
+    >
+  >;
+}) {
   const [element, setElement] = useState<Element | null>(null);
   const handleRef = useRef<HTMLButtonElement | null>(null);
   const { isDragging } = useSortable({
@@ -43,6 +60,14 @@ export function SortableItem({ name, index }: { name: number; index: number }) {
         >
           <Input className="w-40" />
         </Form.Item>{" "}
+        <Button
+          onClick={() => {
+            console.log("click");
+            setItems((i) => i.filter((elem) => elem.id !== index));
+          }}
+        >
+          Remove
+        </Button>
       </div>
     </div>
   );
