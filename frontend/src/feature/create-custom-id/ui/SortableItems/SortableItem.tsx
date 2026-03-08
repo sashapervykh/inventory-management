@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import { useSortable } from "@dnd-kit/react/sortable";
 import { HolderOutlined } from "@ant-design/icons";
-import { Form, Input } from "antd";
 import { PartsSelector } from "../PartsSelector/PartsSelector";
 import type { CustomIdPart } from "../../model/types/CustomIdPart";
 import { PartsValue } from "../PartsValue/PartsValue";
@@ -11,23 +10,22 @@ export function SortableItem({
   index,
   type,
 }: CustomIdPart & { index: number }) {
-  const [element, setElement] = useState<Element | null>(null);
   const handleRef = useRef<HTMLButtonElement | null>(null);
-  const { isDragging } = useSortable({
+  const [chosenType, setChosenType] = useState(type);
+  const { ref } = useSortable({
     id: name,
     index,
-    element,
     handle: handleRef,
   });
 
   return (
     <div
-      ref={setElement}
+      ref={ref}
       className="grid grid-cols-[20px_minmax(100px,140px)_auto] gap-3.5"
     >
       <HolderOutlined ref={handleRef} className="flex h-fit mt-1.75" />
-      <PartsSelector name={name} type={type} />
-      <PartsValue type={type} name={name} />
+      <PartsSelector name={name} type={chosenType} onChange={setChosenType} />
+      <PartsValue type={chosenType} name={name} />
     </div>
   );
 }
