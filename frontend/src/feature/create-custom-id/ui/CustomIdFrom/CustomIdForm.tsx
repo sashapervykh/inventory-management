@@ -1,17 +1,14 @@
 import { useRef, useState } from "react";
 import { move } from "@dnd-kit/helpers";
 import { DragDropProvider } from "@dnd-kit/react";
-import { SortableItem } from "./SortableItem";
 import { Button, Form } from "antd";
-import { TabHeaderArea } from "./TabHeaderArea";
+import { DroppableTabHeader } from "../DroppableTabHeader/DroppableTabHeader";
+import { SortableItems } from "../SortableItems/SortableItems";
+import { INITIAL_ITEMS } from "../../constants/initialParts";
+import { ID_PARTS_TYPES } from "../../constants/idPartsTypes";
 
 export function CustomIdForm() {
-  const fields = Array.from({ length: 5 }, (_, i) => ({
-    name: "field" + i,
-    key: i,
-    id: i,
-  }));
-  const [items, setItems] = useState(fields);
+  const [items, setItems] = useState(INITIAL_ITEMS);
   const counter = useRef(items.length - 1);
 
   return (
@@ -25,8 +22,8 @@ export function CustomIdForm() {
           );
         }}
       >
-        <Form.List name="custom-id-elements" initialValue={fields}>
-          {(_) => {
+        <Form.List name="custom-id-elements" initialValue={INITIAL_ITEMS}>
+          {() => {
             return (
               <DragDropProvider
                 onDragEnd={(event) => {
@@ -41,17 +38,8 @@ export function CustomIdForm() {
                   }
                 }}
               >
-                <TabHeaderArea />
-                {items.map((field, index) => {
-                  return (
-                    <SortableItem
-                      key={field.key}
-                      name={field.id}
-                      index={index}
-                      setItems={setItems}
-                    />
-                  );
-                })}
+                <DroppableTabHeader />
+                <SortableItems items={items} />
                 <Button
                   type="primary"
                   onClick={() => {
@@ -59,9 +47,10 @@ export function CustomIdForm() {
                     setItems((i) => [
                       ...i,
                       {
-                        name: "field" + counter.current,
+                        name: counter.current,
                         key: counter.current,
                         id: counter.current,
+                        type: ID_PARTS_TYPES.FIXED,
                       },
                     ]);
                   }}

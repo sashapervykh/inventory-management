@@ -5,12 +5,12 @@ import { Typography } from "antd";
 
 const { Text } = Typography;
 
-export function TabHeaderArea() {
+export function DroppableTabHeader() {
   const { isDropTarget, ref } = useDroppable({
     id: "droppable",
   });
   return (
-    <div className="flex flex-col w-full h-20 bg-amber-200" ref={ref}>
+    <div className="flex flex-col w-full h-20" ref={ref}>
       {isDropTarget ? (
         <>Drop element here to remove it.</>
       ) : (
