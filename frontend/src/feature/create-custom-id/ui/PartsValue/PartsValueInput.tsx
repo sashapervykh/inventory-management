@@ -1,5 +1,5 @@
 import { Form, Input } from "antd";
-import { DEFAULT_FIXED_VALUE } from "../../constants/defaultFixedValue";
+import { DEFAULT_FIXED_VALUE } from "../../constants/idPartsValues/defaultFixedValue";
 
 export function PartsValueInput({ name }: { name: number }) {
   return (

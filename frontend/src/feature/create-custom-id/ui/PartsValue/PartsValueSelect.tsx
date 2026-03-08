@@ -1,5 +1,5 @@
 import { Form, Select } from "antd";
-import { examplePartOptions } from "../../constants/examplePartOptions";
+import { examplePartOptions } from "../../constants/idPartsOptions/examplePartOptions";
 import type { IdPartType } from "../../model/types/IdPartType";
 
 export function PartsValueSelect({

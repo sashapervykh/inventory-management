@@ -2,7 +2,7 @@ import { BIT_OPTIONS } from "./bitOptions";
 import { DATE_OPTIONS } from "./dateOptions";
 import { DIGIT_OPTIONS } from "./digitOptions";
 import { GUID_OPTIONS } from "./guidOptions";
-import { ID_PARTS_TYPES } from "./idPartsTypes";
+import { ID_PARTS_TYPES } from "../idPartsTypes";
 import { SEQUENCE_OPTIONS } from "./sequenceOptions";
 
 export const examplePartOptions = {
