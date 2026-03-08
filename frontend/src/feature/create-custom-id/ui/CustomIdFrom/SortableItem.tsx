@@ -17,11 +17,9 @@ export function SortableItem({
   name,
   index,
   setItems,
-  remove,
 }: {
   name: number;
   index: number;
-  remove: (index: number | number[]) => void;
   setItems: Dispatch<
     SetStateAction<
       {
@@ -62,8 +60,7 @@ export function SortableItem({
         </Form.Item>{" "}
         <Button
           onClick={() => {
-            console.log("click");
-            setItems((i) => i.filter((elem) => elem.id !== index));
+            setItems((i) => i.filter((elem) => elem.id !== name));
           }}
         >
           Remove
