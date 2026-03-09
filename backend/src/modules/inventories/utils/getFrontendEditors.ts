@@ -1,5 +1,5 @@
 import { getFrontendName } from "../../../shared/utils/getFrontendName.js";
-import type { BackendEditors } from "../type/BackendEditingUsers.js";
+import type { BackendEditors } from "../types/BackendEditingUsers.js";
 
 export function getFrontendEditors(editors: BackendEditors) {
   return editors.map((editor) => {

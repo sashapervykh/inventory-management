@@ -2,8 +2,9 @@ import {
   InventoriesRepository,
   inventoriesRepository,
 } from "./inventories.repository.js";
-import type { CreateInventoryDTO } from "./type/CreateInventoryDTO.js";
-import type { UpdateInventoryDTO } from "./type/UpdateInventoryDTO.js";
+import type { CreateInventoryDTO } from "./types/CreateInventoryDTO.js";
+import type { CustomIdParts } from "./types/CustomIdParts.js";
+import type { UpdateInventoryDTO } from "./types/UpdateInventoryDTO.js";
 import { getFrontendEditors } from "./utils/getFrontendEditors.js";
 import { getFrontendInventory } from "./utils/getFrontendInventory.js";
 
@@ -52,6 +53,18 @@ export class InventoriesService {
       userIds,
     );
     const frontendEditors = getFrontendEditors(updatedInventoryAccess);
+    return frontendEditors;
+  };
+
+  updateCustomIdFormat = async (
+    inventoryId: string,
+    formatSettings: CustomIdParts,
+  ) => {
+    const inventory = await this.repository.updateCustomIdFormat(
+      inventoryId,
+      formatSettings,
+    );
+
     return frontendEditors;
   };
 }

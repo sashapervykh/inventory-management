@@ -1,5 +1,5 @@
-import type { BackendInventory } from "../type/BackendInventory.js";
-import type { FrontendInventory } from "../type/FrontendInventory.js";
+import type { BackendInventory } from "../types/BackendInventory.js";
+import type { FrontendInventory } from "../types/FrontendInventory.js";
 
 export function getFrontendInventory(
   backendInventory: BackendInventory | null,

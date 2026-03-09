@@ -1,6 +1,7 @@
 import { prisma } from "../../shared/lib/prisma.js";
-import type { CreateInventoryDTO } from "./type/CreateInventoryDTO.js";
-import type { UpdateInventoryDTO } from "./type/UpdateInventoryDTO.js";
+import type { CreateInventoryDTO } from "./types/CreateInventoryDTO.js";
+import type { CustomIdParts } from "./types/CustomIdParts.js";
+import type { UpdateInventoryDTO } from "./types/UpdateInventoryDTO.js";
 
 export class InventoriesRepository {
   async createInventory({
@@ -106,6 +107,16 @@ export class InventoriesRepository {
           },
         },
       });
+    });
+  }
+
+  async updateCustomIdFormat(
+    inventoryId: string,
+    formatSettings: CustomIdParts,
+  ) {
+    return prisma.inventory.update({
+      where: { id: inventoryId },
+      data: { customIdParts: formatSettings },
     });
   }
 }
