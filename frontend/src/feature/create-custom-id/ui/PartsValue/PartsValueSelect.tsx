@@ -16,7 +16,7 @@ export function PartsValueSelect({
       name={[name, `${name}-2`]}
       initialValue={options[0].value}
     >
-      <Select options={options} defaultValue={options[0].value} />
+      <Select options={options} />
     </Form.Item>
   );
 }

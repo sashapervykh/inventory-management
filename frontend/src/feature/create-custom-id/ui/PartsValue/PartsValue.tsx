@@ -4,7 +4,6 @@ import { PartsValueInput } from "./PartsValueInput";
 import { PartsValueSelect } from "./PartsValueSelect";
 
 export function PartsValue({ type, name }: { type: IdPartType; name: number }) {
-  console.log(type);
   return type === ID_PARTS_TYPES.FIXED ? (
     <PartsValueInput name={name} />
   ) : (
