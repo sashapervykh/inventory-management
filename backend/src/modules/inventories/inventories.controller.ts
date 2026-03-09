@@ -109,6 +109,7 @@ class InventoriesController {
     next: NextFunction,
   ) => {
     try {
+      console.log("start");
       const inventoryId = inventoryIdSchema.parse(req.params.id);
       const formatArray = customIdPartSchema.parse(req.body);
       const inventory = await this.service.updateCustomIdFormat(

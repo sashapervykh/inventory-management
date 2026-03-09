@@ -30,7 +30,7 @@ export function SortableItem({
       newType === ID_PARTS_TYPES.FIXED
         ? DEFAULT_FIXED_VALUE
         : examplePartOptions[newType][0].value;
-    form.setFieldValue(["id-parts", name, `${name}-2`], defaultValue);
+    form.setFieldValue(["id-parts", name, `value`], defaultValue);
   };
 
   return (

@@ -8,9 +8,12 @@ import { INITIAL_ITEMS } from "../../constants/initialParts";
 import { ID_PARTS_TYPES } from "../../constants/idPartsTypes";
 import { useForm } from "antd/es/form/Form";
 import { CustomIdExample } from "../CustomIdExample/CustomIdExample";
+import { customIdPartsSchema } from "../../schemas/customIdPartsSchema";
+import { useCustomIdParts } from "../../model/hooks/useCustomIdParts";
 
 export function CustomIdForm() {
   const [items, setItems] = useState(INITIAL_ITEMS);
+  const { updateCustomIdParts } = useCustomIdParts();
   const [form] = useForm();
   const counter = useRef(items.length - 1);
 
@@ -19,11 +22,13 @@ export function CustomIdForm() {
       <Form
         form={form}
         onFinish={(values: { "id-parts": [] }) => {
-          console.log(
-            items.map((elem) =>
+          const customIdParts = items
+            .map((elem) =>
               values["id-parts"].find((_value, id) => id === elem.id),
-            ),
-          );
+            )
+            .filter(Boolean);
+          const typedCustomIdParts = customIdPartsSchema.parse(customIdParts);
+          updateCustomIdParts(typedCustomIdParts);
         }}
       >
         <Form.List name="id-parts" initialValue={INITIAL_ITEMS}>

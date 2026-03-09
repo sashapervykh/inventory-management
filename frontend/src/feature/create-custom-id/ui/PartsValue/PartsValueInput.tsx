@@ -3,7 +3,7 @@ import { DEFAULT_FIXED_VALUE } from "../../constants/idPartsValues/defaultFixedV
 
 export function PartsValueInput({ name }: { name: number }) {
   return (
-    <Form.Item name={[name, `${name}-2`]} initialValue={DEFAULT_FIXED_VALUE}>
+    <Form.Item name={[name, `value`]} initialValue={DEFAULT_FIXED_VALUE}>
       <Input />
     </Form.Item>
   );

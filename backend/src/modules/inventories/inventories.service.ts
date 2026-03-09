@@ -3,7 +3,7 @@ import {
   inventoriesRepository,
 } from "./inventories.repository.js";
 import type { CreateInventoryDTO } from "./types/CreateInventoryDTO.js";
-import type { CustomIdParts } from "./types/CustomIdParts.js";
+import type { CustomIdParts } from "./types/CustomIdPart.js";
 import type { UpdateInventoryDTO } from "./types/UpdateInventoryDTO.js";
 import { getFrontendEditors } from "./utils/getFrontendEditors.js";
 import { getFrontendInventory } from "./utils/getFrontendInventory.js";
@@ -60,12 +60,11 @@ export class InventoriesService {
     inventoryId: string,
     formatSettings: CustomIdParts,
   ) => {
-    const inventory = await this.repository.updateCustomIdFormat(
+    const customIdParts = await this.repository.updateCustomIdFormat(
       inventoryId,
       formatSettings,
     );
-
-    return frontendEditors;
+    return customIdParts;
   };
 }
 

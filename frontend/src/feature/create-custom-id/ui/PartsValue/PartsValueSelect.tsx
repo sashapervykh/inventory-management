@@ -13,7 +13,7 @@ export function PartsValueSelect({
   return (
     <Form.Item
       key={type}
-      name={[name, `${name}-2`]}
+      name={[name, `value`]}
       initialValue={options[0].value}
     >
       <Select options={options} />

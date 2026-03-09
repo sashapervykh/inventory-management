@@ -12,7 +12,7 @@ export function PartsSelector({
   onChange: (newType: IdPartType) => void;
 }) {
   return (
-    <Form.Item name={[name, `${name}-1`]} initialValue={type}>
+    <Form.Item name={[name, `type`]} initialValue={type}>
       <Select value={type} onChange={onChange} options={partsOptions} />
     </Form.Item>
   );
