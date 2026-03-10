@@ -14,11 +14,11 @@ export function CustomIdExample({ items }: { items: CustomIdPart[] }) {
 
   const idExample = getCustomIdExample(orderedParts);
   return (
-    <div className="flex gap-2 pb-2.5">
+    <div className="flex gap-2 pb-2.5 break-all">
       <Text>
         <strong>Custom Id Example:</strong>
       </Text>
-      <span>{idExample}</span>
+      <span className="break-all">{idExample}</span>
     </div>
   );
 }
