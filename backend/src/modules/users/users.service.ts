@@ -11,6 +11,10 @@ export class UsersService {
     this.repository = repository;
   }
 
+  deleteUserInventories = async (userId: string, inventoriesIds: string[]) => {
+    await this.repository.deleteUserInventories(userId, inventoriesIds);
+  };
+
   getUsers = async (search: string | undefined, limit: number | undefined) => {
     const users = await this.repository.getUsers(search, limit);
     const frontendUsers = getFrontendUsers(users);

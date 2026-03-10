@@ -5,6 +5,7 @@ import { decodedTokenSchema } from "./schema/decodedTokenSchema.js";
 import { getTypedSearch } from "./utils/getTypedSearch.js";
 import { getTypedLimit } from "./utils/getTypedLimit.js";
 import { AuthError } from "../../shared/errors/AuthError.js";
+import { deletedInventoriesSchema } from "./schema/deletedInventoriesSchema.js";
 
 class UsersController {
   private service: UsersService;
@@ -17,6 +18,22 @@ class UsersController {
     const limit = getTypedLimit(req);
     const users = await this.service.getUsers(search, limit);
     res.status(200).send(users);
+  };
+
+  deleteUserInventories = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      const userId = req.user?.id;
+      if (!userId) throw new AuthError();
+      const inventoriesId = deletedInventoriesSchema.parse(req.body);
+      await this.service.deleteUserInventories(userId, inventoriesId);
+      res.status(204).send({ message: "Successfully deleted" });
+    } catch (err) {
+      next(err);
+    }
   };
 
   findById = async (req: Request, res: Response, next: NextFunction) => {

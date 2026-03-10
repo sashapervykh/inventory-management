@@ -1,10 +1,15 @@
+import type { Key } from "react";
 import { TooltipButton } from "../../../../shared/ui/TooltipButton/TooltipButtom";
 import { useControlsList } from "../../model/useControlsList";
 
-export function UserInventoriesControls() {
-  const controlsList = useControlsList();
+interface Props {
+  selectedInventories: Key[];
+}
+
+export function UserInventoriesControls({ selectedInventories }: Props) {
+  const controlsList = useControlsList({ selectedInventories });
   return (
-    <div className="flex w-full justify-end">
+    <div className="flex w-full justify-end gap-2.5">
       {controlsList.map((buttonData) => (
         <TooltipButton
           key={buttonData.action}

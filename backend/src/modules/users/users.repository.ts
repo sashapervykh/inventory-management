@@ -1,6 +1,15 @@
 import { prisma } from "../../shared/lib/prisma.js";
 
 export class UsersRepository {
+  async deleteUserInventories(userId: string, inventoriesIds: string[]) {
+    await prisma.inventory.deleteMany({
+      where: {
+        ownerId: userId,
+        id: { in: inventoriesIds },
+      },
+    });
+  }
+
   getUsers = async (search: string | undefined, limit: number | undefined) => {
     const users = await prisma.user.findMany({
       where: search
@@ -16,11 +25,6 @@ export class UsersRepository {
     });
     return users;
   };
-
-  async findById(id: string) {
-    const user = await prisma.user.findFirstOrThrow({ where: { id: id } });
-    return user;
-  }
 
   async getUserInventories(userId: string) {
     const [owned, edited] = await prisma.$transaction([
@@ -59,6 +63,11 @@ export class UsersRepository {
     ]);
 
     return { owned, edited };
+  }
+
+  async findById(id: string) {
+    const user = await prisma.user.findFirstOrThrow({ where: { id: id } });
+    return user;
   }
 }
 
