@@ -19,5 +19,9 @@
     "verbatimModuleSyntax": true
   },
   "exclude": ["node_modules", "dist"],
-  "include": ["src/**/*", "prisma.config.ts", "src/types/express.d.ts"]
+  "include": [
+    "src/**/*",
+    "src/shared/config/prisma.config.ts",
+    "src/types/express.d.ts"
+  ]
 }
