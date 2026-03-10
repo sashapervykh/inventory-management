@@ -29,7 +29,7 @@ export class UsersService {
 
   getUserInventories = async (userId: string) => {
     const { owned, edited } = await this.repository.getUserInventories(userId);
-    return { owned: flatCategory(owned), access: flatCategory(edited) };
+    return { owned: flatCategory(owned), edited: flatCategory(edited) };
   };
 }
 

@@ -1,40 +1,19 @@
-import { useEffect, useState } from "react";
+import Title from "antd/es/typography/Title";
+import { useUserInventories } from "../model/useUserInventories";
+import { UserInventoriesTable } from "./UserInventoriesTable/UserInventoriesTable";
 
 export function UserInventories() {
-  const [inventories, setInventories] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { userInventories, isLoading } = useUserInventories();
 
-  useEffect(() => {
-    const get = async () => {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/users/me/inventories`,
-          {
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
-          },
-        );
-        console.log(response);
-        const inventories = await response.json();
-        console.log(inventories);
-        setInventories(inventories.owned);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    get();
-  }, []);
+  if (isLoading) return "Loading...";
 
-  if (loading) return "Loading...";
-  if (inventories.length === 0) return "No inventories found";
-  console.log(inventories);
   return (
     <div>
-      {inventories.map((elem) => (
-        <div key={elem.id}>{elem.title}</div>
-      ))}
+      <Title level={3}>My Repositories</Title>
+      <UserInventoriesTable userInventories={userInventories?.owned} />
+      <Title level={3}>My Repositories</Title>
+      Repositories I can edit
+      <UserInventoriesTable userInventories={userInventories?.edited} />
     </div>
   );
 }

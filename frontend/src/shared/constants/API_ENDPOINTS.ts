@@ -1,4 +1,4 @@
 export const API_ENDPOINTS = {
-  INVENTORIES: /inventories/,
-  USERS: /users/,
+  INVENTORIES: "/inventories/",
+  USERS: "/users",
 };
