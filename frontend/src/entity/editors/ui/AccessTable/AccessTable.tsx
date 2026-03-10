@@ -2,7 +2,7 @@ import { Spin, Table, type TableColumnsType } from "antd";
 import Text from "antd/es/typography";
 import type { TableRowSelection } from "antd/es/table/interface";
 import { useEditors } from "../../model/hooks/useEditors";
-import type { EditorsToDelete } from "../../../../widgets/InventoryTabs/models/types/editorsToDelete";
+import type { EditorsToDelete } from "../../model/types/EditorsToDelete";
 
 interface DataType {
   key: React.Key;

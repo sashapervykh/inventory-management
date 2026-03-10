@@ -10,11 +10,6 @@ export class UsersService {
     this.repository = repository;
   }
 
-  async createUser(name: string, email: string) {
-    const user = await usersRepository.createUser(name, email);
-    return user;
-  }
-
   getUsers = async (search: string | undefined, limit: number | undefined) => {
     const users = await this.repository.getUsers(search, limit);
     const frontendUsers = getFrontendUsers(users);

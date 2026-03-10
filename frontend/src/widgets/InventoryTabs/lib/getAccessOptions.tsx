@@ -1,4 +1,4 @@
-import type { Editors } from "../../../feature/define-editors/model/types/Editors";
+import type { Editors } from "../../../entity/editors/model/types/Editors";
 
 export function getAccessOptions(editors: Editors) {
   return editors.map((editor) => ({

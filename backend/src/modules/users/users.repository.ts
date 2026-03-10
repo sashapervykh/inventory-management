@@ -1,11 +1,6 @@
 import { prisma } from "../../shared/lib/prisma.js";
 
 export class UsersRepository {
-  async createUser(name: string, email: string) {
-    const user = await prisma.user.create({ data: { name, email } });
-    return user;
-  }
-
   getUsers = async (search: string | undefined, limit: number | undefined) => {
     const users = await prisma.user.findMany({
       where: search

@@ -1,4 +1,3 @@
-import { ANONYMOUS } from "../../../shared/constants/ANONYM.js";
 import { getFrontendName } from "../../../shared/utils/getFrontendName.js";
 import type { BackendUsers } from "../types/BackendUser.js";
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useSortable } from "@dnd-kit/react/sortable";
 import { HolderOutlined } from "@ant-design/icons";
 import { PartsSelector } from "../PartsSelector/PartsSelector";
