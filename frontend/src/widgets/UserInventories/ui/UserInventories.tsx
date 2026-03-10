@@ -1,6 +1,7 @@
 import Title from "antd/es/typography/Title";
 import { useUserInventories } from "../model/useUserInventories";
 import { UserInventoriesTable } from "./UserInventoriesTable/UserInventoriesTable";
+import { UserInventoriesControls } from "./UserInventoriesControls/UserInventoriesControls";
 
 export function UserInventories() {
   const { userInventories, isLoading } = useUserInventories();
@@ -9,6 +10,7 @@ export function UserInventories() {
 
   return (
     <div>
+      <UserInventoriesControls />
       <Title level={3}>My Repositories</Title>
       <UserInventoriesTable userInventories={userInventories?.owned} />
       <Title level={3}>Repositories I can edit</Title>
