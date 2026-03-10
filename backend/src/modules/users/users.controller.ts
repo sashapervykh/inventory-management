@@ -4,9 +4,10 @@ import jwt from "jsonwebtoken";
 import { decodedTokenSchema } from "./schema/decodedTokenSchema.js";
 import { getTypedSearch } from "./utils/getTypedSearch.js";
 import { getTypedLimit } from "./utils/getTypedLimit.js";
+import { AuthError } from "../../shared/errors/AuthError.js";
 
 class UsersController {
-  service: UsersService;
+  private service: UsersService;
   constructor(service: UsersService) {
     this.service = service;
   }
@@ -14,20 +15,35 @@ class UsersController {
   getUsers = async (req: Request, res: Response) => {
     const search = getTypedSearch(req);
     const limit = getTypedLimit(req);
-    const users = await usersService.getUsers(search, limit);
+    const users = await this.service.getUsers(search, limit);
     res.status(200).send(users);
   };
 
-  async findById(req: Request, res: Response, next: NextFunction) {
+  findById = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const token = req.cookies.auth;
       const userInfo = decodedTokenSchema.parse(jwt.decode(token));
-      const user = await usersService.findById(userInfo.userId);
+      const user = await this.service.findById(userInfo.userId);
       res.status(200).send(user);
     } catch (error) {
       next(error);
     }
-  }
+  };
+
+  getUserInventories = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      const userId = req.user?.id;
+      if (!userId) throw new AuthError();
+      const userInventories = await this.service.getUserInventories(userId);
+      res.status(200).send(userInventories);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export const userController = new UsersController(usersService);

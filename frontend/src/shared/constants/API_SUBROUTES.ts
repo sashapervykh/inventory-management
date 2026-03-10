@@ -3,4 +3,7 @@ export const API_SUBROUTES = {
     ACCESS: "access",
     CUSTOM_ID: "custom-id",
   },
+  USERS: {
+    USER_INVENTORIES: "me/inventories",
+  },
 };

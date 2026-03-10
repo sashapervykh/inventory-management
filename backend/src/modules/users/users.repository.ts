@@ -21,6 +21,45 @@ export class UsersRepository {
     const user = await prisma.user.findFirstOrThrow({ where: { id: id } });
     return user;
   }
+
+  async getUserInventories(userId: string) {
+    const [owned, edited] = await prisma.$transaction([
+      prisma.inventory.findMany({
+        where: {
+          ownerId: userId,
+        },
+        select: {
+          id: true,
+          title: true,
+          description: true,
+          category: {
+            select: { name: true },
+          },
+        },
+        orderBy: { title: "desc" },
+      }),
+
+      prisma.inventory.findMany({
+        where: {
+          inventories_access: {
+            some: { userId },
+          },
+          ownerId: { not: userId },
+        },
+        select: {
+          id: true,
+          title: true,
+          description: true,
+          category: {
+            select: { name: true },
+          },
+        },
+        orderBy: { title: "desc" },
+      }),
+    ]);
+
+    return { owned, edited };
+  }
 }
 
 export const usersRepository = new UsersRepository();
