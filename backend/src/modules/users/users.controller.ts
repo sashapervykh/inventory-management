@@ -11,12 +11,6 @@ class UsersController {
     this.service = service;
   }
 
-  async createUser(req: Request, res: Response) {
-    const { name, email } = req.body;
-    const user = await usersService.createUser(name, email);
-    res.status(200).send(user);
-  }
-
   getUsers = async (req: Request, res: Response) => {
     const search = getTypedSearch(req);
     const limit = getTypedLimit(req);
