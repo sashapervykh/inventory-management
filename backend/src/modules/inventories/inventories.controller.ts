@@ -9,6 +9,7 @@ import { updateInventorySchema } from "./schemas/updateInventorySchema.js";
 import { inventoryIdSchema } from "./schemas/inventoryIdSchema.js";
 import { getUserIds } from "./utils/getUserIds.js";
 import { editorsDeletingSchema } from "./schemas/editorsDeletingSchema.js";
+import { customIdPartSchema } from "./schemas/customIdPartSchema.js";
 
 class InventoriesController {
   private service: InventoriesService;
@@ -95,6 +96,25 @@ class InventoriesController {
       const inventory = await this.service.updateAccessInventory(
         inventoryId,
         userIds,
+      );
+      res.status(200).send(inventory);
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  updateCustomIdFormat = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      console.log("start");
+      const inventoryId = inventoryIdSchema.parse(req.params.id);
+      const formatArray = customIdPartSchema.parse(req.body);
+      const inventory = await this.service.updateCustomIdFormat(
+        inventoryId,
+        formatArray,
       );
       res.status(200).send(inventory);
     } catch (err) {

@@ -4,5 +4,5 @@ import type { Inventory } from "../../../../entity/inventory/model/types/Invento
 
 export function InventoryTabs({ inventory }: { inventory: Inventory }) {
   const tabsList = getTabsList(inventory);
-  return <Tabs defaultActiveKey="items" items={tabsList} size="large" />;
+  return <Tabs defaultActiveKey="custom id" items={tabsList} size="large" />;
 }

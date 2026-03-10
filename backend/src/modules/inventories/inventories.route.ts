@@ -34,5 +34,10 @@ inventoriesRouter.delete(
   requireAuth,
   inventoriesController.deleteEditors,
 );
+inventoriesRouter.put(
+  INVENTORY_ROUTES.CUSTOM_ID,
+  requireAuth,
+  inventoriesController.updateCustomIdFormat,
+);
 
 export default inventoriesRouter;

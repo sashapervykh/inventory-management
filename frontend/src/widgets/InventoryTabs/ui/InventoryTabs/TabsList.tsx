@@ -2,6 +2,7 @@ import type { TabsProps } from "antd";
 import { SettingsTab } from "../SettingsTab/SettingsTab";
 import type { Inventory } from "../../../../entity/inventory/model/types/Inventory";
 import { AccessTab } from "../AccessTab/AccessTab";
+import { CustomIdTab } from "../CustomIdTab/CustomIdTab";
 
 export const getTabsList: (inventory: Inventory) => TabsProps["items"] = (
   inventory: Inventory,
@@ -31,7 +32,7 @@ export const getTabsList: (inventory: Inventory) => TabsProps["items"] = (
   {
     key: "custom id",
     label: "Custom ID",
-    children: "This feature is to be implemented later",
+    children: <CustomIdTab />,
   },
   {
     key: "access",
