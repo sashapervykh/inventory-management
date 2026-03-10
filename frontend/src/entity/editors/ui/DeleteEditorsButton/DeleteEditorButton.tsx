@@ -1,7 +1,7 @@
 import { DeleteOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import { useEditors } from "../../model/hooks/useEditors";
-import type { EditorsToDelete } from "../../../../widgets/InventoryTabs/models/types/editorsToDelete";
+import type { EditorsToDelete } from "../../model/types/EditorsToDelete";
 
 export function DeleteEditorsButton({
   editorsToDelete,

@@ -9,7 +9,9 @@ export function CustomIdExample({ items }: { items: CustomIdPart[] }) {
   const idParts = useWatch("id-parts", form);
   if (!idParts) return;
   const orderedParts = items
-    .map((elem) => idParts.find((_, id: number) => id === elem.id))
+    .map((elem) =>
+      idParts.find((_: CustomIdPart, id: number) => id === elem.id),
+    )
     .filter(Boolean);
 
   const idExample = getCustomIdExample(orderedParts);
