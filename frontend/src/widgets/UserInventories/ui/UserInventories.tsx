@@ -11,8 +11,7 @@ export function UserInventories() {
     <div>
       <Title level={3}>My Repositories</Title>
       <UserInventoriesTable userInventories={userInventories?.owned} />
-      <Title level={3}>My Repositories</Title>
-      Repositories I can edit
+      <Title level={3}>Repositories I can edit</Title>
       <UserInventoriesTable userInventories={userInventories?.edited} />
     </div>
   );

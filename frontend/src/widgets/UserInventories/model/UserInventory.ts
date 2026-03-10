@@ -1,4 +1,8 @@
 import z from "zod";
-import type { inventoriesSchema } from "./userInventoriesSchema";
+import type {
+  inventoriesListSchema,
+  inventorySchema,
+} from "./userInventoriesSchema";
 
-export type UserInventories = z.infer<typeof inventoriesSchema>;
+export type UserInventories = z.infer<typeof inventoriesListSchema>;
+export type UserInventory = z.infer<typeof inventorySchema>;
