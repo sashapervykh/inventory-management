@@ -4,7 +4,11 @@ import type { UserCreationDto } from "./types/UserCreationDto.js";
 export class AuthRepository {
   async registerUser(userCreationDto: UserCreationDto) {
     const user = await prisma.user.create({
-      data: { ...userCreationDto, provider: "local", providerId: "local" },
+      data: {
+        ...userCreationDto,
+        provider: "local",
+        providerId: `local:${userCreationDto.email}`,
+      },
     });
     return user;
   }

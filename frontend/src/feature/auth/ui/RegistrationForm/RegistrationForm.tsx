@@ -1,5 +1,7 @@
 import { Button, Form, Input } from "antd";
 import type { FormProps } from "antd";
+import { useUserData } from "../../model/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 type FieldType = {
   firstName?: string;
@@ -9,10 +11,13 @@ type FieldType = {
 };
 
 export function RegisterForm() {
-  //   const { isLoading, register } = useAuth();
+  const { isRegistering, registerUser, isSuccess } = useUserData();
+  const navigate = useNavigate();
 
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
-    // await register(values);
+    console.log(values);
+    await registerUser(values);
+    if (isSuccess) navigate("/home");
   };
 
   return (
@@ -59,7 +64,7 @@ export function RegisterForm() {
             type="primary"
             htmlType="submit"
             size="large"
-            disabled={false}
+            disabled={isRegistering}
           >
             Sign Up
           </Button>

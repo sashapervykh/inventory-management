@@ -13,19 +13,19 @@ export class AuthService {
     this.repository = repository;
   }
 
-  async register(registerUserDto: UserRegistrationDto) {
-    const { password } = registerUserDto;
+  register = async (registerUserDto: UserRegistrationDto) => {
+    const { password, ...databaseData } = registerUserDto;
     const passwordHash = await this.getPasswordHash(password);
     const user = await this.repository.registerUser({
-      ...registerUserDto,
+      ...databaseData,
       passwordHash,
     });
     const frontendUser = getFrontendUser(user);
     const token = this.getJwtToken(user.id);
     return { token, user: frontendUser };
-  }
+  };
 
-  async login(userLoginDto: UserLoginDto) {
+  login = async (userLoginDto: UserLoginDto) => {
     const { email, password } = userLoginDto;
     const user = await this.repository.getUserByEmail(email);
     const { passwordHash } = user;
@@ -39,7 +39,7 @@ export class AuthService {
     const frontendUser = getFrontendUser(user);
     const token = this.getJwtToken(user.id);
     return { token, user: frontendUser };
-  }
+  };
 
   private getJwtToken(userId: string) {
     const payload = { userId };
@@ -50,6 +50,7 @@ export class AuthService {
   }
 
   private async getPasswordHash(password: string) {
+    console.log(password);
     return await bcrypt.hash(password, ENV.SALTS_ROUNDS);
   }
 

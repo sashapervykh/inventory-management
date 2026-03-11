@@ -1,7 +1,6 @@
 import { type NextFunction, type Request, type Response } from "express";
 import { authService, type AuthService } from "./auth.service.js";
 import { userRegistrationSchema } from "./schemas/userRegistrationSchema.js";
-import { FRONTEND_ROUTES } from "../../shared/constants/frontendRoutes/frontendRoutes.js";
 import { STATUS_CODES } from "../../shared/constants/statusCodes.js";
 import { userLoginSchema } from "./schemas/userLoginSchema.js";
 
@@ -23,7 +22,7 @@ class AuthController {
         maxAge: 7 * 24 * 60 * 60 * 1000,
         path: "/",
       });
-      res.status(STATUS_CODES.CREATED).send({ user });
+      res.status(STATUS_CODES.CREATED).send(user);
     } catch (error) {
       next(error);
     }
