@@ -69,8 +69,8 @@ export class InventoriesRepository {
         user: {
           select: {
             id: true,
-            first_name: true,
-            last_name: true,
+            firstName: true,
+            lastName: true,
             email: true,
           },
         },
@@ -100,8 +100,8 @@ export class InventoriesRepository {
           user: {
             select: {
               id: true,
-              first_name: true,
-              last_name: true,
+              firstName: true,
+              lastName: true,
               email: true,
             },
           },

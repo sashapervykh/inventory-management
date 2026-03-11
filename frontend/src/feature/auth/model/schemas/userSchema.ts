@@ -5,5 +5,5 @@ export const userSchema = z.object({
   firstName: z.string().optional(),
   lastName: z.string().optional(),
   email: z.string(),
-  type: z.string(),
+  type: z.enum(["user", "admin", "none"]),
 });

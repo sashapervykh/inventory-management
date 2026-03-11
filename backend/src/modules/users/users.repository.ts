@@ -15,8 +15,8 @@ export class UsersRepository {
       where: search
         ? {
             OR: [
-              { first_name: { contains: search, mode: "insensitive" } },
-              { last_name: { contains: search, mode: "insensitive" } },
+              { firstName: { contains: search, mode: "insensitive" } },
+              { lastName: { contains: search, mode: "insensitive" } },
               { email: { contains: search, mode: "insensitive" } },
             ],
           }
