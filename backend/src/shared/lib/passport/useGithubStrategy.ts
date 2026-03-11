@@ -25,19 +25,19 @@ export function useGitHubStrategy() {
           const providerId = profile.id;
           const user = await prisma.user.upsert({
             where: {
-              provider_provider_id: { provider, provider_id: providerId },
+              provider_providerId: { provider, providerId: providerId },
             },
-            update: { last_login_at: new Date() },
+            update: { lastLoginAt: new Date() },
             create: {
-              first_name:
+              firstName:
                 profile.name?.givenName ??
                 profile.displayName ??
                 profile.username,
-              last_name: profile.name?.familyName,
+              lastName: profile.name?.familyName,
               provider,
-              provider_id: providerId,
+              providerId: providerId,
               email,
-              last_login_at: new Date(),
+              lastLoginAt: new Date(),
             },
           });
 

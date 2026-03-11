@@ -22,17 +22,18 @@ enum UserType {
 model User {
   id                 String            @id @default(uuid())
   email              String            @unique
-  first_name         String?
-  last_name          String?
+  firstName          String?           @map("first_name")
+  lastName           String?           @map("last_name")
   provider           String
-  provider_id        String
+  providerId         String            @map("provider_id")
   type               UserType          @default(user)
-  createdAt          DateTime          @default(now())
-  last_login_at      DateTime?
+  createdAt          DateTime          @default(now()) @map("created_at")
+  passwordHash       String?           @map("password_hash")
+  lastLoginAt        DateTime?         @map("last_login_at")
   inventory          Inventory[]
   inventories_access InventoryAccess[]
 
-  @@unique([provider, provider_id])
+  @@unique([provider, providerId])
   @@map("users")
 }
 
