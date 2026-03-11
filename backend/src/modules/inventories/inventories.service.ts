@@ -30,6 +30,14 @@ export class InventoriesService {
     return frontendInventory;
   };
 
+  getInventories = async (orderBy: string) => {
+    const inventories = await this.repository.getInventories(orderBy);
+    const frontendInventories = inventories.map((inventory) =>
+      getFrontendInventory(inventory),
+    );
+    return frontendInventories;
+  };
+
   getEditors = async (inventoryId: string) => {
     const editors = await this.repository.getEditors(inventoryId);
     const frontendEditors = getFrontendEditors(editors);
