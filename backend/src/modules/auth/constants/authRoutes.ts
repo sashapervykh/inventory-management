@@ -1,4 +1,4 @@
-import { AUTH_PROVIDERS } from "../authProviders.js";
+import { AUTH_PROVIDERS } from "../../../shared/constants/authProviders.js";
 
 export const AUTH_ROUTES = {
   REGISTER: "/register",
