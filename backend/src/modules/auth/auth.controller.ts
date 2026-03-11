@@ -15,7 +15,7 @@ class AuthController {
   register = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const userRegistrationDto = userRegistrationSchema.parse(req.body);
-      const token = await authService.register(userRegistrationDto);
+      const { token, user } = await authService.register(userRegistrationDto);
       res.cookie("auth", token, {
         httpOnly: true,
         secure: true,
@@ -23,7 +23,7 @@ class AuthController {
         maxAge: 7 * 24 * 60 * 60 * 1000,
         path: "/",
       });
-      res.redirect(FRONTEND_ROUTES.HOME);
+      res.status(STATUS_CODES.CREATED).send({ user });
     } catch (error) {
       next(error);
     }
@@ -32,7 +32,7 @@ class AuthController {
   login = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { email, password } = userLoginSchema.parse(req.body);
-      const token = await this.service.login({ email, password });
+      const { token, user } = await this.service.login({ email, password });
       res.cookie("auth", token, {
         httpOnly: true,
         secure: true,
@@ -40,7 +40,7 @@ class AuthController {
         maxAge: 7 * 24 * 60 * 60 * 1000,
         path: "/",
       });
-      res.redirect(FRONTEND_ROUTES.HOME);
+      res.status(STATUS_CODES.OK).send({ user });
     } catch (error) {
       next(error);
     }

@@ -4,6 +4,7 @@ import { AuthRepository, authRepository } from "./auth.repository.js";
 import type { UserRegistrationDto } from "./types/UserRegistrationDto.js";
 import { ENV } from "../../shared/constants/env.js";
 import type { UserLoginDto } from "./types/UserLoginDto.js";
+import { getFrontendUser } from "../../shared/utils/getFrontendUser.js";
 
 export class AuthService {
   private repository: AuthRepository;
@@ -19,8 +20,9 @@ export class AuthService {
       ...registerUserDto,
       passwordHash,
     });
+    const frontendUser = getFrontendUser(user);
     const token = this.getJwtToken(user.id);
-    return token;
+    return { token, user: frontendUser };
   }
 
   async login(userLoginDto: UserLoginDto) {
@@ -34,10 +36,9 @@ export class AuthService {
     if (!isCorrect) {
       throw new Error("Incorrect password");
     }
-
+    const frontendUser = getFrontendUser(user);
     const token = this.getJwtToken(user.id);
-
-    return token;
+    return { token, user: frontendUser };
   }
 
   private getJwtToken(userId: string) {
