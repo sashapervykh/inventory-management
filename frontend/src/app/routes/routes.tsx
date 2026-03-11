@@ -20,6 +20,7 @@ export function AppRouter() {
           <Route element={<ProtectedRoute />}>
             <Route path={ROUTES.USER} element={<UserPage />} />
             <Route path={ROUTES.ADMIN} element={<AdminPage />} />
+            <Route path={ROUTES.CREATE} element={<CreationPage />} />
           </Route>
           <Route element={<PublicOnlyRoute />}>
             <Route path={ROUTES.LOGIN} element={<RegisterPage />} />
@@ -29,7 +30,7 @@ export function AppRouter() {
             element={<InventoryPage />}
           />
           <Route path={ROUTES.HOME} element={<HomePage />} />
-          <Route path={ROUTES.CREATE} element={<CreationPage />} />
+
           <Route path={ROUTES.ITEM} element={<AdminPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>

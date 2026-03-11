@@ -16,6 +16,7 @@ import tagsRouter from "./modules/tags/tags.route.js";
 dotenv.config();
 const app = express();
 const port = ENV.PORT || 3000;
+app.set("trust proxy", 1);
 app.use(cookieParser());
 app.use(cors({ origin: ENV.FRONTEND_URL, credentials: true }));
 useGoogleStrategy();

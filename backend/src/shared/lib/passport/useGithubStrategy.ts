@@ -2,8 +2,6 @@ import passport from "passport";
 import { Strategy as GithubStrategy, type Profile } from "passport-github2";
 import { prisma } from "../prisma.js";
 import { ENV } from "../../constants/env.js";
-import { AUTH_ROUTES } from "../../constants/routes/authRoutes.js";
-import { ENDPOINTS } from "../../constants/routes/endpoints.js";
 import { AUTH_PROVIDERS } from "../../constants/authProviders.js";
 
 export function useGitHubStrategy() {
@@ -12,7 +10,7 @@ export function useGitHubStrategy() {
       {
         clientID: ENV.GITHUB_CLIENT_ID,
         clientSecret: ENV.GITHUB_CLIENT_SECRET,
-        callbackURL: `${ENDPOINTS.AUTH}${AUTH_ROUTES.GITHUB.CALLBACK}`,
+        callbackURL: ENV.GITHUB_CALLBACK_URL,
         scope: ["user:email"],
       },
       async (

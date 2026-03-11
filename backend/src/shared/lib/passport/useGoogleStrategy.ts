@@ -6,8 +6,6 @@ import {
 } from "passport-google-oauth20";
 import { prisma } from "../prisma.js";
 import { ENV } from "../../constants/env.js";
-import { AUTH_ROUTES } from "../../constants/routes/authRoutes.js";
-import { ENDPOINTS } from "../../constants/routes/endpoints.js";
 import { AUTH_PROVIDERS } from "../../constants/authProviders.js";
 
 export function useGoogleStrategy() {
@@ -16,7 +14,7 @@ export function useGoogleStrategy() {
       {
         clientID: ENV.GOOGLE_CLIENT_ID,
         clientSecret: ENV.GOOGLE_CLIENT_SECRET,
-        callbackURL: `${ENDPOINTS.AUTH}${AUTH_ROUTES.GOOGLE.CALLBACK}`,
+        callbackURL: ENV.GOOGLE_CALLBACK_URL,
         scope: ["profile", "email"],
       },
       async (

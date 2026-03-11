@@ -41,7 +41,7 @@ model Inventory {
   title              String
   description        String
   isPublic           Boolean           @map("is_public")
-  owner              User              @relation(fields: [ownerId], references: [id])
+  owner              User              @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId            String            @map("owner_id")
   category           Category          @relation(fields: [categoryId], references: [id])
   categoryId         Int               @map("category_id")
@@ -72,7 +72,7 @@ model Tag {
 model InventoryTag {
   tag         Tag       @relation(fields: [tagId], references: [id])
   tagId       Int       @map("tag_id")
-  inventory   Inventory @relation(fields: [inventoryId], references: [id])
+  inventory   Inventory @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
   inventoryId String    @map("inventory_id")
 
   @@id([tagId, inventoryId])
@@ -82,7 +82,7 @@ model InventoryTag {
 model InventoryAccess {
   user        User      @relation(fields: [userId], references: [id])
   userId      String    @map("user_id")
-  inventory   Inventory @relation(fields: [inventoryId], references: [id])
+  inventory   Inventory @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
   inventoryId String    @map("inventory_id")
 
   @@id([userId, inventoryId])
@@ -93,7 +93,7 @@ model Item {
   id          String    @id @default(uuid())
   customId    String    @map("custom_id")
   inventoryId String
-  inventory   Inventory @relation(fields: [inventoryId], references: [id])
+  inventory   Inventory @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
 
   @@unique([inventoryId, customId])
   @@map("items")

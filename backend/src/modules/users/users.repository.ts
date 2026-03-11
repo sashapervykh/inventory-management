@@ -1,6 +1,15 @@
 import { prisma } from "../../shared/lib/prisma.js";
 
 export class UsersRepository {
+  async deleteUserInventories(userId: string, inventoriesIds: string[]) {
+    await prisma.inventory.deleteMany({
+      where: {
+        ownerId: userId,
+        id: { in: inventoriesIds },
+      },
+    });
+  }
+
   getUsers = async (search: string | undefined, limit: number | undefined) => {
     const users = await prisma.user.findMany({
       where: search
@@ -16,6 +25,45 @@ export class UsersRepository {
     });
     return users;
   };
+
+  async getUserInventories(userId: string) {
+    const [owned, edited] = await prisma.$transaction([
+      prisma.inventory.findMany({
+        where: {
+          ownerId: userId,
+        },
+        select: {
+          id: true,
+          title: true,
+          description: true,
+          category: {
+            select: { name: true },
+          },
+        },
+        orderBy: { title: "desc" },
+      }),
+
+      prisma.inventory.findMany({
+        where: {
+          inventories_access: {
+            some: { userId },
+          },
+          ownerId: { not: userId },
+        },
+        select: {
+          id: true,
+          title: true,
+          description: true,
+          category: {
+            select: { name: true },
+          },
+        },
+        orderBy: { title: "desc" },
+      }),
+    ]);
+
+    return { owned, edited };
+  }
 
   async findById(id: string) {
     const user = await prisma.user.findFirstOrThrow({ where: { id: id } });
