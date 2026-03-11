@@ -6,4 +6,5 @@ export const ROUTES = {
   CREATE: "create",
   ITEM: "item",
   LOGIN: "login",
+  REGISTER: "register",
 };

@@ -39,7 +39,7 @@ class AuthController {
         maxAge: 7 * 24 * 60 * 60 * 1000,
         path: "/",
       });
-      res.status(STATUS_CODES.OK).send({ user });
+      res.status(STATUS_CODES.OK).send(user);
     } catch (error) {
       next(error);
     }

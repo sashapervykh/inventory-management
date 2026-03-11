@@ -31,5 +31,6 @@ authRouter.get(
 );
 authRouter.post(AUTH_ROUTES.LOGOUT, passportService.logout);
 authRouter.post(AUTH_ROUTES.REGISTER, authController.register);
+authRouter.post(AUTH_ROUTES.LOGIN, authController.login);
 
 export default authRouter;

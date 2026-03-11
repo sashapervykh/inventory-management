@@ -1,5 +1,5 @@
 export const API_SUBROUTES = {
-  AUTH: { REGISTRATION: "register" },
+  AUTH: { REGISTRATION: "register", LOGIN: "login" },
   INVENTORIES: {
     ACCESS: "access",
     CUSTOM_ID: "custom-id",

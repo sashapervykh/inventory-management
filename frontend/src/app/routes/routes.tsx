@@ -10,6 +10,7 @@ import { ProtectedRoute } from "../../feature/auth/ui/ProtectedRoute/ProtectedRo
 import { PublicOnlyRoute } from "../../feature/auth/ui/PublicRoute/PublicRoute";
 import { CreationPage } from "../../pages/CreationPage/CreationPage";
 import { InventoryPage } from "../../pages/Inventory/InventoryPage";
+import { LoginPage } from "../../pages/Auth/LoginPage";
 
 export function AppRouter() {
   return (
@@ -23,7 +24,8 @@ export function AppRouter() {
             <Route path={ROUTES.CREATE} element={<CreationPage />} />
           </Route>
           <Route element={<PublicOnlyRoute />}>
-            <Route path={ROUTES.LOGIN} element={<RegisterPage />} />
+            <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+            <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
           </Route>
           <Route
             path={`${ROUTES.INVENTORIES}/:inventoryId`}
