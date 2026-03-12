@@ -7,8 +7,6 @@ import {
   UpOutlined,
 } from "@ant-design/icons";
 import { useUsers } from "../../model/hooks/useUsers";
-import type { UseMutateFunction } from "@tanstack/react-query";
-import type { StatusUpdateDto } from "../../model/types/StatusUpdateDto";
 
 interface Props {
   selectedUsersKeys: Key[];
