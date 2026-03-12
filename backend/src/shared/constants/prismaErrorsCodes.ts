@@ -1,0 +1,4 @@
+export const PRISMA_ERRORS_CODES = {
+  NOT_EXISTED: "P2025",
+  DUPLICATED: "P2002",
+};

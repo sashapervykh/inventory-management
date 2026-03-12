@@ -1,5 +1,6 @@
 import { API_URL } from "../constants/API_URL";
 import { METHODS } from "../constants/METHODS";
+import { errorResponse } from "../schemas/errorResposne";
 
 interface Props {
   endpoint: string;
@@ -17,7 +18,9 @@ export async function requestDeleteApi({
     ...options,
   });
   if (!response.ok) {
-    throw new Error(await response.text());
+    const json = await response.json();
+    const message = errorResponse.parse(json).message;
+    throw new Error(message);
   }
   return true;
 }

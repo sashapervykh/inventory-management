@@ -5,6 +5,7 @@ import type { UserRegistrationDto } from "./types/UserRegistrationDto.js";
 import { ENV } from "../../shared/constants/env.js";
 import type { UserLoginDto } from "./types/UserLoginDto.js";
 import { getFrontendUser } from "../../shared/utils/getFrontendUser.js";
+import { WrongCredentialsError } from "../../shared/errors/WrongCredentialsError.js";
 
 export class AuthService {
   private repository: AuthRepository;
@@ -30,11 +31,11 @@ export class AuthService {
     const user = await this.repository.getUserByEmail(email);
     const { passwordHash } = user;
     if (!passwordHash) {
-      throw new Error("No Hash");
+      throw new WrongCredentialsError();
     }
     const isCorrect = await this.verifyPassword(password, passwordHash);
     if (!isCorrect) {
-      throw new Error("Incorrect password");
+      throw new WrongCredentialsError();
     }
     const frontendUser = getFrontendUser(user);
     const token = this.getJwtToken(user.id);
