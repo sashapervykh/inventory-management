@@ -6,7 +6,7 @@ import { editorsSchema } from "../model/schemas/editors.schema";
 
 export async function getEditors(inventoryId: string) {
   const editingUsers = await requestApi({
-    endpoint: `${API_ENDPOINTS.INVENTORIES}${inventoryId}/${API_SUBROUTES.INVENTORIES.ACCESS}`,
+    endpoint: `${API_ENDPOINTS.INVENTORIES}/${inventoryId}/${API_SUBROUTES.INVENTORIES.ACCESS}`,
     method: METHODS.GET,
     schema: editorsSchema,
   });

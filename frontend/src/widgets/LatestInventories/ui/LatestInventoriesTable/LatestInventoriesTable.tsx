@@ -1,12 +1,12 @@
 import { Table } from "antd";
-import type { PopularInventory } from "../../model/PopularInventory";
+import type { LatestInventory } from "../../model/LatestInventory";
 import { useNavigate } from "react-router-dom";
-import { popularInventoriesColumns } from "./popularInventoriesColumns";
+import { latestInventoriesColumns } from "./latestInventoriesColumns";
 
-export function PopularInventoriesTable({
+export function LatestInventoriesTable({
   inventories,
 }: {
-  inventories: PopularInventory[] | undefined;
+  inventories: LatestInventory[] | undefined;
 }) {
   const navigate = useNavigate();
   if (!inventories || inventories.length === 0) {
@@ -17,7 +17,7 @@ export function PopularInventoriesTable({
     <Table
       rowKey="id"
       dataSource={inventories}
-      columns={popularInventoriesColumns}
+      columns={latestInventoriesColumns}
       pagination={false}
       onRow={(record) => ({
         onClick: () => {

@@ -12,7 +12,7 @@ export async function sendInventoryAccessRequest({
 }) {
   try {
     const body = JSON.stringify({ isPublic });
-    const endpoint = `${API_ENDPOINTS.INVENTORIES}${inventoryId}`;
+    const endpoint = `${API_ENDPOINTS.INVENTORIES}/${inventoryId}`;
     const method = METHODS.PUT;
     await requestApi({
       endpoint,

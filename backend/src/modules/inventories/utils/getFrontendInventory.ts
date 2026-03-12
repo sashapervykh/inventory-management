@@ -7,7 +7,7 @@ export function getFrontendInventory(
 ): FrontendInventory | undefined {
   if (!backendInventory) return;
 
-  const { id, title, description, isPublic, category, tags, owner } =
+  const { id, title, description, isPublic, category, tags, owner, createdAt } =
     backendInventory;
 
   const frontendTags = tags.map((tag) => tag.tag.name);
@@ -19,6 +19,7 @@ export function getFrontendInventory(
     ownerName: getFrontendName(owner.firstName, owner.lastName).fullName,
     ownerEmail: owner.email,
     category: category.name,
+    createdAt: createdAt,
     tags: frontendTags,
   };
 }

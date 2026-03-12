@@ -6,5 +6,6 @@ export interface FrontendInventory {
   category: string;
   ownerName: string;
   ownerEmail: string;
+  createdAt: Date;
   tags: string[] | undefined;
 }
