@@ -26,5 +26,10 @@ usersRouter.patch(
   requireAuth,
   userController.updateUsersType,
 );
+usersRouter.delete(
+  USERS_ROUTES.DELETE,
+  requireAuth,
+  userController.deleteUsers,
+);
 
 export default usersRouter;

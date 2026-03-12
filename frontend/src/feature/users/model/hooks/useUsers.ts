@@ -4,6 +4,8 @@ import type { StatusUpdateDto } from "../types/StatusUpdateDto";
 import { fetchUpdatingUsersStatus } from "../../api/updateUsersStatus";
 import { fetchUpdatingUsersType } from "../../api/updateUsersType";
 import type { TypeUpdateDto } from "../types/TypeUpdateDto";
+import { fetchDeletingUsers } from "../../api/fetchDeletingUsers";
+import type { Key } from "react";
 
 export function useUsers() {
   const queryClient = useQueryClient();
@@ -30,10 +32,18 @@ export function useUsers() {
     },
     onSuccess: invalidateQueries,
   });
+
+  const { mutate: deleteUsers, isPending: isDeleting } = useMutation({
+    mutationFn: (deletedUsersDto: Key[]) => {
+      return fetchDeletingUsers(deletedUsersDto);
+    },
+    onSuccess: invalidateQueries,
+  });
   return {
     users: data,
-    isLoading: isLoading || isUpdatingStatus || isUpdatingType,
+    isLoading: isLoading || isUpdatingStatus || isUpdatingType || isDeleting,
     updateUsersStatus,
     updateUsersType,
+    deleteUsers,
   };
 }

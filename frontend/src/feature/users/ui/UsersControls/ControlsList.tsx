@@ -19,7 +19,7 @@ export function useUserControls({
   selectedUsersKeys,
   setSelectedUsersKeys,
 }: Props) {
-  const { updateUsersStatus, updateUsersType } = useUsers();
+  const { updateUsersStatus, updateUsersType, deleteUsers } = useUsers();
   const clearListAfterAction = (action: () => void) => () => {
     action();
     setSelectedUsersKeys([]);
@@ -57,7 +57,7 @@ export function useUserControls({
     {
       buttonText: <DeleteOutlined />,
       tooltip: "Delete",
-      onClick: () => console.log("Delete"),
+      onClick: clearListAfterAction(() => deleteUsers(selectedUsersKeys)),
     },
   ];
 }

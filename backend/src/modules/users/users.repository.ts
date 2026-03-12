@@ -12,6 +12,14 @@ export class UsersRepository {
     });
   }
 
+  async deleteUsers(userIds: string[]) {
+    await prisma.user.deleteMany({
+      where: {
+        id: { in: userIds },
+      },
+    });
+  }
+
   getUsers = async (search: string | undefined, limit: number | undefined) => {
     const users = await prisma.user.findMany({
       where: search

@@ -8,6 +8,7 @@ import { AuthError } from "../../shared/errors/AuthError.js";
 import { deletedInventoriesSchema } from "./schema/deletedInventoriesSchema.js";
 import { statusUpdateDtoSchema } from "./schema/statusUpdateDtoSchema.js";
 import { typeUpdateDtoSchema } from "./schema/typeUpdateDtoSchema.js";
+import { deletedUsers } from "./schema/deletedUsers.js";
 
 class UsersController {
   private service: UsersService;
@@ -20,6 +21,16 @@ class UsersController {
     const limit = getTypedLimit(req);
     const users = await this.service.getUsers(search, limit);
     res.status(200).send(users);
+  };
+
+  deleteUsers = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const userIds = deletedUsers.parse(req.body);
+      await this.service.deleteUsers(userIds);
+      res.status(204).send({ message: "Successfully deleted" });
+    } catch (err) {
+      next(err);
+    }
   };
 
   deleteUserInventories = async (

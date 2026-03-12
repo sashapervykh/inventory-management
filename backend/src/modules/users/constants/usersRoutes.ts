@@ -4,4 +4,5 @@ export const USERS_ROUTES = {
   USER_INVENTORIES: "/me/inventories",
   STATUS: "/status",
   TYPE: "/update-type",
+  DELETE: "/delete",
 };

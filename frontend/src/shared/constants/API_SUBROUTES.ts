@@ -8,5 +8,6 @@ export const API_SUBROUTES = {
     USER_INVENTORIES: "me/inventories",
     STATUS: "status",
     TYPE: "update-type",
+    DELETE: "delete",
   },
 };
