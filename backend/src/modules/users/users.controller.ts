@@ -6,6 +6,7 @@ import { getTypedSearch } from "./utils/getTypedSearch.js";
 import { getTypedLimit } from "./utils/getTypedLimit.js";
 import { AuthError } from "../../shared/errors/AuthError.js";
 import { deletedInventoriesSchema } from "./schema/deletedInventoriesSchema.js";
+import { statusUpdateDtoSchema } from "./schema/statusUpdateDtoSchema.js";
 
 class UsersController {
   private service: UsersService;
@@ -57,6 +58,21 @@ class UsersController {
       if (!userId) throw new AuthError();
       const userInventories = await this.service.getUserInventories(userId);
       res.status(200).send(userInventories);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  updateUsersStatus = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      const updateStatusDto = statusUpdateDtoSchema.parse(req.body);
+      const updatedCount =
+        await this.service.updateUsersStatus(updateStatusDto);
+      res.status(200).send(updatedCount);
     } catch (error) {
       next(error);
     }

@@ -16,5 +16,10 @@ usersRouter.delete(
   requireAuth,
   userController.deleteUserInventories,
 );
+usersRouter.patch(
+  USERS_ROUTES.STATUS,
+  requireAuth,
+  userController.deleteUserInventories,
+);
 
 export default usersRouter;

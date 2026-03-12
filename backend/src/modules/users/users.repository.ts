@@ -1,4 +1,5 @@
 import { prisma } from "../../shared/lib/prisma.js";
+import type { StatusUpdateDto } from "./types/StatusUpdateDto.js";
 
 export class UsersRepository {
   async deleteUserInventories(userId: string, inventoriesIds: string[]) {
@@ -69,6 +70,14 @@ export class UsersRepository {
     const user = await prisma.user.findFirstOrThrow({ where: { id: id } });
     return user;
   }
+
+  updateUsersStatus = async ({ userIds, isBlocked }: StatusUpdateDto) => {
+    const updatedCount = await prisma.user.updateMany({
+      where: { id: { in: userIds } },
+      data: { status: isBlocked ? "blocked" : "active" },
+    });
+    return updatedCount;
+  };
 }
 
 export const usersRepository = new UsersRepository();

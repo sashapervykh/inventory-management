@@ -3,6 +3,7 @@ import { getFrontendUser } from "../../shared/utils/getFrontendUser.js";
 import { AuthError } from "../../shared/errors/AuthError.js";
 import { getFrontendUsers } from "./utils/getFrontendUsers.js";
 import { flatCategory } from "./utils/getFrontendUserInventory.js";
+import type { StatusUpdateDto } from "./types/StatusUpdateDto.js";
 
 export class UsersService {
   private repository: UsersRepository;
@@ -30,6 +31,12 @@ export class UsersService {
       throw new AuthError();
     }
   }
+
+  updateUsersStatus = async (updateStatusDto: StatusUpdateDto) => {
+    const updatedCount =
+      await this.repository.updateUsersStatus(updateStatusDto);
+    return updatedCount;
+  };
 
   getUserInventories = async (userId: string) => {
     const { owned, edited } = await this.repository.getUserInventories(userId);
