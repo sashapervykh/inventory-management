@@ -3,6 +3,8 @@ import { getFrontendUser } from "../../shared/utils/getFrontendUser.js";
 import { AuthError } from "../../shared/errors/AuthError.js";
 import { getFrontendUsers } from "./utils/getFrontendUsers.js";
 import { flatCategory } from "./utils/getFrontendUserInventory.js";
+import type { StatusUpdateDto } from "./types/StatusUpdateDto.js";
+import type { TypeUpdateDto } from "./types/TypeUpdateDto.js";
 
 export class UsersService {
   private repository: UsersRepository;
@@ -13,6 +15,10 @@ export class UsersService {
 
   deleteUserInventories = async (userId: string, inventoriesIds: string[]) => {
     await this.repository.deleteUserInventories(userId, inventoriesIds);
+  };
+
+  deleteUsers = async (userIds: string[]) => {
+    await this.repository.deleteUsers(userIds);
   };
 
   getUsers = async (search: string | undefined, limit: number | undefined) => {
@@ -30,6 +36,17 @@ export class UsersService {
       throw new AuthError();
     }
   }
+
+  updateUsersStatus = async (updateStatusDto: StatusUpdateDto) => {
+    const updatedCount =
+      await this.repository.updateUsersStatus(updateStatusDto);
+    return updatedCount;
+  };
+
+  updateUsersType = async (typeUpdateDto: TypeUpdateDto) => {
+    const updatedCount = await this.repository.updateUsersType(typeUpdateDto);
+    return updatedCount;
+  };
 
   getUserInventories = async (userId: string) => {
     const { owned, edited } = await this.repository.getUserInventories(userId);

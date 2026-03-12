@@ -43,6 +43,28 @@ class InventoriesController {
     }
   };
 
+  getEditors = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const inventoryId = inventoryIdSchema.parse(req.params.id);
+      const inventory = await this.service.getEditors(inventoryId);
+      res.status(200).send(inventory);
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  getInventories = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const orderBy = req.query.orderBy ?? "latest";
+      if (typeof orderBy !== "string")
+        throw new Error("Sort string is required");
+      const inventories = await this.service.getInventories(orderBy);
+      res.status(200).send(inventories);
+    } catch (err) {
+      next(err);
+    }
+  };
+
   getInventoryById = async (
     req: Request,
     res: Response,
@@ -51,16 +73,6 @@ class InventoriesController {
     try {
       const id = inventoryIdSchema.parse(req.params.id);
       const inventory = await this.service.getInventoryById(id);
-      res.status(200).send(inventory);
-    } catch (err) {
-      next(err);
-    }
-  };
-
-  getEditors = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const inventoryId = inventoryIdSchema.parse(req.params.id);
-      const inventory = await this.service.getEditors(inventoryId);
       res.status(200).send(inventory);
     } catch (err) {
       next(err);

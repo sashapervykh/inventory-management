@@ -7,9 +7,9 @@ import { useEditors } from "../../../../entity/editors/model/hooks/useEditors";
 
 export function AccessAutocomplete() {
   const [value, setValue] = useState("");
-  const { users, getUsers } = useAllUsers();
-  const { updateEditors } = useEditors();
-  const options = getAccessOptions(users);
+  const { getUsers } = useAllUsers();
+  const { editors, updateEditors } = useEditors();
+  const options = getAccessOptions(editors);
 
   return (
     <AutoComplete<string, EditorOption>

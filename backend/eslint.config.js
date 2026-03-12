@@ -4,7 +4,7 @@ import globals from "globals";
 
 export default [
   {
-    ignores: ["node_modules/**", "dist/**", ".env"],
+    ignores: ["node_modules/**", "dist/**", ".env", "prisma.config.ts"],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended.map((config) => ({

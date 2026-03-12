@@ -1,3 +1,5 @@
+import { UsersView } from "../../feature/users/ui/UsersView/UsersView";
+
 export function AdminPage() {
-  return <div>ADMIN</div>;
+  return <UsersView />;
 }

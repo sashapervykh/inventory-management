@@ -9,7 +9,7 @@ export async function sendDeletedEditors(
 ) {
   const body = JSON.stringify({ userIds: [...deletedUsers] });
   return await requestDeleteApi({
-    endpoint: `${API_ENDPOINTS.INVENTORIES}${inventoryId}/${API_SUBROUTES.INVENTORIES.ACCESS}`,
+    endpoint: `${API_ENDPOINTS.INVENTORIES}/${inventoryId}/${API_SUBROUTES.INVENTORIES.ACCESS}`,
     options: { body },
   });
 }

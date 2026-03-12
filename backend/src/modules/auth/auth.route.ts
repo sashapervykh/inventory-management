@@ -1,6 +1,8 @@
 import { Router } from "express";
-import { AUTH_ROUTES } from "../../shared/constants/routes/authRoutes.js";
+import { AUTH_ROUTES } from "./constants/authRoutes.js";
 import { passportService } from "./passport.service.js";
+import { authService } from "./auth.service.js";
+import { authController } from "./auth.controller.js";
 
 const authRouter = Router();
 authRouter.get(
@@ -28,5 +30,7 @@ authRouter.get(
   passportService.handleResponse,
 );
 authRouter.post(AUTH_ROUTES.LOGOUT, passportService.logout);
+authRouter.post(AUTH_ROUTES.REGISTER, authController.register);
+authRouter.post(AUTH_ROUTES.LOGIN, authController.login);
 
 export default authRouter;

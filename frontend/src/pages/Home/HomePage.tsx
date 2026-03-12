@@ -1,13 +1,11 @@
-import { useUser } from "../../entity/user/model/useUser";
+import { LatestInventories } from "../../widgets/LatestInventories/ui/LatestInventories";
+import { PopularInventories } from "../../widgets/PopularInventories/ui/PopularInventories";
 
 export function HomePage() {
-  const { user } = useUser();
-  console.log(user);
-  return user ? (
-    <div>
-      user {user.firstName} {user.lastName} {user.email}
+  return (
+    <div className="flex flex-col">
+      <PopularInventories />
+      <LatestInventories />
     </div>
-  ) : (
-    <div>HOME</div>
   );
 }

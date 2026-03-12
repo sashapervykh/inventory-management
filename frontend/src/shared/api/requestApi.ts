@@ -26,5 +26,6 @@ export async function requestApi<T extends ZodType>({
   }
 
   const data = await response.json();
+  console.log(data);
   return schema.parse(data);
 }

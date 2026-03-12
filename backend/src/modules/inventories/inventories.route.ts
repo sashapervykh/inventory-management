@@ -10,6 +10,10 @@ inventoriesRouter.post(
   inventoriesController.createInventory,
 );
 inventoriesRouter.get(
+  INVENTORY_ROUTES.MAIN,
+  inventoriesController.getInventories,
+);
+inventoriesRouter.get(
   INVENTORY_ROUTES.ONE,
   requireAuth,
   inventoriesController.getInventoryById,

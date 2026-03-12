@@ -49,6 +49,36 @@ export class InventoriesRepository {
       include: {
         category: true,
         tags: { include: { tag: true } },
+        owner: {
+          select: {
+            firstName: true,
+            lastName: true,
+            email: true,
+          },
+        },
+      },
+    });
+    return inventory;
+  }
+
+  async getInventories(orderBy: string) {
+    const sortingSettings =
+      orderBy === "popular"
+        ? { items: { _count: "desc" as const } }
+        : { createdAt: "desc" as const };
+    const inventory = await prisma.inventory.findMany({
+      orderBy: sortingSettings,
+      take: 5,
+      include: {
+        category: true,
+        tags: { include: { tag: true } },
+        owner: {
+          select: {
+            firstName: true,
+            lastName: true,
+            email: true,
+          },
+        },
       },
     });
     return inventory;
@@ -69,8 +99,8 @@ export class InventoriesRepository {
         user: {
           select: {
             id: true,
-            first_name: true,
-            last_name: true,
+            firstName: true,
+            lastName: true,
             email: true,
           },
         },
@@ -100,8 +130,8 @@ export class InventoriesRepository {
           user: {
             select: {
               id: true,
-              first_name: true,
-              last_name: true,
+              firstName: true,
+              lastName: true,
               email: true,
             },
           },

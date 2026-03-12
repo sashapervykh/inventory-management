@@ -11,7 +11,7 @@ export async function sendUpdatedEditors(
 ) {
   const body = JSON.stringify([...newUsers]);
   const editors = await requestApi({
-    endpoint: `${API_ENDPOINTS.INVENTORIES}${inventoryId}/${API_SUBROUTES.INVENTORIES.ACCESS}`,
+    endpoint: `${API_ENDPOINTS.INVENTORIES}/${inventoryId}/${API_SUBROUTES.INVENTORIES.ACCESS}`,
     method: METHODS.POST,
     schema: editorsSchema,
     options: { body },
