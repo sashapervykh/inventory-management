@@ -1,3 +1,4 @@
+import type { Dispatch, Key, SetStateAction } from "react";
 import {
   DeleteOutlined,
   DownOutlined,
@@ -5,18 +6,39 @@ import {
   UnlockOutlined,
   UpOutlined,
 } from "@ant-design/icons";
+import { useUsers } from "../../model/hooks/useUsers";
+import type { UseMutateFunction } from "@tanstack/react-query";
+import type { StatusUpdateDto } from "../../model/types/StatusUpdateDto";
 
-export function useUserControls() {
+interface Props {
+  selectedUsersKeys: Key[];
+  setSelectedUsersKeys: Dispatch<SetStateAction<Key[]>>;
+}
+
+export function useUserControls({
+  selectedUsersKeys,
+  setSelectedUsersKeys,
+}: Props) {
+  const { updateUsersStatus } = useUsers();
+  const clearListAfterAction = (action: () => void) => () => {
+    action();
+    setSelectedUsersKeys([]);
+  };
+
   return [
     {
       buttonText: <LockOutlined />,
       tooltip: "Block",
-      onClick: () => console.log("Block"),
+      onClick: clearListAfterAction(() =>
+        updateUsersStatus({ userIds: selectedUsersKeys, isBlocked: true }),
+      ),
     },
     {
       buttonText: <UnlockOutlined />,
       tooltip: "Unblock",
-      onClick: () => console.log("Unblock"),
+      onClick: clearListAfterAction(() =>
+        updateUsersStatus({ userIds: selectedUsersKeys, isBlocked: false }),
+      ),
     },
     {
       buttonText: <UpOutlined />,

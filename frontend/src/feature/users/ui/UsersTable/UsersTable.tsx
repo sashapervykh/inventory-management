@@ -1,8 +1,8 @@
 import { Table, type TableColumnsType } from "antd";
-import Text from "antd/es/typography";
-import type { User } from "../../../../../entity/user/model/User";
-import { useUsers } from "../../hooks/useUsers";
 import type { Dispatch, Key, SetStateAction } from "react";
+import type { TableRowSelection } from "antd/es/table/interface";
+import { useUsers } from "../../model/hooks/useUsers";
+import type { User } from "../../../../entity/user/model/User";
 
 const columns: TableColumnsType<User> = [
   {

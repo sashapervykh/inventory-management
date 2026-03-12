@@ -6,7 +6,10 @@ export function UsersView() {
   const [selectedUsersKeys, setSelectedUsersKeys] = useState<Key[]>([]);
   return (
     <div>
-      <UserControls />
+      <UserControls
+        selectedUsersKeys={selectedUsersKeys}
+        setSelectedUsersKeys={setSelectedUsersKeys}
+      />
       <UsersTable
         selectedUsersKeys={selectedUsersKeys}
         setSelectedUsersKeys={setSelectedUsersKeys}

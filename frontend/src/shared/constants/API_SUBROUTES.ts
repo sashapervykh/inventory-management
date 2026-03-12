@@ -6,5 +6,6 @@ export const API_SUBROUTES = {
   },
   USERS: {
     USER_INVENTORIES: "me/inventories",
+    STATUS: "status",
   },
 };
