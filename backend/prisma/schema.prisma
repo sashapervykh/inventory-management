@@ -19,6 +19,13 @@ enum UserType {
   @@map("user_type")
 }
 
+enum UserStatus {
+  blocked
+  active
+
+  @@map("user_status")
+}
+
 model User {
   id                 String            @id @default(uuid())
   email              String            @unique
@@ -27,6 +34,7 @@ model User {
   provider           String
   providerId         String            @map("provider_id")
   type               UserType          @default(user)
+  status             UserStatus        @default(active)
   createdAt          DateTime          @default(now()) @map("created_at")
   passwordHash       String?           @map("password_hash")
   lastLoginAt        DateTime?         @map("last_login_at")

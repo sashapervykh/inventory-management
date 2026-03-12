@@ -2,6 +2,7 @@ import { Table, type TableColumnsType } from "antd";
 import Text from "antd/es/typography";
 import type { User } from "../../../../../entity/user/model/User";
 import { useUsers } from "../../hooks/useUsers";
+import type { Dispatch, Key, SetStateAction } from "react";
 
 const columns: TableColumnsType<User> = [
   {
@@ -16,13 +17,31 @@ const columns: TableColumnsType<User> = [
     title: "Type",
     dataIndex: "type",
   },
+  {
+    title: "Status",
+    dataIndex: "status",
+  },
 ];
 
-export function UsersTable() {
+interface Props {
+  selectedUsersKeys: Key[];
+  setSelectedUsersKeys: Dispatch<SetStateAction<Key[]>>;
+}
+
+export function UsersTable({ selectedUsersKeys, setSelectedUsersKeys }: Props) {
   const { users, isLoading } = useUsers();
+  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
+    setSelectedUsersKeys(newSelectedRowKeys);
+  };
+  const rowSelection: TableRowSelection<User> = {
+    type: "checkbox",
+    selectedRowKeys: selectedUsersKeys,
+    onChange: onSelectChange,
+  };
   return (
     <Table<User>
       rowKey="id"
+      rowSelection={rowSelection}
       loading={isLoading}
       columns={columns}
       dataSource={users}

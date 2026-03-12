@@ -16,6 +16,7 @@ export function getFrontendUsers(users: BackendUsers) {
       lastLoginAt: user.lastLoginAt,
       createdAt: user.createdAt,
       type: user.type,
+      status: user.status,
     };
   });
 }

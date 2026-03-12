@@ -8,6 +8,7 @@ export const userSchema = z.object({
   fullName: z.string(),
   lastLoginAt: z.string().nullable(),
   createdAt: z.string(),
+  status: z.enum(["active", "blocked"]),
   type: z.enum(["admin", "user", "none"]),
 });
 
