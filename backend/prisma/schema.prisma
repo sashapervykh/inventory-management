@@ -46,6 +46,7 @@ model Inventory {
   ownerId            String            @map("owner_id")
   category           Category          @relation(fields: [categoryId], references: [id])
   categoryId         Int               @map("category_id")
+  createdAt          DateTime          @default(now()) @map("created_at")
   tags               InventoryTag[]
   customIdParts      Json?             @map("custom_id_parts")
   items              Item[]

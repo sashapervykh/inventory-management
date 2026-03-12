@@ -1,15 +1,12 @@
-import { Table, type TableProps } from "antd";
-import type { UserInventories, UserInventory } from "../../model/UserInventory";
-
+import { Table } from "antd";
+import type { PopularInventory } from "../../model/PopularInventory";
 import { useNavigate } from "react-router-dom";
-import type { Dispatch, Key, SetStateAction } from "react";
 import { popularInventoriesColumns } from "./popularInventoriesColumns";
-import type { Inventory } from "../../../../entity/inventory/model/types/Inventory";
 
 export function PopularInventoriesTable({
   inventories,
 }: {
-  inventories: Inventory[] | undefined;
+  inventories: PopularInventory[] | undefined;
 }) {
   const navigate = useNavigate();
   if (!inventories || inventories.length === 0) {
@@ -19,6 +16,7 @@ export function PopularInventoriesTable({
   return (
     <Table
       rowKey="id"
+      dataSource={inventories}
       columns={popularInventoriesColumns}
       onRow={(record) => ({
         onClick: () => {

@@ -49,6 +49,13 @@ export class InventoriesRepository {
       include: {
         category: true,
         tags: { include: { tag: true } },
+        owner: {
+          select: {
+            firstName: true,
+            lastName: true,
+            email: true,
+          },
+        },
       },
     });
     return inventory;
@@ -65,6 +72,13 @@ export class InventoriesRepository {
       include: {
         category: true,
         tags: { include: { tag: true } },
+        owner: {
+          select: {
+            firstName: true,
+            lastName: true,
+            email: true,
+          },
+        },
       },
     });
     return inventory;

@@ -1,12 +1,9 @@
-import { useUser } from "../../entity/user/model/useUser";
+import { PopularInventories } from "../../widgets/PopularInventories/ui/PopularInventories";
 
 export function HomePage() {
-  const { user } = useUser();
-  return user ? (
-    <div>
-      user {user.firstName} {user.lastName} {user.email}
-    </div>
-  ) : (
-    <div>HOME</div>
+  return (
+    <>
+      <PopularInventories />
+    </>
   );
 }
