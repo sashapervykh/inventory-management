@@ -21,5 +21,10 @@ usersRouter.patch(
   requireAuth,
   userController.updateUsersStatus,
 );
+usersRouter.patch(
+  USERS_ROUTES.TYPE,
+  requireAuth,
+  userController.updateUsersType,
+);
 
 export default usersRouter;

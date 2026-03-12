@@ -19,7 +19,7 @@ export function useUserControls({
   selectedUsersKeys,
   setSelectedUsersKeys,
 }: Props) {
-  const { updateUsersStatus } = useUsers();
+  const { updateUsersStatus, updateUsersType } = useUsers();
   const clearListAfterAction = (action: () => void) => () => {
     action();
     setSelectedUsersKeys([]);
@@ -43,12 +43,16 @@ export function useUserControls({
     {
       buttonText: <UpOutlined />,
       tooltip: "Promote to admin",
-      onClick: () => console.log("Promote to admin"),
+      onClick: clearListAfterAction(() =>
+        updateUsersType({ userIds: selectedUsersKeys, userType: "admin" }),
+      ),
     },
     {
       buttonText: <DownOutlined />,
       tooltip: "Demote to user",
-      onClick: () => console.log("Demote to user"),
+      onClick: clearListAfterAction(() =>
+        updateUsersType({ userIds: selectedUsersKeys, userType: "user" }),
+      ),
     },
     {
       buttonText: <DeleteOutlined />,

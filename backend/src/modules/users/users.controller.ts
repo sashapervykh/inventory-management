@@ -7,6 +7,7 @@ import { getTypedLimit } from "./utils/getTypedLimit.js";
 import { AuthError } from "../../shared/errors/AuthError.js";
 import { deletedInventoriesSchema } from "./schema/deletedInventoriesSchema.js";
 import { statusUpdateDtoSchema } from "./schema/statusUpdateDtoSchema.js";
+import { typeUpdateDtoSchema } from "./schema/typeUpdateDtoSchema.js";
 
 class UsersController {
   private service: UsersService;
@@ -72,6 +73,16 @@ class UsersController {
       const updateStatusDto = statusUpdateDtoSchema.parse(req.body);
       const updatedCount =
         await this.service.updateUsersStatus(updateStatusDto);
+      res.status(200).send(updatedCount);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  updateUsersType = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const typeUpdateDto = typeUpdateDtoSchema.parse(req.body);
+      const updatedCount = await this.service.updateUsersType(typeUpdateDto);
       res.status(200).send(updatedCount);
     } catch (error) {
       next(error);

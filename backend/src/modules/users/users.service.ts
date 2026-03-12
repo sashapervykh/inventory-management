@@ -4,6 +4,7 @@ import { AuthError } from "../../shared/errors/AuthError.js";
 import { getFrontendUsers } from "./utils/getFrontendUsers.js";
 import { flatCategory } from "./utils/getFrontendUserInventory.js";
 import type { StatusUpdateDto } from "./types/StatusUpdateDto.js";
+import type { TypeUpdateDto } from "./types/TypeUpdateDto.js";
 
 export class UsersService {
   private repository: UsersRepository;
@@ -35,6 +36,11 @@ export class UsersService {
   updateUsersStatus = async (updateStatusDto: StatusUpdateDto) => {
     const updatedCount =
       await this.repository.updateUsersStatus(updateStatusDto);
+    return updatedCount;
+  };
+
+  updateUsersType = async (typeUpdateDto: TypeUpdateDto) => {
+    const updatedCount = await this.repository.updateUsersType(typeUpdateDto);
     return updatedCount;
   };
 

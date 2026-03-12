@@ -3,5 +3,5 @@ export const USERS_ROUTES = {
   ME: "/me",
   USER_INVENTORIES: "/me/inventories",
   STATUS: "/status",
-  TYPE: "/type",
+  TYPE: "/update-type",
 };
