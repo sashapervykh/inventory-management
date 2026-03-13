@@ -46,7 +46,17 @@ export function useUsers() {
     mutationFn: (typeUpdateDto: TypeUpdateDto) => {
       return fetchUpdatingUsersType(typeUpdateDto);
     },
-    onSuccess: invalidateQueries,
+    onSuccess: ({ affectedSelf }) => {
+      if (affectedSelf) {
+        showNotification({
+          type: "error",
+          title: "You lost admin status",
+          description: "You revoked your admin status",
+        });
+        navigate("/home");
+      }
+      queryClient.invalidateQueries({ queryKey });
+    },
   });
 
   const { mutate: deleteUsers, isPending: isDeleting } = useMutation({
