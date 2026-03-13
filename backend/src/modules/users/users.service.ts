@@ -39,10 +39,17 @@ export class UsersService {
     }
   }
 
-  updateUsersStatus = async (updateStatusDto: StatusUpdateDto) => {
-    const updatedCount =
-      await this.repository.updateUsersStatus(updateStatusDto);
-    return updatedCount;
+  updateUsersStatus = async ({
+    userIds,
+    isBlocked,
+    adminId,
+  }: StatusUpdateDto & { adminId: string }) => {
+    const affectedSelf = isBlocked && userIds.includes(adminId);
+    const updatedCount = await this.repository.updateUsersStatus({
+      userIds,
+      isBlocked,
+    });
+    return { ...updatedCount, affectedSelf };
   };
 
   updateUsersType = async (typeUpdateDto: TypeUpdateDto) => {

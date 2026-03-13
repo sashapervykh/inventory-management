@@ -28,7 +28,18 @@ export function useUsers() {
       mutationFn: (statusUpdateDto: StatusUpdateDto) => {
         return fetchUpdatingUsersStatus(statusUpdateDto);
       },
-      onSuccess: invalidateQueries,
+      onSuccess: ({ affectedSelf }) => {
+        if (affectedSelf) {
+          setUser(null);
+          showNotification({
+            type: "error",
+            title: "You lost access",
+            description: "You blocked your account",
+          });
+          navigate("/home");
+        }
+        queryClient.invalidateQueries({ queryKey });
+      },
     });
 
   const { mutate: updateUsersType, isPending: isUpdatingType } = useMutation({

@@ -83,9 +83,13 @@ class UsersController {
     next: NextFunction,
   ) => {
     try {
+      const adminId = req.user?.id;
+      if (!adminId) throw new AuthError();
       const updateStatusDto = statusUpdateDtoSchema.parse(req.body);
-      const updatedCount =
-        await this.service.updateUsersStatus(updateStatusDto);
+      const updatedCount = await this.service.updateUsersStatus({
+        ...updateStatusDto,
+        adminId,
+      });
       res.status(200).send(updatedCount);
     } catch (error) {
       next(error);
