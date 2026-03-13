@@ -1,6 +1,7 @@
 import z, { ZodType } from "zod";
 import { API_URL } from "../constants/API_URL";
 import type { METHODS } from "../constants/METHODS";
+import { errorResponse } from "../schemas/errorResposne";
 
 interface Props<T> {
   endpoint: string;
@@ -22,7 +23,9 @@ export async function requestApi<T extends ZodType>({
     ...options,
   });
   if (!response.ok) {
-    throw new Error(await response.text());
+    const json = await response.json();
+    const message = errorResponse.parse(json).message;
+    throw new Error(message);
   }
 
   const data = await response.json();

@@ -25,9 +25,11 @@ class UsersController {
 
   deleteUsers = async (req: Request, res: Response, next: NextFunction) => {
     try {
+      const adminId = req.user?.id;
+      if (!adminId) throw new AuthError();
       const userIds = deletedUsers.parse(req.body);
-      await this.service.deleteUsers(userIds);
-      res.status(204).send({ message: "Successfully deleted" });
+      const result = await this.service.deleteUsers(userIds, adminId);
+      res.status(200).send({ message: "Successfully deleted", ...result });
     } catch (err) {
       next(err);
     }
@@ -81,9 +83,13 @@ class UsersController {
     next: NextFunction,
   ) => {
     try {
+      const adminId = req.user?.id;
+      if (!adminId) throw new AuthError();
       const updateStatusDto = statusUpdateDtoSchema.parse(req.body);
-      const updatedCount =
-        await this.service.updateUsersStatus(updateStatusDto);
+      const updatedCount = await this.service.updateUsersStatus({
+        ...updateStatusDto,
+        adminId,
+      });
       res.status(200).send(updatedCount);
     } catch (error) {
       next(error);
