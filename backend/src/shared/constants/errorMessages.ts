@@ -4,4 +4,5 @@ export const ERROR_MESSAGES = {
   INTERNAL_ERROR: "Internal error happened",
   USER_BLOCKED: "Your account was blocked",
   DOUBLE_USER: "User with this email already exists",
+  ADMIN_ONLY: "You need admin status to perform this action",
 };
