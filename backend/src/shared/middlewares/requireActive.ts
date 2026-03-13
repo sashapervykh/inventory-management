@@ -15,6 +15,7 @@ export async function requireActive(
     if (user.status === "blocked") {
       throw new BlockedError();
     }
+    next();
   } catch (error) {
     next(error);
   }

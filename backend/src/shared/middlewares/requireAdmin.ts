@@ -1,6 +1,5 @@
 import { type NextFunction, type Request, type Response } from "express";
 import { AuthError } from "../errors/AuthError.js";
-import { BlockedError } from "../errors/BlockedError.js";
 import { AdminOnlyError } from "../errors/AdminOnlyError.js";
 
 export async function requireAdmin(
@@ -16,6 +15,7 @@ export async function requireAdmin(
     if (user.type !== "admin") {
       throw new AdminOnlyError();
     }
+    next();
   } catch (error) {
     next(error);
   }
