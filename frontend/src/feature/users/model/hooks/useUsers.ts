@@ -6,8 +6,13 @@ import { fetchUpdatingUsersType } from "../../api/updateUsersType";
 import type { TypeUpdateDto } from "../types/TypeUpdateDto";
 import { fetchDeletingUsers } from "../../api/fetchDeletingUsers";
 import type { Key } from "react";
+import { useNavigate } from "react-router-dom";
+import { showNotification } from "../../../../shared/ui/showNotification/showNotification";
+import { useUser } from "../../../../entity/user/model/useUser";
 
 export function useUsers() {
+  const navigate = useNavigate();
+  const { setUser } = useUser();
   const queryClient = useQueryClient();
   const queryKey = ["allUsers"];
   const invalidateQueries = () => queryClient.invalidateQueries({ queryKey });
@@ -37,7 +42,18 @@ export function useUsers() {
     mutationFn: (deletedUsersDto: Key[]) => {
       return fetchDeletingUsers(deletedUsersDto);
     },
-    onSuccess: invalidateQueries,
+    onSuccess: ({ affectedSelf }) => {
+      if (affectedSelf) {
+        setUser(null);
+        showNotification({
+          type: "error",
+          title: "You lost access",
+          description: "You deleted your account",
+        });
+        navigate("/home");
+      }
+      queryClient.invalidateQueries({ queryKey });
+    },
   });
   return {
     users: data,

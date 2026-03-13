@@ -25,9 +25,11 @@ class UsersController {
 
   deleteUsers = async (req: Request, res: Response, next: NextFunction) => {
     try {
+      const adminId = req.user?.id;
+      if (!adminId) throw new AuthError();
       const userIds = deletedUsers.parse(req.body);
-      await this.service.deleteUsers(userIds);
-      res.status(204).send({ message: "Successfully deleted" });
+      const result = await this.service.deleteUsers(userIds, adminId);
+      res.status(200).send({ message: "Successfully deleted", ...result });
     } catch (err) {
       next(err);
     }
