@@ -5,6 +5,8 @@ import type { UserRegistrationDto } from "./types/UserRegistrationDto.js";
 import { ENV } from "../../shared/constants/env.js";
 import type { UserLoginDto } from "./types/UserLoginDto.js";
 import { getFrontendUser } from "../../shared/utils/getFrontendUser.js";
+import { WrongCredentialsError } from "../../shared/errors/WrongCredentialsError.js";
+import { BlockedError } from "../../shared/errors/BlockedError.js";
 
 export class AuthService {
   private repository: AuthRepository;
@@ -28,13 +30,16 @@ export class AuthService {
   login = async (userLoginDto: UserLoginDto) => {
     const { email, password } = userLoginDto;
     const user = await this.repository.getUserByEmail(email);
+    if (user.status === "blocked") {
+      throw new BlockedError();
+    }
     const { passwordHash } = user;
     if (!passwordHash) {
-      throw new Error("No Hash");
+      throw new WrongCredentialsError();
     }
     const isCorrect = await this.verifyPassword(password, passwordHash);
     if (!isCorrect) {
-      throw new Error("Incorrect password");
+      throw new WrongCredentialsError();
     }
     const frontendUser = getFrontendUser(user);
     const token = this.getJwtToken(user.id);

@@ -17,8 +17,10 @@ export class UsersService {
     await this.repository.deleteUserInventories(userId, inventoriesIds);
   };
 
-  deleteUsers = async (userIds: string[]) => {
-    await this.repository.deleteUsers(userIds);
+  deleteUsers = async (userIds: string[], adminId: string) => {
+    let affectedSelf = userIds.includes(adminId) ? true : false;
+    const result = await this.repository.deleteUsers(userIds);
+    return { affectedSelf };
   };
 
   getUsers = async (search: string | undefined, limit: number | undefined) => {
@@ -37,10 +39,17 @@ export class UsersService {
     }
   }
 
-  updateUsersStatus = async (updateStatusDto: StatusUpdateDto) => {
-    const updatedCount =
-      await this.repository.updateUsersStatus(updateStatusDto);
-    return updatedCount;
+  updateUsersStatus = async ({
+    userIds,
+    isBlocked,
+    adminId,
+  }: StatusUpdateDto & { adminId: string }) => {
+    const affectedSelf = isBlocked && userIds.includes(adminId);
+    const updatedCount = await this.repository.updateUsersStatus({
+      userIds,
+      isBlocked,
+    });
+    return { ...updatedCount, affectedSelf };
   };
 
   updateUsersType = async (typeUpdateDto: TypeUpdateDto) => {
