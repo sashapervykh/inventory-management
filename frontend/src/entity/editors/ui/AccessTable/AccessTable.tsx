@@ -1,0 +1,54 @@
+import { Spin, Table, type TableColumnsType } from "antd";
+import Text from "antd/es/typography";
+import type { TableRowSelection } from "antd/es/table/interface";
+import { useEditors } from "../../model/hooks/useEditors";
+import type { EditorsToDelete } from "../../model/types/EditorsToDelete";
+
+interface DataType {
+  key: React.Key;
+  id: string;
+  fullName: string;
+  email: string;
+}
+const columns: TableColumnsType<DataType> = [
+  {
+    title: "Name",
+    dataIndex: "fullName",
+  },
+  {
+    title: "Email",
+    dataIndex: "email",
+  },
+];
+
+export function AccessTable({
+  editorsToDelete,
+  setEditorsToDelete,
+}: EditorsToDelete) {
+  const { editors, isLoading } = useEditors();
+
+  if (isLoading) return <Spin />;
+  const dataSource = editors.map((editor) => ({ ...editor, key: editor.id }));
+
+  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
+    setEditorsToDelete(newSelectedRowKeys);
+  };
+  const rowSelection: TableRowSelection<DataType> = {
+    type: "checkbox",
+    selectedRowKeys: editorsToDelete,
+    onChange: onSelectChange,
+  };
+
+  if (editors.length === 0) {
+    return (
+      <Text>No users are granted write access, except you and admins.</Text>
+    );
+  }
+  return (
+    <Table<DataType>
+      rowSelection={rowSelection}
+      columns={columns}
+      dataSource={dataSource}
+    />
+  );
+}

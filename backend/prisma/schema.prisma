@@ -1,0 +1,110 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserType {
+  user
+  admin
+
+  @@map("user_type")
+}
+
+enum UserStatus {
+  blocked
+  active
+
+  @@map("user_status")
+}
+
+model User {
+  id                 String            @id @default(uuid())
+  email              String            @unique
+  firstName          String?           @map("first_name")
+  lastName           String?           @map("last_name")
+  provider           String
+  providerId         String            @map("provider_id")
+  type               UserType          @default(user)
+  status             UserStatus        @default(active)
+  createdAt          DateTime          @default(now()) @map("created_at")
+  passwordHash       String?           @map("password_hash")
+  lastLoginAt        DateTime?         @map("last_login_at")
+  inventory          Inventory[]
+  inventories_access InventoryAccess[]
+
+  @@unique([provider, providerId])
+  @@map("users")
+}
+
+model Inventory {
+  id                 String            @id @default(uuid())
+  title              String
+  description        String
+  isPublic           Boolean           @map("is_public")
+  owner              User              @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId            String            @map("owner_id")
+  category           Category          @relation(fields: [categoryId], references: [id])
+  categoryId         Int               @map("category_id")
+  createdAt          DateTime          @default(now()) @map("created_at")
+  tags               InventoryTag[]
+  customIdParts      Json?             @map("custom_id_parts")
+  items              Item[]
+  inventories_access InventoryAccess[]
+
+  @@map("inventories")
+}
+
+model Category {
+  id          Int         @id @default(autoincrement())
+  name        String      @unique
+  inventories Inventory[]
+
+  @@map("categories")
+}
+
+model Tag {
+  id          Int            @id @default(autoincrement())
+  name        String         @unique
+  inventories InventoryTag[]
+
+  @@map("tags")
+}
+
+model InventoryTag {
+  tag         Tag       @relation(fields: [tagId], references: [id])
+  tagId       Int       @map("tag_id")
+  inventory   Inventory @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
+  inventoryId String    @map("inventory_id")
+
+  @@id([tagId, inventoryId])
+  @@map("inventory_tags")
+}
+
+model InventoryAccess {
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String    @map("user_id")
+  inventory   Inventory @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
+  inventoryId String    @map("inventory_id")
+
+  @@id([userId, inventoryId])
+  @@map("inventory_access")
+}
+
+model Item {
+  id          String    @id @default(uuid())
+  customId    String    @map("custom_id")
+  inventoryId String
+  inventory   Inventory @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
+
+  @@unique([inventoryId, customId])
+  @@map("items")
+}

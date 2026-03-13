@@ -1,0 +1,36 @@
+import { Router } from "express";
+import { AUTH_ROUTES } from "./constants/authRoutes.js";
+import { passportService } from "./passport.service.js";
+import { authService } from "./auth.service.js";
+import { authController } from "./auth.controller.js";
+
+const authRouter = Router();
+authRouter.get(
+  AUTH_ROUTES.GOOGLE.MAIN,
+  passportService.continueWithGoogle({
+    scope: ["profile", "email"],
+    session: false,
+  }),
+);
+authRouter.get(
+  AUTH_ROUTES.GOOGLE.CALLBACK,
+  passportService.continueWithGoogle({ session: false }),
+  passportService.handleResponse,
+);
+authRouter.get(
+  AUTH_ROUTES.GITHUB.MAIN,
+  passportService.continueWithGithub({
+    scope: ["user:email"],
+    session: false,
+  }),
+);
+authRouter.get(
+  AUTH_ROUTES.GITHUB.CALLBACK,
+  passportService.continueWithGithub({ session: false }),
+  passportService.handleResponse,
+);
+authRouter.post(AUTH_ROUTES.LOGOUT, passportService.logout);
+authRouter.post(AUTH_ROUTES.REGISTER, authController.register);
+authRouter.post(AUTH_ROUTES.LOGIN, authController.login);
+
+export default authRouter;
