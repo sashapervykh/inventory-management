@@ -13,5 +13,12 @@ export const en = {
     logout: "LOG OUT",
     footerText: "Made by",
     footerLink: "Sasha Pervykh",
+    ownerNameColumn: "Owner Name",
+    ownerEmailColumn: "Owner Email",
+    titleColumn: "Title",
+    descriptionColumn: "Description",
+    timeColumn: "Created At",
+    popularTitle: "The Most Popular Inventories",
+    latestTitle: "The Latest Inventories",
   },
 };

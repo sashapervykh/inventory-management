@@ -13,5 +13,12 @@ export const ru = {
     loginGithub: "Продолжите с Github",
     footerText: "Сделано",
     footerLink: "Сашей Первых",
+    ownerNameColumn: "Имя владельца",
+    ownerEmailColumn: "Почта владельца",
+    titleColumn: "Название",
+    timeColumn: "Время создания",
+    descriptionColumn: "Описание",
+    popularTitle: "Самые популярные описи",
+    latestTitle: "Последние описи",
   },
 };

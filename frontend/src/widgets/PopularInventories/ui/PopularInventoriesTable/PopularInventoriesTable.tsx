@@ -1,7 +1,7 @@
 import { Table } from "antd";
 import type { PopularInventory } from "../../model/PopularInventory";
 import { useNavigate } from "react-router-dom";
-import { popularInventoriesColumns } from "./popularInventoriesColumns";
+import { usePopularInventoriesColumns } from "../../model/popularInventoriesColumns";
 
 export function PopularInventoriesTable({
   inventories,
@@ -11,6 +11,7 @@ export function PopularInventoriesTable({
   loading: boolean;
 }) {
   const navigate = useNavigate();
+  const popularInventoriesColumns = usePopularInventoriesColumns();
   if (!loading && (!inventories || inventories.length === 0)) {
     return "No inventories in this category";
   }
