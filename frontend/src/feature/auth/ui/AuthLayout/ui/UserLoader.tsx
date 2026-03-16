@@ -9,7 +9,6 @@ export function UserLoader({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (user) return;
     async function getUser() {
-      console.log("request");
       try {
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/users/me`,
