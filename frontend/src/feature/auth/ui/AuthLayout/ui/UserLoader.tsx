@@ -27,6 +27,11 @@ export function UserLoader({ children }: { children: ReactNode }) {
     getUser();
   }, []);
 
-  if (loading) return <Spin />;
+  if (loading)
+    return (
+      <div className="flex w-full h-full justify-center items-center">
+        <Spin />
+      </div>
+    );
   return <>{children}</>;
 }
