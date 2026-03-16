@@ -2,7 +2,6 @@ import { Menu } from "antd";
 import { getNavItems } from "./navItems";
 import { useLocation } from "react-router-dom";
 import { useUser } from "../../../../../entity/user/model/useUser";
-import { useTheme } from "../../../../../shared/hooks/useTheme/useTheme";
 
 export function NavMenu() {
   const { user } = useUser();
