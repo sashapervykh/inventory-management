@@ -5,17 +5,20 @@ import { latestInventoriesColumns } from "./latestInventoriesColumns";
 
 export function LatestInventoriesTable({
   inventories,
+  loading,
 }: {
   inventories: LatestInventory[] | undefined;
+  loading: boolean;
 }) {
   const navigate = useNavigate();
-  if (!inventories || inventories.length === 0) {
+  if (!loading && (!inventories || inventories.length === 0)) {
     return "No inventories in this category";
   }
 
   return (
     <Table
       rowKey="id"
+      loading={loading}
       dataSource={inventories}
       columns={latestInventoriesColumns}
       pagination={false}

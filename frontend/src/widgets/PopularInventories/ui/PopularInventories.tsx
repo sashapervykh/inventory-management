@@ -4,12 +4,13 @@ import { PopularInventoriesTable } from "./PopularInventoriesTable/PopularInvent
 
 export function PopularInventories() {
   const { popularInventories, isLoading } = useUserInventories();
-  if (isLoading) return "Loading...";
-  console.log(popularInventories);
   return (
     <div>
       <Title level={3}>The Most Popular Repositories</Title>
-      <PopularInventoriesTable inventories={popularInventories} />
+      <PopularInventoriesTable
+        inventories={popularInventories}
+        loading={isLoading}
+      />
     </div>
   );
 }

@@ -4,11 +4,13 @@ import { LatestInventoriesTable } from "./LatestInventoriesTable/LatestInventori
 
 export function LatestInventories() {
   const { latestInventories, isLoading } = useLatestInventories();
-  if (isLoading) return "Loading...";
   return (
     <div>
       <Title level={3}>The Latest Repositories</Title>
-      <LatestInventoriesTable inventories={latestInventories} />
+      <LatestInventoriesTable
+        inventories={latestInventories}
+        loading={isLoading}
+      />
     </div>
   );
 }
