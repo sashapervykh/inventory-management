@@ -50,26 +50,28 @@ export function CustomIdForm() {
                 <DroppableTabHeader />
                 <CustomIdExample items={items} />
                 <SortableItems items={items} />
-                <Button
-                  type="primary"
-                  onClick={() => {
-                    counter.current += 1;
-                    setItems((i) => [
-                      ...i,
-                      {
-                        name: counter.current,
-                        key: counter.current,
-                        id: counter.current,
-                        type: ID_PARTS_TYPES.FIXED,
-                      },
-                    ]);
-                  }}
-                >
-                  Add
-                </Button>
-                <Button type="primary" htmlType="submit">
-                  Save
-                </Button>
+                <div className="flex gap-2.5">
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      counter.current += 1;
+                      setItems((i) => [
+                        ...i,
+                        {
+                          name: counter.current,
+                          key: counter.current,
+                          id: counter.current,
+                          type: ID_PARTS_TYPES.FIXED,
+                        },
+                      ]);
+                    }}
+                  >
+                    Add
+                  </Button>
+                  <Button type="primary" htmlType="submit">
+                    Save
+                  </Button>
+                </div>
               </DragDropProvider>
             );
           }}
