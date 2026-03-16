@@ -9,21 +9,23 @@ export function AdditionalInfo() {
       <Form.Item<FormDataType>
         labelCol={{ span: 3 }}
         wrapperCol={{ span: 20 }}
-        label="Is public?"
-        name="isPublic"
-        tooltip="Grant write access to all users"
-        valuePropName="checked"
+        label="Tags"
+        name="tags"
+        tooltip="Add your inventory tags"
+        initialValue={[]}
       >
-        <Checkbox />
+        <TagsSelect />
       </Form.Item>
       <Form.Item<FormDataType>
         labelCol={{ span: 3 }}
         wrapperCol={{ span: 20 }}
-        label="Tags"
-        name="tags"
-        tooltip="Add your inventory tags"
+        label="Is public?"
+        name="isPublic"
+        tooltip="Grant write access to all users"
+        valuePropName="checked"
+        initialValue={false}
       >
-        <TagsSelect />
+        <Checkbox />
       </Form.Item>
     </>
   );
