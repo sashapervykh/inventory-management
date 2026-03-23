@@ -14,4 +14,5 @@ export const ENV = {
   GITHUB_CALLBACK_URL: validateStringEnv(ENV_NAMES.GITHUB_CALLBACK_URL),
   JWT_SECRET: validateStringEnv(ENV_NAMES.JWT_SECRET),
   SALTS_ROUNDS: validateNumberEnv(ENV_NAMES.SALTS_ROUNDS),
+  DROPBOX_TOKEN: validateStringEnv(ENV_NAMES.DROPBOX_TOKEN),
 };

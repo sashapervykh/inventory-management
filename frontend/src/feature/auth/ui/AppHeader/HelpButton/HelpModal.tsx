@@ -4,6 +4,7 @@ import TextArea from "antd/es/input/TextArea";
 import type { User } from "../../../../../entity/user/model/User";
 
 import { useParams } from "react-router-dom";
+import { useUploadReport } from "../../../model/hooks/useUploadReport";
 
 interface Props {
   isOpen: boolean;
@@ -14,6 +15,7 @@ interface Props {
 export function HelpModal({ isOpen, close, user }: Props) {
   const [form] = useForm();
   const { inventoryId } = useParams();
+  const { uploadReport } = useUploadReport();
   const currentLink = window.location.href;
   const fullName =
     user.firstName && user.lastName
@@ -30,13 +32,16 @@ export function HelpModal({ isOpen, close, user }: Props) {
     priority: string;
     summary: string;
   }) => {
-    console.log({
+    const report = JSON.stringify({
       priority,
       summary,
       reportedBy: `${fullName} (${user.email})`,
       currentLink,
       inventoryId: inventoryId ?? null,
     });
+
+    const response = uploadReport(report);
+    console.log(response);
     form.resetFields();
     close();
   };
