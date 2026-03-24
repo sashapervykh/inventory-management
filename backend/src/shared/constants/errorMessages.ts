@@ -5,4 +5,7 @@ export const ERROR_MESSAGES = {
   USER_BLOCKED: "Your account was blocked",
   DOUBLE_USER: "User with this email already exists",
   ADMIN_ONLY: "You need admin status to perform this action",
+  SALESFORCE_TOKEN_ERROR: "Error when getting access salesforce",
+  ACCOUNT_ERROR: "Error when creating account",
+  CONTACT_ERROR: "Error when creating contact",
 };

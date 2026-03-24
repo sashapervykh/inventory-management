@@ -1,5 +1,9 @@
 import { ENV } from "../../shared/constants/env.js";
+import { ERROR_MESSAGES } from "../../shared/constants/errorMessages.js";
+import { SalesforceError } from "../../shared/errors/SalesforceError.js";
 import { SALESFORCE_ENDPOINTS } from "./constants/salesforceEndpoints.js";
+import { accessTokenSchema } from "./schemas/accessTokenSchema.js";
+import { salesforceResponseSchema } from "./schemas/salesforceResponseSchema.js";
 import type { CreateContactDto } from "./types/CreateContactDto.js";
 
 export class SalesforceService {
@@ -24,7 +28,6 @@ export class SalesforceService {
       client_id: ENV.SF_KEY,
       client_secret: ENV.SF_SECRET,
     });
-    console.log(params);
 
     const response = await fetch(
       `${ENV.SF_LOGIN_URL}/${SALESFORCE_ENDPOINTS.ACCESS_TOKEN}`,
@@ -36,11 +39,10 @@ export class SalesforceService {
         body: params,
       },
     );
-    console.log(response);
-    const data = await response.json();
-    console.log(data);
 
-    return data.access_token as string;
+    const data = await response.json();
+    const typedData = accessTokenSchema.parse(data);
+    return typedData.access_token;
   };
 
   createAccount = async (
@@ -62,13 +64,12 @@ export class SalesforceService {
       },
     );
 
-    const data = await response.json();
-
-    if (Array.isArray(data) && data[0]?.errorCode) {
-      throw new Error(`SF error: ${data[0].errorCode} — ${data[0].message}`);
+    if (!response.ok) {
+      throw new SalesforceError(ERROR_MESSAGES.ACCOUNT_ERROR);
     }
-
-    return data as { id: string; success: boolean };
+    const data = await response.json();
+    const typeData = salesforceResponseSchema.parse(data);
+    return typeData;
   };
 
   createContact = async (
@@ -91,13 +92,12 @@ export class SalesforceService {
       },
     );
 
-    const data = await response.json();
-
-    if (Array.isArray(data) && data[0]?.errorCode) {
-      throw new Error(`SF error: ${data[0].errorCode} — ${data[0].message}`);
+    if (!response.ok) {
+      throw new SalesforceError(ERROR_MESSAGES.CONTACT_ERROR);
     }
-
-    return data as { id: string; success: boolean };
+    const data = await response.json();
+    const typeData = salesforceResponseSchema.parse(data);
+    return typeData;
   };
 }
 
