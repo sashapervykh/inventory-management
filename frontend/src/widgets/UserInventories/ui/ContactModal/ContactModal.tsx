@@ -1,4 +1,4 @@
-import { Form, Modal, Select } from "antd";
+import { Form, Input, Modal, Select } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useUser } from "../../../../entity/user/model/useUser";
 import TextArea from "antd/es/input/TextArea";
@@ -27,7 +27,7 @@ export function ContactModal({ isOpen, close }: Props) {
 
   return (
     <Modal
-      title="Create Help Ticket"
+      title="Create Contact"
       open={isOpen}
       onOk={() => form.submit()}
       onCancel={() => {
@@ -38,24 +38,34 @@ export function ContactModal({ isOpen, close }: Props) {
       <Form form={form} layout="vertical" onFinish={handleFinish}>
         <Form.Item
           name="firstName"
-          initialValue={user}
-          rules={[{ required: true, message: "Please select a priority" }]}
+          label="First Name:"
+          initialValue={user.firstName}
+          rules={[{ required: true, message: "Please add your first name" }]}
         >
-          <Select
-            className="w-35"
-            placeholder="Priority"
-            options={[
-              { label: "High", value: "High" },
-              { label: "Average", value: "Average" },
-              { label: "Low", value: "Low" },
-            ]}
-          />
+          <Input />
         </Form.Item>
         <Form.Item
-          name="summary"
-          rules={[{ required: true, message: "Please describe your case" }]}
+          name="lastName"
+          label="Last Name:"
+          initialValue={user.lastName}
+          rules={[{ required: true, message: "Please add your last name" }]}
         >
-          <TextArea className="w-35" placeholder="Describe your case" />
+          <Input placeholder="Last Name" />
+        </Form.Item>
+        <Form.Item
+          name="email"
+          label="Email:"
+          initialValue={user.email}
+          rules={[{ required: true, message: "Please add your email" }]}
+        >
+          <Input placeholder="Email" />
+        </Form.Item>
+        <Form.Item
+          name="title"
+          label="Tile:"
+          rules={[{ required: true, message: "Please add your email" }]}
+        >
+          <Input placeholder="Title" />
         </Form.Item>
       </Form>
     </Modal>
