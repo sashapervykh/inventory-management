@@ -1,11 +1,17 @@
-import { Form, Input, Modal, Select } from "antd";
+import { Form, Input, Modal } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useUser } from "../../../../entity/user/model/useUser";
-import TextArea from "antd/es/input/TextArea";
 
 interface Props {
   isOpen: boolean;
   close: () => void;
+}
+
+interface FormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  title: string;
 }
 
 export function ContactModal({ isOpen, close }: Props) {
@@ -56,7 +62,13 @@ export function ContactModal({ isOpen, close }: Props) {
           name="email"
           label="Email:"
           initialValue={user.email}
-          rules={[{ required: true, message: "Please add your email" }]}
+          rules={[
+            { required: true, message: "Please add your email" },
+            {
+              type: "email",
+              message: "The input is not a valid email!",
+            },
+          ]}
         >
           <Input placeholder="Email" />
         </Form.Item>
