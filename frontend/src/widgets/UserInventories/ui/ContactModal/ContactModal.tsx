@@ -1,17 +1,11 @@
 import { Form, Input, Modal } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useUser } from "../../../../entity/user/model/useUser";
+import type { CreateContactDto } from "../../model/types/CreateContactDto";
 
 interface Props {
   isOpen: boolean;
   close: () => void;
-}
-
-interface FormData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  title: string;
 }
 
 export function ContactModal({ isOpen, close }: Props) {
@@ -20,13 +14,7 @@ export function ContactModal({ isOpen, close }: Props) {
 
   if (!user) return null;
 
-  const handleFinish = ({
-    priority,
-    summary,
-  }: {
-    priority: string;
-    summary: string;
-  }) => {
+  const handleFinish = (formData: CreateContactDto) => {
     form.resetFields();
     close();
   };

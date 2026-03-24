@@ -3,4 +3,5 @@ export const API_ENDPOINTS = {
   INVENTORIES: "/inventories",
   USERS: "/users",
   SUPPORT: "/support",
+  SALESFORCE: "/salesforce",
 };

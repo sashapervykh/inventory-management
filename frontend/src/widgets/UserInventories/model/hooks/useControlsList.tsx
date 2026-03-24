@@ -19,7 +19,7 @@ export function useControlsList({ selectedInventories }: Props) {
   return [
     {
       action: "Create Contact",
-      tooltip: "Create Contract",
+      tooltip: "Create Contact",
       buttonText: <UserSwitchOutlined />,
       onClick: () => {
         open();
