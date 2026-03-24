@@ -1,4 +1,5 @@
 import { ENV } from "../../shared/constants/env.js";
+import { SALESFORCE_ENDPOINTS } from "./constants/salesforceEndpoints.js";
 import type { CreateContactDto } from "./types/CreateContactDto.js";
 
 export class SalesforceService {
@@ -25,13 +26,16 @@ export class SalesforceService {
     });
     console.log(params);
 
-    const response = await fetch(`${ENV.SF_LOGIN_URL}/services/oauth2/token`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+    const response = await fetch(
+      `${ENV.SF_LOGIN_URL}/${SALESFORCE_ENDPOINTS.ACCESS_TOKEN}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: params,
       },
-      body: params,
-    });
+    );
     console.log(response);
     const data = await response.json();
     console.log(data);
@@ -45,7 +49,7 @@ export class SalesforceService {
     lastName: string,
   ) => {
     const response = await fetch(
-      `${ENV.SF_LOGIN_URL}/services/data/v59.0/sobjects/Account`,
+      `${ENV.SF_LOGIN_URL}/${SALESFORCE_ENDPOINTS.CREATE.BASE}/${SALESFORCE_ENDPOINTS.CREATE.ACCOUNT}`,
       {
         method: "POST",
         headers: {
@@ -73,7 +77,7 @@ export class SalesforceService {
     body: CreateContactDto,
   ) => {
     const response = await fetch(
-      `${ENV.SF_LOGIN_URL}/services/data/v59.0/sobjects/Contact`,
+      `${ENV.SF_LOGIN_URL}/${SALESFORCE_ENDPOINTS.CREATE.BASE}/${SALESFORCE_ENDPOINTS.CREATE.CONTACT}`,
       {
         method: "POST",
         headers: {
