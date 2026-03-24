@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { AUTH_ROUTES } from "./constants/authRoutes.js";
 import { passportService } from "./passport.service.js";
-import { authService } from "./auth.service.js";
 import { authController } from "./auth.controller.js";
 
 const authRouter = Router();

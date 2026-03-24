@@ -1,6 +1,6 @@
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { useUser } from "../../../../../entity/user/model/useUser";
-import { Button, Modal, Tooltip } from "antd";
+import { Button, Tooltip } from "antd";
 import { useState } from "react";
 import { HelpModal } from "./HelpModal";
 

@@ -12,7 +12,7 @@ class SupportController {
   createReport = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const report = reportSchema.parse(req.body);
-      const inventory = await this.service.createReport(report);
+      await this.service.createReport(report);
       res.status(200).send({ message: "Inventory created successfully" });
     } catch (err) {
       next(err);
