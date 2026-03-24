@@ -1,5 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import { SalesforceService, salesforceService } from "./salesforce.service.js";
+import { createContactDtoSchema } from "./schemas/createContactDtoSchema.js";
 
 class SalesforceController {
   private service: SalesforceService;
@@ -14,8 +15,11 @@ class SalesforceController {
     next: NextFunction,
   ) => {
     try {
-      const accessToken = await this.service.createSalesforceEntity();
-      res.status(200).send(accessToken);
+      const contactData = createContactDtoSchema.parse(req.body);
+      await this.service.createSalesforceEntity(contactData);
+      res
+        .status(200)
+        .send({ success: true, message: "Contact successfully created" });
     } catch (err) {
       next(err);
     }

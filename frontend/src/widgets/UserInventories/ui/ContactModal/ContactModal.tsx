@@ -2,6 +2,7 @@ import { Form, Input, Modal } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useUser } from "../../../../entity/user/model/useUser";
 import type { CreateContactDto } from "../../model/types/CreateContactDto";
+import { useContactCreate } from "../../model/hooks/useContactCreate";
 
 interface Props {
   isOpen: boolean;
@@ -11,10 +12,12 @@ interface Props {
 export function ContactModal({ isOpen, close }: Props) {
   const [form] = useForm();
   const { user } = useUser();
+  const { createContact } = useContactCreate();
 
   if (!user) return null;
 
   const handleFinish = (formData: CreateContactDto) => {
+    createContact(formData);
     form.resetFields();
     close();
   };

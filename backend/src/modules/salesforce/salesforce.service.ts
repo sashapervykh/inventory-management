@@ -1,10 +1,19 @@
 import { ENV } from "../../shared/constants/env.js";
+import type { CreateContactDto } from "./types/CreateContactDto.js";
 
 export class SalesforceService {
-  createSalesforceEntity = async () => {
+  createSalesforceEntity = async (createContactDto: CreateContactDto) => {
     const accessToken = await this.getAccessToken();
-    const { id } = await this.createAccount(accessToken as string);
-    const { id: contactId } = await this.createContact(accessToken, id);
+    const { id } = await this.createAccount(
+      accessToken,
+      createContactDto.firstName,
+      createContactDto.lastName,
+    );
+    const { id: contactId } = await this.createContact(
+      accessToken,
+      id,
+      createContactDto,
+    );
     return contactId;
   };
 
@@ -27,10 +36,14 @@ export class SalesforceService {
     const data = await response.json();
     console.log(data);
 
-    return data.access_token;
+    return data.access_token as string;
   };
 
-  createAccount = async (accessToken: string, companyName = "Test") => {
+  createAccount = async (
+    accessToken: string,
+    firstName: string,
+    lastName: string,
+  ) => {
     const response = await fetch(
       `${ENV.SF_LOGIN_URL}/services/data/v59.0/sobjects/Account`,
       {
@@ -40,7 +53,7 @@ export class SalesforceService {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          Name: companyName,
+          Name: `${firstName} ${lastName} Account`,
         }),
       },
     );
@@ -54,7 +67,11 @@ export class SalesforceService {
     return data as { id: string; success: boolean };
   };
 
-  createContact = async (accessToken: string, accountId: string) => {
+  createContact = async (
+    accessToken: string,
+    accountId: string,
+    body: CreateContactDto,
+  ) => {
     const response = await fetch(
       `${ENV.SF_LOGIN_URL}/services/data/v59.0/sobjects/Contact`,
       {
@@ -64,12 +81,8 @@ export class SalesforceService {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          FirstName: "John",
-          LastName: "Snow",
-          Email: "Snow@email.com",
-          Phone: "+77777777",
-          Title: "Developer",
-          AccountId: accountId,
+          ...body,
+          accountId: accountId,
         }),
       },
     );

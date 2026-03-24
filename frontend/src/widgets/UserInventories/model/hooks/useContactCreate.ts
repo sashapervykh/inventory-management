@@ -11,7 +11,7 @@ export function useContactCreate() {
     onSuccess: ({ message }) =>
       showNotification({
         type: "success",
-        title: "Contact successfully created",
+        title: "Successful request",
         description: message,
       }),
   });
