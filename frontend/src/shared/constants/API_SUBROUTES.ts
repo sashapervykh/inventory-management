@@ -10,4 +10,7 @@ export const API_SUBROUTES = {
     TYPE: "update-type",
     DELETE: "delete",
   },
+  SUPPORT: {
+    REPORT: "report",
+  },
 };

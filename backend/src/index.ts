@@ -12,6 +12,7 @@ import { handleErrors } from "./shared/middlewares/handleErrors.js";
 import inventoriesRouter from "./modules/inventories/inventories.route.js";
 import categoriesRouter from "./modules/categories/categories.route.js";
 import tagsRouter from "./modules/tags/tags.route.js";
+import supportRouter from "./modules/support/support.route.js";
 
 dotenv.config();
 const app = express();
@@ -27,6 +28,7 @@ app.use(ENDPOINTS.INVENTORIES, inventoriesRouter);
 app.use(ENDPOINTS.CATEGORIES, categoriesRouter);
 app.use(ENDPOINTS.TAGS, tagsRouter);
 app.use(ENDPOINTS.AUTH, authRouter);
+app.use(ENDPOINTS.SUPPORT, supportRouter);
 app.use(handleErrors);
 
 app.listen(port, () => {
