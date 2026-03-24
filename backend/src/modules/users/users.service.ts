@@ -19,7 +19,7 @@ export class UsersService {
 
   deleteUsers = async (userIds: string[], adminId: string) => {
     let affectedSelf = userIds.includes(adminId) ? true : false;
-    const result = await this.repository.deleteUsers(userIds);
+    await this.repository.deleteUsers(userIds);
     return { affectedSelf };
   };
 
