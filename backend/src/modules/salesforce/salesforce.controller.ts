@@ -14,7 +14,8 @@ class SalesforceController {
     next: NextFunction,
   ) => {
     try {
-      res.status(200).send({ message: "Contact created successfully" });
+      const accessToken = await this.service.createSalesforceEntity();
+      res.status(200).send(accessToken);
     } catch (err) {
       next(err);
     }
