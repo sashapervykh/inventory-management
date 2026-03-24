@@ -1,8 +1,11 @@
 import { Table, type TableProps } from "antd";
-import type { UserInventories, UserInventory } from "../../model/UserInventory";
 import { userInventoriesColumns } from "./userInventoriesColumns";
 import { useNavigate } from "react-router-dom";
 import type { Dispatch, Key, SetStateAction } from "react";
+import type {
+  UserInventories,
+  UserInventory,
+} from "../../model/types/UserInventory";
 
 export function UserInventoriesTable({
   userInventories,
