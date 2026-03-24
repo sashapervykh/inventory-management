@@ -2,7 +2,7 @@ import { requestApi } from "../../../shared/api/requestApi";
 import { API_ENDPOINTS } from "../../../shared/constants/API_ENDPOINTS";
 import { API_SUBROUTES } from "../../../shared/constants/API_SUBROUTES";
 import { METHODS } from "../../../shared/constants/METHODS";
-import { userInventoriesSchema } from "../model/userInventoriesSchema";
+import { userInventoriesSchema } from "../model/schemas/userInventoriesSchema";
 
 export async function getUserInventories() {
   const userInventories = await requestApi({
