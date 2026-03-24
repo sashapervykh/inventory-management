@@ -5,4 +5,5 @@ export const ENDPOINTS = {
   CATEGORIES: "/categories",
   TAGS: "/tags",
   SUPPORT: "/support",
+  SALESFORCE: "/salesforce",
 };

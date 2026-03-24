@@ -13,4 +13,5 @@ export const API_SUBROUTES = {
   SUPPORT: {
     REPORT: "report",
   },
+  SALESFORCE: { CONTACT: "contact" },
 };
