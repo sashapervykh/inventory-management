@@ -9,15 +9,17 @@ interface Props {
 export function UserInventoriesControls({ selectedInventories }: Props) {
   const controlsList = useControlsList({ selectedInventories });
   return (
-    <div className="flex w-full justify-end gap-2.5">
-      {controlsList.map((buttonData) => (
-        <TooltipButton
-          key={buttonData.action}
-          tooltip={buttonData.tooltip}
-          buttonText={buttonData.buttonText}
-          onClick={buttonData.onClick}
-        />
-      ))}
+    <div className="flex w-full space-between">
+      <div className="flex w-fit justify-end gap-2.5">
+        {controlsList.map((buttonData) => (
+          <TooltipButton
+            key={buttonData.action}
+            tooltip={buttonData.tooltip}
+            buttonText={buttonData.buttonText}
+            onClick={buttonData.onClick}
+          />
+        ))}
+      </div>
     </div>
   );
 }
