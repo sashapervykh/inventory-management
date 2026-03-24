@@ -4,8 +4,9 @@ import {
   UserSwitchOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import { useUserInventories } from "./useUserInventories";
 import type { Key } from "react";
+import { useUserInventories } from "./useUserInventories";
+import { useContactModal } from "./useContactModal";
 
 interface Props {
   selectedInventories: Key[];
@@ -14,13 +15,14 @@ interface Props {
 export function useControlsList({ selectedInventories }: Props) {
   const navigate = useNavigate();
   const { deleteUserInventories } = useUserInventories();
+  const { open } = useContactModal();
   return [
     {
       action: "Create Contact",
       tooltip: "Create Contract",
       buttonText: <UserSwitchOutlined />,
       onClick: () => {
-        navigate("/create");
+        open();
       },
     },
     {

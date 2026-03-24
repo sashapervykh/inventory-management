@@ -1,6 +1,6 @@
 import type { Key } from "react";
 import { TooltipButton } from "../../../../shared/ui/TooltipButton/TooltipButtom";
-import { useControlsList } from "../../model/useControlsList";
+import { useControlsList } from "../../model/hooks/useControlsList";
 
 interface Props {
   selectedInventories: Key[];

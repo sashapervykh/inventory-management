@@ -1,8 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useUser } from "../../../entity/user/model/useUser";
-import { getUserInventories } from "../api/getUserInventories";
-import { sendDeletedInventories } from "../api/sendDeletedInventories";
+
 import type { Key } from "react";
+import { useUser } from "../../../../entity/user/model/useUser";
+import { getUserInventories } from "../../api/getUserInventories";
+import { sendDeletedInventories } from "../../api/sendDeletedInventories";
 
 export function useUserInventories() {
   const { user } = useUser();

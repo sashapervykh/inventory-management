@@ -1,5 +1,10 @@
+import { ContactModalProvider } from "../../widgets/UserInventories/model/providers/modal.provider";
 import { UserInventories } from "../../widgets/UserInventories/ui/UserInventories";
 
 export function UserPage() {
-  return <UserInventories />;
+  return (
+    <ContactModalProvider>
+      <UserInventories />
+    </ContactModalProvider>
+  );
 }

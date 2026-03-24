@@ -1,5 +1,5 @@
 import MDEditor from "@uiw/react-md-editor";
-import type { UserInventory } from "../../model/UserInventory";
+import type { UserInventory } from "../../model/types/UserInventory";
 
 export const userInventoriesColumns = [
   {
