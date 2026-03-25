@@ -4,4 +4,5 @@ export interface User {
   lastName?: string;
   type: "admin" | "user" | "none";
   email: string;
+  contactId?: string | null;
 }

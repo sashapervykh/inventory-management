@@ -2,12 +2,25 @@ import { ENV } from "../../shared/constants/env.js";
 import { ERROR_MESSAGES } from "../../shared/constants/errorMessages.js";
 import { SalesforceError } from "../../shared/errors/SalesforceError.js";
 import { SALESFORCE_ENDPOINTS } from "./constants/salesforceEndpoints.js";
+import {
+  salesforceRepository,
+  type SalesforceRepository,
+} from "./salesforce.repository.js";
 import { accessTokenSchema } from "./schemas/accessTokenSchema.js";
 import { salesforceResponseSchema } from "./schemas/salesforceResponseSchema.js";
 import type { CreateContactDto } from "./types/CreateContactDto.js";
 
 export class SalesforceService {
-  createSalesforceEntity = async (createContactDto: CreateContactDto) => {
+  repository: SalesforceRepository;
+
+  constructor(repository: SalesforceRepository) {
+    this.repository = repository;
+  }
+
+  createSalesforceEntity = async (
+    createContactDto: CreateContactDto,
+    userId: string,
+  ) => {
     const accessToken = await this.getAccessToken();
     const { id } = await this.createAccount(
       accessToken,
@@ -19,7 +32,8 @@ export class SalesforceService {
       id,
       createContactDto,
     );
-    return contactId;
+    await this.repository.updateContactId(userId, contactId);
+    return { contactId };
   };
 
   getAccessToken = async () => {
@@ -101,4 +115,4 @@ export class SalesforceService {
   };
 }
 
-export const salesforceService = new SalesforceService();
+export const salesforceService = new SalesforceService(salesforceRepository);
