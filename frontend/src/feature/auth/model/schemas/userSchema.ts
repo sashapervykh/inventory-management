@@ -6,4 +6,5 @@ export const userSchema = z.object({
   lastName: z.string().optional(),
   email: z.string(),
   type: z.enum(["user", "admin", "none"]),
+  contactId: z.string().nullable().optional(),
 });
