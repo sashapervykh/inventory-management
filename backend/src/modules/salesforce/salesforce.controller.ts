@@ -18,10 +18,15 @@ class SalesforceController {
     try {
       const userId = validateUserId(req.user?.id);
       const contactData = createContactDtoSchema.parse(req.body);
-      await this.service.createSalesforceEntity(contactData, userId);
-      res
-        .status(200)
-        .send({ success: true, message: "Contact successfully created" });
+      const { contactId } = await this.service.createSalesforceEntity(
+        contactData,
+        userId,
+      );
+      res.status(200).send({
+        success: true,
+        message: "Contact successfully created",
+        contactId,
+      });
     } catch (err) {
       next(err);
     }
