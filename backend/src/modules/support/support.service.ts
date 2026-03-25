@@ -4,6 +4,7 @@ import {
   InventoriesRepository,
   inventoriesRepository,
 } from "../inventories/inventories.repository.js";
+import { accessTokenSchema } from "./schemas/accessTokenSchema.js";
 import type { ReportDto } from "./types/ReportDto.js";
 
 export class SupportService {
@@ -42,29 +43,47 @@ export class SupportService {
     return { ticket, json, filename };
   };
 
+  getAccessToken = async () => {
+    const response = await fetch("https://api.dropbox.com/oauth2/token", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        grant_type: "refresh_token",
+        refresh_token: ENV.DROPBOX_TOKEN,
+        client_id: ENV.DROPBOX_CLIENT,
+        client_secret: ENV.DROPBOX_SECRET,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to refresh Dropbox token");
+    }
+
+    const data = await response.json();
+    const typedData = accessTokenSchema.parse(data);
+    return typedData.access_token;
+  };
+
   async uploadReport({ json, filename }: { json: string; filename: string }) {
-    try {
-      const response = await fetch(
-        "https://content.dropboxapi.com/2/files/upload",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${ENV.DROPBOX_TOKEN}`,
-            "Dropbox-API-Arg": JSON.stringify({
-              path: `/tickets/${filename}`,
-              mode: "add",
-              autorename: true,
-            }),
-            "Content-Type": "application/octet-stream",
-          },
-          body: json,
+    const accessToken = await this.getAccessToken();
+    const response = await fetch(
+      "https://content.dropboxapi.com/2/files/upload",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Dropbox-API-Arg": JSON.stringify({
+            path: `/tickets/${filename}`,
+            mode: "add",
+            autorename: true,
+          }),
+          "Content-Type": "application/octet-stream",
         },
-      );
-      const text = await response.text();
-      console.log(text);
-      return "success";
-    } catch (error) {
-      console.log(error);
+        body: json,
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to upload data to dropbox");
     }
   }
 }

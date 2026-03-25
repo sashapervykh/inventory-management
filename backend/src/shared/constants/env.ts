@@ -15,6 +15,8 @@ export const ENV = {
   JWT_SECRET: validateStringEnv(ENV_NAMES.JWT_SECRET),
   SALTS_ROUNDS: validateNumberEnv(ENV_NAMES.SALTS_ROUNDS),
   DROPBOX_TOKEN: validateStringEnv(ENV_NAMES.DROPBOX_TOKEN),
+  DROPBOX_CLIENT: validateStringEnv(ENV_NAMES.DROPBOX_CLIENT),
+  DROPBOX_SECRET: validateStringEnv(ENV_NAMES.DROPBOX_SECRET),
   SF_KEY: validateStringEnv(ENV_NAMES.SF_KEY),
   SF_SECRET: validateStringEnv(ENV_NAMES.SF_SECRET),
   SF_LOGIN_URL: validateStringEnv(ENV_NAMES.SF_LOGIN_URL),

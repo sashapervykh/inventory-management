@@ -38,6 +38,7 @@ model User {
   createdAt          DateTime          @default(now()) @map("created_at")
   passwordHash       String?           @map("password_hash")
   lastLoginAt        DateTime?         @map("last_login_at")
+  contactId          String?            @map("contact_id")
   inventory          Inventory[]
   inventories_access InventoryAccess[]
 
